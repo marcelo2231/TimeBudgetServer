@@ -1,0 +1,2 @@
+include ':app', ':TimeBudgetServer'
+rootProject.name='TimeBudget'

@@ -1,0 +1,263 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>TicketToRide</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3.css">
+
+    <style>
+        body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        }
+        tr {
+        width: 100%;
+        }
+        .inputTable-Left {
+        width: 50%;
+        float: left;
+        box-sizing: border-box;
+        padding-right: 10px
+        }
+        .inputTable-Right {
+        width: 50%;
+        float: left;
+        box-sizing: border-box;
+        padding-left: 10px
+        }
+        .nowrap{
+        width:1px;
+        white-space:nowrap;
+        }
+        #handleBox, #authToken, textarea{
+        width: 100%;
+        box-sizing: border-box;
+        }
+        textarea {
+        height: 300px;
+        }
+    </style>
+
+    <script type="text/javascript">
+        function submit() {
+            var handle = document.getElementById("handleBox").value;
+            var requestBody = document.getElementById("requestBox").value;
+            var token = document.getElementById("authToken").value;
+            var method = "post";
+            if (handle.includes("person") || handle.includes("event")) {
+                method = "get";
+            }
+            send(handle, requestBody, method, token);
+            return false;
+        }
+        function send(path, params, method, token) {
+            var obj = new XMLHttpRequest();
+            obj.onreadystatechange = function () {
+                var response = obj.responseText;
+                var responseJson = JSON.parse(response);
+                if (responseJson.authToken) {
+                    document.getElementById("authToken").value = responseJson.authToken;
+                }
+                document.getElementById("response").value = formatJson(response);
+            };
+            obj.open(method, path, false);
+            obj.setRequestHeader("Content-Type", "application/json");
+            obj.setRequestHeader("Authorization", token);
+            obj.send(params);
+        }
+        function formatJson(inputText) {
+            var temp = "";
+            var indent = 0;
+            for (var i in inputText) {
+                var char = inputText[i];
+                if (char != null) {
+                    if (char === ']' || char === '}') {
+                        temp += "\n";
+                        indent--;
+                        for (var j = 0; j < indent; j++) {
+                            temp += '\t';
+                        }
+                    }
+                    temp += char;
+                    if (char === ',') {
+                        temp += "\n";
+                        for (j = 0; j < indent; j++) {
+                            temp += '\t';
+                        }
+                    }
+                    if (char === '{' || char === '[') {
+                        temp += "\n";
+                        indent++;
+                        for (j = 0; j < indent; j++) {
+                            temp += '\t';
+                        }
+                    }
+                }
+            }
+            return temp;
+        }
+
+
+        function login() {
+            window.scrollTo(0, document.body.scrollHeight);
+            document.getElementById("handleBox").value = "/user/login";
+            document.getElementById("requestBox").value = formatJson(
+                "{\"username\":\"username\",\"password\":\"password\"}");
+        }
+        function register() {
+            window.scrollTo(0, document.body.scrollHeight);
+            document.getElementById("handleBox").value = "/user/register";
+            document.getElementById("requestBox").value = formatJson(
+                "{\"username\":\"username\",\"password\":\"password\"}");
+        }
+        function logout() {
+            window.scrollTo(0, document.body.scrollHeight);
+            document.getElementById("handleBox").value = "/user/logout";
+            document.getElementById("requestBox").value = formatJson("{\"username\":\"username\"}");
+        }
+
+
+        function createGame() {
+            window.scrollTo(0, document.body.scrollHeight);
+            document.getElementById("handleBox").value = "/gamelobby/creategame";
+            document.getElementById("requestBox").value = formatJson(
+                "{\"gameName\":\"My Game\", \"username\":\"username\"}");
+        }
+
+
+        function chat() {
+            window.scrollTo(0, document.body.scrollHeight);
+            document.getElementById("handleBox").value = "/game/chat";
+            document.getElementById("requestBox").value = formatJson("{\"gameName\":\"My Game\", \"playerName\":\"username\", \"message\":\"Hello!\"}");
+        }
+
+    </script>
+</head>
+
+<body>
+<div style="text-align:center;">
+    <h1>
+        CS428 Time Budget Server
+    </h1>
+</div>
+<div>
+
+
+    <!-- Commands for the Database -->
+    <div style="border: 2px solid black; margin:5px;">
+        <h1 style="padding-left:1cm; text-decoration: underline;">User Commands</h1>
+        <ul>
+            <li>
+                <a href="javascript:login()">/user/login</a> This API login an user.
+            </li>
+            <li>
+                <a href="javascript:register()">/user/register</a> This API will register a new user.
+            </li>
+            <li>
+                <a href="javascript:logout()">/user/logout</a> This API will logout a user.</li>
+        </ul>
+    </div>
+
+    <br />
+
+    <div style="border: 2px solid black; margin:5px;">
+        <h1 style="padding-left:1cm; text-decoration: underline;">Game Lobby Commands</h1>
+        <ul>
+            <li>
+                <a href="javascript:createGame()">/gamelobby/creategame</a> Create a game.
+            </li>
+        </ul>
+    </div>
+
+    <br />
+
+    <div style="border: 2px solid black; margin:5px;">
+        <h1 style="padding-left:1cm; text-decoration: underline;">Game Commands</h1>
+        <ul>
+            <li>
+                <a href="javascript:chat()">/game/chat</a> This API sends a message to be added to chat.
+            </li>
+        </ul>
+    </div>
+
+
+</div>
+<div>
+    <h5>
+        A few notes:
+        <ul>
+            <li>
+                The authorization token is returned from the server in the "Authorization"
+                attribute of the JSON object returned by the "/user/register" and "/user/login" APIs.
+                The authorization token must be placed in the "Authorization" header
+                on all subsequent HTTP requests.
+            </li>
+            <li>
+                If something fails, the returned JSON object contains a "message" attribute
+                which contains a message describing what happened.
+                Watch for these as they will give helpful insight into why the server did not
+                work as expected.
+            </li>
+        </ul>
+    </h5>
+</div>
+
+<div class="inputTable-Left">
+    <table style="width: 100%;">
+        <tr>
+            <td>Handle:</td>
+        </tr>
+        <tr>
+            <td><input type="text" id="handleBox" name="handleBox"></td>
+        </tr>
+    </table>
+</div>
+
+<div class="inputTable-Right">
+    <table style="width: 100%;">
+        <tr>
+            <td>Authorization token:</td>
+        </tr>
+        <tr>
+            <td><input type="text" id="authToken" name="authToken"></td>
+            <td class="nowrap"><input type="button" name="Submit" value="Submit" onclick="submit()">
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div style="clear:both"></div>
+
+<div class="inputTable-Left">
+    <table style="width: 100%;">
+        <tr>
+            <td>Request body:</td>
+        </tr>
+        <tr>
+            <td><textarea type="text" id="requestBox" name="requestBox" class="requestBody"></textarea></td>
+        </tr>
+    </table>
+</div>
+
+<div class="inputTable-Right">
+    <table style="width: 100%;">
+        <tr>
+            <td>Response from the server:</td>
+        </tr>
+        <tr>
+            <td><textarea type="text" id="response" class="responseBody" readonly></textarea></td>
+        </tr>
+    </table>
+</div>
+
+<div style="clear:both"></div>
+
+
+</body>
+
+</html>
