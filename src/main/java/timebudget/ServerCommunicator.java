@@ -5,8 +5,16 @@ import com.sun.net.httpserver.HttpServer;
 import org.apache.commons.cli.*;
 import timebudget.database.DAOFactory;
 import timebudget.handlers.DefaultHandler;
+import timebudget.handlers.FakeItHandler;
+import timebudget.handlers.GetMetricsReportHandler;
 import timebudget.handlers.LoginHandler;
 import timebudget.handlers.RegisterHandler;
+import timebudget.handlers.categories.GetAllCategoriesHandler;
+import timebudget.handlers.events.CreateEventHandler;
+import timebudget.handlers.events.DeleteEventHandler;
+import timebudget.handlers.events.EditEventHandler;
+import timebudget.handlers.events.GetEventByIdHandler;
+import timebudget.handlers.events.GetListEventHandler;
 import timebudget.log.Corn;
 
 
@@ -52,6 +60,15 @@ public class ServerCommunicator {
 		server.createContext(IServer.USER_LOGIN, new LoginHandler());
 		server.createContext(IServer.USER_REGISTER, new RegisterHandler());
 		server.createContext(IServer.DEFAULT, new DefaultHandler());
+		server.createContext(IServer.EVENT_CREATE, new CreateEventHandler());
+		server.createContext(IServer.EVENT_EDIT, new EditEventHandler());
+		server.createContext(IServer.EVENT_DELETE, new DeleteEventHandler());
+		server.createContext(IServer.EVENT_GET_LIST, new GetListEventHandler());
+		server.createContext(IServer.EVENT_GET_BY_ID, new GetEventByIdHandler());
+		server.createContext(IServer.REPORT_GET_TIME_METRICS, new GetMetricsReportHandler());
+		server.createContext(IServer.FAKE_IT, new FakeItHandler());
+		server.createContext(IServer.CATEGORIES_GET_ACTIVE, new GetAllCategoriesHandler());
+		server.createContext(IServer.CATEGORIES_GET_BY_ID, new GetCategoryByIdHandler());
 	}
 	
 	
