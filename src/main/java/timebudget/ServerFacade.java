@@ -1,6 +1,6 @@
 package timebudget;
 
-import timebudget.database.IDAOFactory;
+import timebudget.database.interfaces.IDAOFactory;
 import timebudget.exceptions.BadUserException;
 import timebudget.exceptions.UserCreationException;
 import timebudget.model.ServerModel;

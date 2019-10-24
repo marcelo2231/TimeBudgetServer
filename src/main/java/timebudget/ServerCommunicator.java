@@ -2,8 +2,10 @@ package timebudget;
 import com.sun.net.httpserver.HttpServer;
 
 import org.apache.commons.cli.*;
+import timebudget.database.DAOFactory;
 import timebudget.handlers.LoginHandler;
 import timebudget.handlers.RegisterHandler;
+import timebudget.log.Corn;
 
 
 import java.io.IOException;
@@ -21,7 +23,7 @@ public class ServerCommunicator {
 	 * @param port used as the post the timebudget.server listens on.
 	 */
 	public ServerCommunicator(String port, int maxDeltas){
-		//Corn.log("Initializing HTTP Server");
+		Corn.log("Initializing HTTP Server");
 		try {
 			server = HttpServer.create(new InetSocketAddress(Integer.parseInt(port)), MAX_WAITING_CONNECTIONS);
 		}
@@ -32,22 +34,15 @@ public class ServerCommunicator {
 		
 		server.setExecutor(null); // use the default executor
 		
-		//Corn.log("Loading plugin");
-		//PluginFactory factory = new PluginFactory();
-//		try {
-//			factory.loadPlugins();
-//		} catch(FileNotFoundException e) {
-//			e.printStackTrace();
-//		}
-//		//Set the DAOFactory in the timebudget.server facade before contexts use the ServerFacade.
-//		ServerFacade.daoFactory = factory.getDAOFactory();
-//		ServerFacade.max_commands = maxDeltas;
-//		ServerFacade.getInstance(); //Loads the database stuff
+		//Set the DAOFactory in the timebudget.server facade before contexts use the ServerFacade.
+		ServerFacade.daoFactory = new DAOFactory();
+		ServerFacade.max_commands = maxDeltas;
+		ServerFacade.getInstance(); //Loads the database stuff
 		
-		//Corn.log("Creating contexts");
+		Corn.log("Creating contexts");
 		createContexts();
 		
-		//Corn.log("Starting timebudget.server on port: " + port);
+		Corn.log("Starting timebudget.server on port: " + port);
 		server.start();
 	}
 	
@@ -102,7 +97,7 @@ public class ServerCommunicator {
 			logFile = cmd.getOptionValue("log");
 		System.out.println("Log File: " + logFile);
 		//Create Server and Log
-		//new Corn(logFile);
+		new Corn(logFile);
 		new ServerCommunicator(port, delta);
 	}
 }

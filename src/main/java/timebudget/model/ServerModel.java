@@ -1,13 +1,14 @@
 package timebudget.model;
 
 import timebudget.ServerFacade;
-import timebudget.database.IDAOFactory;
-import timebudget.database.IUserDAO;
+import timebudget.database.interfaces.IDAOFactory;
+import timebudget.database.interfaces.IUserDAO;
 import timebudget.exceptions.BadUserException;
 import timebudget.exceptions.UserCreationException;
 
 import java.math.BigInteger;
 import java.security.SecureRandom;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -17,7 +18,7 @@ public class ServerModel {
 	private IUserDAO userDAO;
 	
 	public ServerModel(IDAOFactory factory) {
-		//users = new HashSet<>();
+		users = new HashSet<User>();
 		random = new SecureRandom();
 		if(factory != null) {
 			userDAO = factory.getUserDAOInstance();
@@ -26,13 +27,15 @@ public class ServerModel {
 	}
 	
 	private void loadFromDatabase() {
-		if( userDAO != null) {
+		if(userDAO != null) {
 			ServerFacade.daoFactory.startTransaction();
-			List<User> userDTOList = userDAO.getAll();
-			for(User userObj : userDTOList) {
-				User user = new User(userObj.getUsername(), userObj.getPassword(), userObj.getFullName());
-				user.setUserID(userObj.getUserID());
-				users.add(user);
+			List<User> userList = userDAO.getAll();
+			if(userList != null) {
+				for(User userObj : userList) {
+					User user = new User(userObj.getUsername(), userObj.getPassword(), userObj.getFullName());
+					user.setUserID(userObj.getUserID());
+					users.add(user);
+				}
 			}
 			
 			
