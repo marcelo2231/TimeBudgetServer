@@ -8,6 +8,9 @@ import timebudget.model.User;
 public interface IServer {
 	
 	// CONTEXTS
+	// Default
+	String DEFAULT = "/";
+
 	// User
 	String USER_LOGIN = "/user/login";
 	String USER_REGISTER = "/user/register";

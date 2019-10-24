@@ -1,8 +1,10 @@
 package timebudget;
+
 import com.sun.net.httpserver.HttpServer;
 
 import org.apache.commons.cli.*;
 import timebudget.database.DAOFactory;
+import timebudget.handlers.DefaultHandler;
 import timebudget.handlers.LoginHandler;
 import timebudget.handlers.RegisterHandler;
 import timebudget.log.Corn;
@@ -49,6 +51,7 @@ public class ServerCommunicator {
 	private void createContexts() {
 		server.createContext(IServer.USER_LOGIN, new LoginHandler());
 		server.createContext(IServer.USER_REGISTER, new RegisterHandler());
+		server.createContext(IServer.DEFAULT, new DefaultHandler());
 	}
 	
 	

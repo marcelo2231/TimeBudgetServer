@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - ServerCommunicator",
+            "request": "launch",
+            "mainClass": "timebudget.ServerCommunicator",
+            "projectName": "TimeBudget"
+        }
+    ]
+}
