@@ -120,22 +120,52 @@
             document.getElementById("handleBox").value = "/user/logout";
             document.getElementById("requestBox").value = formatJson("{\"username\":\"username\"}");
         }
-
-
-        function createGame() {
+        function createEvent() {
             window.scrollTo(0, document.body.scrollHeight);
-            document.getElementById("handleBox").value = "/gamelobby/creategame";
-            document.getElementById("requestBox").value = formatJson(
-                "{\"gameName\":\"My Game\", \"username\":\"username\"}");
+            document.getElementById("handleBox").value = "/event/create";
+            document.getElementById("requestBox").value = formatJson("{\"eventName\":\"My Event\", \"eventDescription\":\"This is a great event!\"}");
         }
-
-
-        function chat() {
+        function editEvent() {
             window.scrollTo(0, document.body.scrollHeight);
-            document.getElementById("handleBox").value = "/game/chat";
-            document.getElementById("requestBox").value = formatJson("{\"gameName\":\"My Game\", \"playerName\":\"username\", \"message\":\"Hello!\"}");
+            document.getElementById("handleBox").value = "/event/edit";
+            document.getElementById("requestBox").value = formatJson("{\"eventID\":\"event123\"}");
         }
-
+        function deleteEvent() {
+            window.scrollTo(0, document.body.scrollHeight);
+            document.getElementById("handleBox").value = "/event/delete";
+            document.getElementById("requestBox").value = formatJson("{\"eventID\":\"event123\"}");
+        }
+        function getEventList() {
+            window.scrollTo(0, document.body.scrollHeight);
+            document.getElementById("handleBox").value = "/event/get_list";
+            document.getElementById("requestBox").value = formatJson("{\"eventID\":\"event123\"}");
+        }
+        function getEventByID() {
+            window.scrollTo(0, document.body.scrollHeight);
+            document.getElementById("handleBox").value = "/event/get_by_id";
+            document.getElementById("requestBox").value = formatJson("{\"eventID\":\"event123\"}");
+        }
+        function getTimeMetricsReport() {
+            window.scrollTo(0, document.body.scrollHeight);
+            document.getElementById("handleBox").value = "/report/get_time_metrics_all";
+            document.getElementById("requestBox").value = formatJson("{\"userID\":\"username\"}");
+        }
+        function fakeIt() {
+            window.scrollTo(0, document.body.scrollHeight);
+            document.getElementById("handleBox").value = "/fake_it";
+            document.getElementById("requestBox").value = formatJson("{\"userID\":\"username\"}");
+        }
+        function getAllCategoriesActive() {
+            window.scrollTo(0, document.body.scrollHeight);
+            document.getElementById("handleBox").value = "/categories/get_all_active";
+            document.getElementById("requestBox").value = formatJson("{\"userID\":\"username\"}");
+        }
+        function getCategoryByID() {
+            window.scrollTo(0, document.body.scrollHeight);
+            document.getElementById("handleBox").value = "/categories/get_by_id";
+            document.getElementById("requestBox").value = formatJson("{\"userID\":\"username\"}");
+        }
+    
     </script>
 </head>
 
@@ -153,23 +183,35 @@
         <h1 style="padding-left:1cm; text-decoration: underline;">User Commands</h1>
         <ul>
             <li>
-                <a href="javascript:login()">/user/login</a> This API login an user.
+                <a href="javascript:login()">/user/login</a> This API call login an user.
             </li>
             <li>
-                <a href="javascript:register()">/user/register</a> This API will register a new user.
+                <a href="javascript:register()">/user/register</a> This API call will register a new user.
             </li>
             <li>
-                <a href="javascript:logout()">/user/logout</a> This API will logout a user.</li>
+                <a href="javascript:logout()">/user/logout</a> This API call will logout a user.</li>
         </ul>
     </div>
 
     <br />
 
     <div style="border: 2px solid black; margin:5px;">
-        <h1 style="padding-left:1cm; text-decoration: underline;">Game Lobby Commands</h1>
+        <h1 style="padding-left:1cm; text-decoration: underline;">Events Commands</h1>
         <ul>
             <li>
-                <a href="javascript:createGame()">/gamelobby/creategame</a> Create a game.
+                <a href="javascript:createEvent()">/event/create</a> This API call will create an event.
+            </li>
+            <li>
+                <a href="javascript:editEvent()">/event/edit</a> This API call will edit an event.
+            </li>
+            <li>
+                <a href="javascript:deleteEvent()">/event/delete</a> This API call will delete an event.
+            </li>
+            <li>
+                <a href="javascript:getEventList()">/event/get_list</a> This API call will get a list of events.
+            </li>
+            <li>
+                <a href="javascript:getEventByID()">/event/get_by_id</a> This API call will get event by ID.
             </li>
         </ul>
     </div>
@@ -177,15 +219,34 @@
     <br />
 
     <div style="border: 2px solid black; margin:5px;">
-        <h1 style="padding-left:1cm; text-decoration: underline;">Game Commands</h1>
+        <h1 style="padding-left:1cm; text-decoration: underline;">Report Commands</h1>
         <ul>
             <li>
-                <a href="javascript:chat()">/game/chat</a> This API sends a message to be added to chat.
+                <a href="javascript:getTimeMetricsReport()">/report/get_time_metrics_all</a> This API call will return the metrics report for all
             </li>
         </ul>
     </div>
 
+    <div style="border: 2px solid black; margin:5px;">
+        <h1 style="padding-left:1cm; text-decoration: underline;">Mock Commands</h1>
+        <ul>
+            <li>
+                <a href="javascript:fakeIt()">/fake_it</a> This API call will fake data.
+            </li>
+        </ul>
+    </div>
 
+    <div style="border: 2px solid black; margin:5px;">
+        <h1 style="padding-left:1cm; text-decoration: underline;">Categories Commands</h1>
+        <ul>
+            <li>
+                <a href="javascript:getAllCategoriesActive()">/categories/get_all_active</a> This API call returns all active categories.
+            </li>
+            <li>
+                <a href="javascript:getCategoryByID()">/categories/get_by_id</a> This API call returns a category by ID.
+            </li>
+        </ul>
+    </div>
 </div>
 <div>
     <h5>
