@@ -10,6 +10,7 @@ import timebudget.handlers.GetMetricsReportHandler;
 import timebudget.handlers.LoginHandler;
 import timebudget.handlers.RegisterHandler;
 import timebudget.handlers.categories.GetAllCategoriesHandler;
+import timebudget.handlers.categories.GetCategoryByIdHandler;
 import timebudget.handlers.events.CreateEventHandler;
 import timebudget.handlers.events.DeleteEventHandler;
 import timebudget.handlers.events.EditEventHandler;
