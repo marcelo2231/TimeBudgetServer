@@ -3,199 +3,97 @@ package timebudget.model;
 public class User {
 	
 	public static final int NO_USER_ID = -1;
-	
-	private String username = null; // Must be 4 characters long
-	private String password = null; // Must be 8 characters long
-	private String fullName = null; // Can be null
-	private String token = null;
+	public static final int NO_CREATED_AT = -1;
+
 	private int userID = NO_USER_ID;
-	
-	public static final int AUTH_TOKEN_SIZE = 16;
-	
-	/**
-	 * Default constructor for serialization
-	 *
-	 * @post a new User has been created.
-	 */
+	private String username = null; // Must be 4 characters long
+	private String email = null; // Must be 4 characters long
+	private String password = null; // Must be 8 characters long
+	private int createdAt = NO_CREATED_AT;
+
 	private User(){}
-	
-	/**
-	 * Constructor that creates a User with a name and password.
-	 * @param username username of the new user
-	 * @param password the password of the new user
-	 *
-	 * @pre username and password parameters are not null;
-	 * @post a new User is created with the given username and password
-	 */
-	public User(String username, String password) {
+
+	public User(int userID, String username, String email, String password, int createdAt) {
+		this.userID = userID;
 		this.username = username;
-		this.password = password;
+		this.emaiil = email;
+		this.password = password1;
+		this.createdAt = createdAt;
 	}
-	
-	/**
-	 * Constructor that creates a new user with a given Auth token
-	 * @param token the auth token for the user to be created.
-	 *
-	 * @pre auth token param is not null
-	 * @post a new User is created with the given auth token
-	 */
-	public User(String token) {
-		this.token = token;
-	}
-	
-	/**
-	 * Constructor that creates a new User with the username, password, and fullname
-	 *
-	 * @param username username of new user to be created
-	 * @param password new user's password
-	 * @param fullName new user's fullname
-	 *
-	 * @pre none of the params are null
-	 * @post A new User is created with the given username, password, and fullname
-	 */
-	public User(String username, String password, String fullName) {
-		this.username = username;
-		this.password = password;
-		this.fullName = fullName;
-	}
-	
-	/**
-	 * A copy constructor for a new User.
-	 * @param user the User object to be copied.
-	 *
-	 * @pre user param is not null
-	 * @post A new User is created that is a copy of the provided User.
-	 * @Post the new User has the same username, password, fullname, authToken,
-	 * and userID as the provided user.
-	 */
+
 	public User(User user) {
-		this.username = user.getUsername();
-		this.password = user.getPassword();
-		this.fullName = user.getFullName();
-		this.token = user.getToken();
 		this.userID = user.getUserID();
+		this.username = user.getUsername();
+		this.email = user.getEmail();
+		this.password = user.getPassword();
+		this.createdAt = user.getCreatedAt();
 	}
-	
-	/**
-	 * Sets this User's token to the provided token
-	 * @param token the token which should be set on this User
-	 *
-	 * @post this User's token is identical to the provided token
-	 */
-	public void setToken(String token) {
-		this.token = token;
-	}
-	
-	/**
-	 * Returns this user's token
-	 * @return the token currently stored for this User
-	 *
-	 * @post retVal == this.token;
-	 */
-	public String getToken() {
-		return token;
-	}
-	
-	/**
-	 * Returns this User's username.
-	 * @return the value of this User's username
-	 *
-	 * @post retVal == this.username
-	 */
-	public String getUsername() {
-		return username;
-	}
-	
-	/**
-	 * Returns this User's password.
-	 * @return the value of this User's password
-	 *
-	 * @post retVal == this.password
-	 */
-	public String getPassword() {
-		return password;
-	}
-	
-	/**
-	 * Returns this User's fullname.
-	 * @return the value of this User's fullname
-	 *
-	 * @post retVal == this.fullname
-	 */
-	public String getFullName() {
-		return fullName;
-	}
-	
-	/**
-	 * Method to set the fullname of this User
-	 * @param fullName the value to be stored as this User's fullName
-	 *
-	 * @post retVal == this.fullName
-	 */
-	public void setFullName(String fullName) {
-		this.fullName = fullName;
-	}
-	
-	/**
-	 * Returns this User's userID.
-	 * @return the value of this User's userID
-	 *
-	 * @post retVal == this.userID
-	 */
+
 	public int getUserID() {
 		return userID;
 	}
-	
-	public void setUserID(int id) {
-		userID = id;
+
+	public void setUserID(int userID) {
+		this.userID = userID;
 	}
-	
-	/**
-	 * Method to compare two objects to determine if the other is the same as this one.
-	 * @param o the other object to be compared to this User
-	 * @return true/false depending on whether both this User and o are the same object
-	 *
-	 * @post this == o || this != o
-	 */
-	@Override
-	public boolean equals(Object o) {
-		if(this == o) return true;
-		if(o == null || getClass() != o.getClass()) return false;
-		
-		User user = (User) o;
-		
-		if(userID != user.userID) return false;
-		if(!username.equals(user.username)) return false;
-		if(!password.equals(user.password)) return false;
-		return (fullName != null ? !fullName.equals(user.fullName) : user.fullName == null);
-	}
-	
-	/**
-	 * This method creates a hashing code for this userObject based on this.username, this.password,
-	 * and this.userID.
-	 * @return the hash code for this User object
-	 *
-	 * @pre this != null
-	 * @pre this.username != null
-	 * @post a unique hash code for this user has been generated.
-	 */
-	@Override
-	public int hashCode() {
-		int result = username.hashCode();
-		result = 31 * result + password.hashCode();
-		result = 31 * result + userID;
-		return result;
-	}
-	
-	/**
-	 * A string representation of this user which just consists of the username.
-	 * @return the username of this user
-	 *
-	 * @post retVal == this.username
-	 */
-	@Override
-	public String toString() {
+
+	public String getUsername() {
 		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public int getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(int createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public boolean equals(Object object) {
+		if (this == object) return true;
+		if (object == null || getClass() != object.getClass()) return false;
+		if (!super.equals(object)) return false;
+		User user = (User) object;
+		return getUserID() == user.getUserID() &&
+				getCreatedAt() == user.getCreatedAt() &&
+				java.util.Objects.equals(getUsername(), user.getUsername()) &&
+				java.util.Objects.equals(getEmail(), user.getEmail()) &&
+				java.util.Objects.equals(getPassword(), user.getPassword());
+	}
+
+	public int hashCode() {
+		return java.util.Objects.hash(super.hashCode(), getUserID(), getUsername(), getEmail(), getPassword(), getCreatedAt());
+	}
+
+	@java.lang.Override
+	public java.lang.String toString() {
+		return "User{" +
+				"userID=" + userID +
+				", username='" + username + '\'' +
+				", email='" + email + '\'' +
+				", password='" + password + '\'' +
+				", createdAt=" + createdAt +
+				'}';
 	}
 }
 
