@@ -1,6 +1,5 @@
 package timebudget.model;
 
-import java.time.LocalDateTime;
 
 public class Category {
 
@@ -14,8 +13,6 @@ public class Category {
 	private int deletedAt = NO_DELETED_AT;
 
 	public static final int AUTH_TOKEN_SIZE = 16;
-
-	private Category() {}
 
 	public Category(int categoryID, int userID, String description, int deletedAt) {
 		this.categoryID = categoryID;
@@ -76,13 +73,13 @@ public class Category {
 		if (!super.equals(object)) return false;
 		Category category = (Category) object;
 		return getCategoryID() == category.getCategoryID() &&
-				getUserId() == category.getUserId() &&
+				getUserID() == category.getUserID() &&
 				getDeletedAt() == category.getDeletedAt() &&
 				java.util.Objects.equals(getDescription(), category.getDescription());
 	}
 
 	public int hashCode() {
-		return java.util.Objects.hash(super.hashCode(), getCategoryID(), getUserId(), getDescription(), getDeletedAt());
+		return java.util.Objects.hash(super.hashCode(), getCategoryID(), getUserID(), getDescription(), getDeletedAt());
 	}
 
 	@java.lang.Override

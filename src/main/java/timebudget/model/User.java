@@ -11,13 +11,12 @@ public class User {
 	private String password = null; // Must be 8 characters long
 	private int createdAt = NO_CREATED_AT;
 
-	private User(){}
 
 	public User(int userID, String username, String email, String password, int createdAt) {
 		this.userID = userID;
 		this.username = username;
-		this.emaiil = email;
-		this.password = password1;
+		this.email = email;
+		this.password = password;
 		this.createdAt = createdAt;
 	}
 
