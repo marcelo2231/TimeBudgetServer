@@ -9,20 +9,22 @@ import timebudget.exceptions.BadUserException;
 import timebudget.exceptions.UserCreationException;
 
 //import java.security.SecureRandom;
+import java.math.BigInteger;
+import java.security.SecureRandom;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 public class ServerModel {
 	private Set<User> users; // Stores all users ever.
-	//private SecureRandom random;
+	private SecureRandom random;
 	private IUserDAO userDAO;
 	private IEventDAO eventDAO;
 	private ICategoryDAO categoryDAO;
 	
 	public ServerModel(IDAOFactory factory) {
 		users = new HashSet<User>();
-		//random = new SecureRandom();
+		random = new SecureRandom();
 		if(factory != null) {
 			userDAO = factory.getUserDAOInstance();
 			eventDAO = factory.getEventDAOInstance();
@@ -50,7 +52,7 @@ public class ServerModel {
 	}
 	
 	private void generateToken(User u) {
-		//u.setToken(new BigInteger(130, random).toString(32));
+		u.setToken(new BigInteger(130, random).toString(32));
 	}
 	
 	/**
@@ -71,6 +73,19 @@ public class ServerModel {
 			}
 		}
 		throw new BadUserException("Invalid username or password!");
+	}
+	
+	/**
+	 * authenticates a user using an authentication token.
+	 * @param token token of specified user to log on
+	 * @return user with corresponding token if login successful, null if not
+	 */
+	public User authenticate(String token) throws BadUserException {
+		for(User u : users) {
+			if(token.equals(u.getToken()))
+				return u;
+		}
+		throw new BadUserException("Invalid user token!");
 	}
 
 	

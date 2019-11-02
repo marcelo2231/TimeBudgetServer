@@ -1,10 +1,13 @@
 package timebudget;
 
 
+import timebudget.exceptions.BadEventException;
 import timebudget.exceptions.BadUserException;
 import timebudget.exceptions.NoCategoryException;
 import timebudget.exceptions.UserCreationException;
 import timebudget.model.Category;
+import timebudget.model.Event;
+import timebudget.model.TimePeriod;
 import timebudget.model.User;
 import timebudget.model.request.LoginRequest;
 
@@ -79,9 +82,19 @@ public interface IServer {
 	 */
 	User register(User user) throws UserCreationException;
 	
-	List<Category> getAllActiveCategories(int userID) throws BadUserException, NoCategoryException;
+	List<Category> getAllActiveCategories(User user) throws BadUserException, NoCategoryException;
 	
-	Category getCategoryByID(int categoryID) throws NoCategoryException;
+	Category getCategoryByID(User user, int categoryID) throws NoCategoryException;
+	
+	Event createEvent(Event event) throws BadEventException;
+	
+	boolean deleteEvent(Event event) throws BadEventException;
+	
+	Event editEvent(Event event) throws BadEventException;
+	
+	Event getEventByID(int eventID) throws BadEventException;
+	
+	List<Event> getEventList(int userID, TimePeriod timePeriod) throws BadUserException, BadEventException;
 	
 }
 

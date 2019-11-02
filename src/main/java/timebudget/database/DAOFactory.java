@@ -1,10 +1,13 @@
 package timebudget.database;
 
+import timebudget.database.DAOs.CategoryDAO;
+import timebudget.database.DAOs.EventDAO;
 import timebudget.database.DAOs.UserDAO;
 import timebudget.database.interfaces.ICategoryDAO;
 import timebudget.database.interfaces.IDAOFactory;
 import timebudget.database.interfaces.IEventDAO;
 import timebudget.database.interfaces.IUserDAO;
+import timebudget.model.Category;
 
 import java.io.File;
 import java.sql.*;
@@ -46,12 +49,12 @@ public class DAOFactory implements IDAOFactory {
 	
 	@Override
 	public IEventDAO getEventDAOInstance() {
-		return null;
+		return new EventDAO();
 	}
 	
 	@Override
 	public ICategoryDAO getCategoryDAOInstance() {
-		return null;
+		return new CategoryDAO();
 	}
 	
 	

@@ -1,12 +1,11 @@
 package timebudget;
 
 import timebudget.database.interfaces.IDAOFactory;
+import timebudget.exceptions.BadEventException;
 import timebudget.exceptions.BadUserException;
 import timebudget.exceptions.NoCategoryException;
 import timebudget.exceptions.UserCreationException;
-import timebudget.model.Category;
-import timebudget.model.ServerModel;
-import timebudget.model.User;
+import timebudget.model.*;
 import timebudget.model.request.LoginRequest;
 
 import java.util.List;
@@ -42,16 +41,42 @@ public class ServerFacade implements IServer {
 	}
 	
 	@Override
-	public List<Category> getAllActiveCategories(int userID) throws BadUserException, NoCategoryException {
-		
+	public List<Category> getAllActiveCategories(User user) throws BadUserException, NoCategoryException {
+		//This will get the full user and its userID based on the auth token provided by the client.
+		user = model.authenticate(user.getToken());
 		
 		
 		return null;
 	}
 	
 	@Override
-	public Category getCategoryByID(int categoryID) throws NoCategoryException {
+	public Category getCategoryByID(User user, int categoryID) throws NoCategoryException {
 		
+		return null;
+	}
+	
+	@Override
+	public Event createEvent(Event event) throws BadEventException {
+		return null;
+	}
+	
+	@Override
+	public boolean deleteEvent(Event event) throws BadEventException {
+		return false;
+	}
+	
+	@Override
+	public Event editEvent(Event event) throws BadEventException {
+		return null;
+	}
+	
+	@Override
+	public Event getEventByID(int eventID) throws BadEventException {
+		return null;
+	}
+	
+	@Override
+	public List<Event> getEventList(int userID, TimePeriod timePeriod) throws BadUserException, BadEventException {
 		return null;
 	}
 	

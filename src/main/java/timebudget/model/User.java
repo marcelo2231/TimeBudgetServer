@@ -11,6 +11,7 @@ public class User {
 	private String username = null; // Must be 4 characters long
 	private String email = null; // Must be 4 characters long
 	private String password = null; // Must be 8 characters long
+	private String token = null;
 	private int createdAt = NO_CREATED_AT;
 
 
@@ -25,6 +26,10 @@ public class User {
 	public User(LoginRequest loginRequest){
 		this.username = loginRequest.getUsername();
 		this.password = loginRequest.getPassword();
+	}
+	
+	public User(String token){
+		this.token = token;
 	}
 
 	public User(User user) {
@@ -41,6 +46,14 @@ public class User {
 
 	public void setUserID(int userID) {
 		this.userID = userID;
+	}
+	
+	public String getToken(){
+		return token;
+	}
+	
+	public void setToken(String token){
+		this.token = token;
 	}
 
 	public String getUsername() {
@@ -74,6 +87,7 @@ public class User {
 	public void setCreatedAt(int createdAt) {
 		this.createdAt = createdAt;
 	}
+	
 
 	public boolean equals(Object object) {
 		if (this == object) return true;
