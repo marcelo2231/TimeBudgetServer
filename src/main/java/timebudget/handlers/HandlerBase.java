@@ -2,6 +2,7 @@ package timebudget.handlers;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
+import timebudget.TBSerializer;
 
 import java.io.*;
 import java.util.List;
@@ -49,7 +50,7 @@ public abstract class HandlerBase implements HttpHandler {
 	protected void sendResponseBody(HttpExchange exchange, Object result) throws IOException {
 		OutputStream os = exchange.getResponseBody();
 		OutputStreamWriter writer = new OutputStreamWriter(os);
-		//writer.write(Serializer.getInstance().serialize(result));
+		writer.write(new TBSerializer().ObjToJson(result));
 		writer.close();
 		os.close();
 	}

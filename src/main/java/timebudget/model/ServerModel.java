@@ -36,8 +36,6 @@ public class ServerModel {
 					users.add(user);
 				}
 			}
-			
-			
 			ServerFacade.daoFactory.endTransaction(false);
 		}
 	}

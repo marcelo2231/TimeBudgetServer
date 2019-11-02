@@ -5,6 +5,7 @@ import timebudget.exceptions.BadUserException;
 import timebudget.exceptions.UserCreationException;
 import timebudget.model.ServerModel;
 import timebudget.model.User;
+import timebudget.model.request.LoginRequest;
 
 public class ServerFacade implements IServer {
 	
@@ -26,9 +27,9 @@ public class ServerFacade implements IServer {
 	}
 	
 	
-	public User login(User user) throws BadUserException {
-		if(user != null)
-			return model.authenticate(user.getUsername(), user.getPassword());
+	public User login(LoginRequest loginRequest) throws BadUserException {
+		if(loginRequest != null)
+			return model.authenticate(loginRequest.getUsername(), loginRequest.getPassword());
 		throw new BadUserException("User was null!");
 	}
 

@@ -23,7 +23,7 @@ public class DAOFactory implements IDAOFactory {
 			+ " FullName text \n"
 			+ ");";
 	
-	static Connection connection;
+	public static Connection connection;
 	
 	/******************************************************************************************/
 	

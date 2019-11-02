@@ -4,6 +4,7 @@ package timebudget;
 import timebudget.exceptions.BadUserException;
 import timebudget.exceptions.UserCreationException;
 import timebudget.model.User;
+import timebudget.model.request.LoginRequest;
 
 public interface IServer {
 	
@@ -54,11 +55,11 @@ public interface IServer {
 	 * @pre user.username exists
 	 * @pre user.password corresponds to user.username
 	 *
-	 * @param user only should consist of a username and password
+	 * @param loginRequest only should consist of a username and password
 	 * @return the user who was logged in if the username and password were correct, null otherwise
 	 * @throws BadUserException contains a message about the failure (only if user is not formatted correctly)
 	 */
-	User login(User user) throws BadUserException;
+	User login(LoginRequest loginRequest) throws BadUserException;
 	
 	/**
 	 * method to register a new user

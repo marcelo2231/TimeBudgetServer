@@ -1,5 +1,7 @@
 package timebudget.model;
 
+import timebudget.model.request.LoginRequest;
+
 public class User {
 	
 	public static final int NO_USER_ID = -1;
@@ -18,6 +20,11 @@ public class User {
 		this.email = email;
 		this.password = password;
 		this.createdAt = createdAt;
+	}
+	
+	public User(LoginRequest loginRequest){
+		this.username = loginRequest.getUsername();
+		this.password = loginRequest.getPassword();
 	}
 
 	public User(User user) {

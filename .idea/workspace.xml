@@ -2,113 +2,75 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a34c3b2a-a4e4-4ab8-8bc7-f0e7235a27cc" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/create_db.sql" beforeDir="false" afterPath="$PROJECT_DIR$/create_db.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/timebudget/TBSerializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/timebudget/IServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/timebudget/IServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/timebudget/ServerCommunicator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/timebudget/ServerCommunicator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/timebudget/ServerFacade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/timebudget/ServerFacade.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/timebudget/database/DAOFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/timebudget/database/DAOFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/timebudget/database/DAOs/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/timebudget/database/DAOs/UserDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/timebudget/handlers/FakeItHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/timebudget/handlers/FakeItHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/timebudget/handlers/GetMetricsReportHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/timebudget/handlers/GetMetricsReportHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/timebudget/handlers/HandlerBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/timebudget/handlers/HandlerBase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/timebudget/handlers/LoginHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/timebudget/handlers/LoginHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/timebudget/handlers/RegisterHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/timebudget/handlers/RegisterHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/timebudget/handlers/categories/GetAllCategoriesHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/timebudget/handlers/categories/GetAllCategoriesHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/timebudget/handlers/categories/GetCategoryByIdHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/timebudget/handlers/categories/GetCategoryByIdHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/timebudget/handlers/events/CreateEventHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/timebudget/handlers/events/CreateEventHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/timebudget/handlers/events/DeleteEventHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/timebudget/handlers/events/DeleteEventHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/timebudget/handlers/events/EditEventHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/timebudget/handlers/events/EditEventHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/timebudget/handlers/events/GetEventByIdHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/timebudget/handlers/events/GetEventByIdHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/timebudget/handlers/events/GetListEventHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/timebudget/handlers/events/GetListEventHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/timebudget/model/ServerModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/timebudget/model/ServerModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/timebudget/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/timebudget/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/timebudget/model/request/LoginRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/timebudget/model/request/LoginRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/IServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/IServer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/ServerCommunicator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/ServerCommunicator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/ServerFacade.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/ServerFacade.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/database/DAOFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/database/DAOFactory.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/database/DAOs/UserDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/database/DAOs/UserDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/database/interfaces/IDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/database/interfaces/IDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/database/interfaces/IDAOFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/database/interfaces/IDAOFactory.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/database/interfaces/IUserDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/database/interfaces/IUserDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/exceptions/BadUserException.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/exceptions/BadUserException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/exceptions/UserCreationException.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/exceptions/UserCreationException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/handlers/DefaultHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/handlers/DefaultHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/handlers/FakeItHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/handlers/FakeItHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/handlers/GetMetricsReportHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/handlers/GetMetricsReportHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/handlers/HandlerBase.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/handlers/HandlerBase.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/handlers/LoginHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/handlers/LoginHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/handlers/RegisterHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/handlers/RegisterHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/handlers/categories/GetAllCategoriesHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/handlers/categories/GetAllCategoriesHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/handlers/categories/GetCategoryByIdHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/handlers/categories/GetCategoryByIdHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/handlers/events/CreateEventHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/handlers/events/CreateEventHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/handlers/events/DeleteEventHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/handlers/events/DeleteEventHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/handlers/events/EditEventHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/handlers/events/EditEventHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/handlers/events/GetEventByIdHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/handlers/events/GetEventByIdHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/handlers/events/GetListEventHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/handlers/events/GetListEventHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/log/Corn$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/log/Corn$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/log/Corn.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/log/Corn.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/model/AuthToken.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/model/AuthToken.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/model/Category.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/model/Category.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/model/Event.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/model/Event.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/model/IDManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/model/IDManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/model/ServerModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/model/ServerModel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/model/TimePeriod.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/model/TimePeriod.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/model/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/model/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/model/request/GetUsingCategoryIDRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/model/request/GetUsingCategoryIDRequest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/model/request/GetUsingEventIDRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/model/request/GetUsingEventIDRequest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/model/request/GetUsingUserIDRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/model/request/GetUsingUserIDRequest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/model/request/LoginRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/model/request/LoginRequest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/timebudget.server.log" beforeDir="false" afterPath="$PROJECT_DIR$/timebudget.server.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/timebudget.server.log.lck" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5">
-      <split-first>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/timebudget/database/DAOs/UserDAO.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="345">
-                  <caret line="29" column="19" lean-forward="true" selection-start-line="29" selection-start-column="19" selection-end-line="29" selection-end-column="19" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                    <element signature="e#226#227#0" expanded="true" />
-                    <element signature="e#245#246#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/timebudget/database/DAOFactory.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="186">
-                  <caret line="96" column="4" lean-forward="true" selection-start-line="96" selection-start-column="4" selection-end-line="96" selection-end-column="4" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/timebudget/handlers/HandlerBase.java">
-              <provider selected="true" editor-type-id="text-editor" />
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/timebudget/handlers/FakeItHandler.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="270">
-                  <caret line="21" column="14" selection-start-line="21" selection-start-column="14" selection-end-line="21" selection-end-column="14" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/timebudget/log/Corn.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="360">
-                  <caret line="28" column="5" lean-forward="true" selection-start-line="28" selection-start-column="5" selection-end-line="28" selection-end-column="5" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/.vscode/launch.json">
-              <provider selected="true" editor-type-id="text-editor" />
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/tb.sqlite">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="420">
-                  <caret line="28" column="12" selection-start-line="28" selection-start-column="12" selection-end-line="28" selection-end-column="12" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/timebudget/database/interfaces/IDAO.java">
-              <provider selected="true" editor-type-id="text-editor" />
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/timebudget/database/interfaces/IDAOFactory.java">
-              <provider selected="true" editor-type-id="text-editor" />
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/timebudget/database/interfaces/IUserDAO.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="135">
-                  <caret line="11" column="1" lean-forward="true" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/create_db.sql">
-              <provider selected="true" editor-type-id="text-editor">
-                <state>
-                  <caret selection-end-line="7" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -118,40 +80,8 @@
       </list>
     </option>
   </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>main</find>
-      <find>Category</find>
-      <find>categoryID</find>
-      <find>name</find>
-      <find>username</find>
-      <find>deletedAt</find>
-      <find>setUser</find>
-      <find>userId</find>
-    </findStrings>
-    <replaceStrings>
-      <replace>Category</replace>
-      <replace>name</replace>
-      <replace>userID</replace>
-    </replaceStrings>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/src/main/java/timebudget/model/User.java" />
-        <option value="$PROJECT_DIR$/src/main/java/timebudget/model/TimePeriod.java" />
-        <option value="$PROJECT_DIR$/src/main/java/timebudget/model/AuthToken.java" />
-        <option value="$PROJECT_DIR$/src/main/java/timebudget/model/Category.java" />
-        <option value="$PROJECT_DIR$/src/main/java/timebudget/model/Event.java" />
-        <option value="$PROJECT_DIR$/create_db.sql" />
-        <option value="$PROJECT_DIR$/src/main/java/timebudget/database/DAOFactory.java" />
-        <option value="$PROJECT_DIR$/src/main/java/timebudget/handlers/FakeItHandler.java" />
-      </list>
-    </option>
   </component>
   <component name="MavenImportPreferences">
     <option name="importingSettings">
@@ -167,70 +97,6 @@
     <option name="height" value="1177" />
   </component>
   <component name="ProjectId" id="1SX4YAf8BnkyOUdpc6KUjxFUJgG" />
-  <component name="ProjectView">
-    <navigator currentView="Scope" currentSubView="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope" proportions="" version="1">
-      <foldersAlwaysOnTop value="true" />
-    </navigator>
-    <panes>
-      <pane id="Scope">
-        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
-          <expand>
-            <path>
-              <item name="TimeBudget" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="~/428" type="442cc68d:ScopeViewTreeModel$RootNode" />
-            </path>
-            <path>
-              <item name="TimeBudget" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="~/428" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="TimeBudget" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="~/428" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="TimeBudget" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="~/428" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="TimeBudget" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="~/428" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="timebudget" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="TimeBudget" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="~/428" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="timebudget" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="handlers" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="TimeBudget" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="~/428" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="timebudget" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="log" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="ProjectPane" />
-      <pane id="PackagesPane" />
-    </panes>
-  </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/timebudget/model" />
@@ -258,6 +124,15 @@
       </list>
     </option>
   </component>
+  <component name="RunManager">
+    <configuration name="Server" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="timebudget.ServerCommunicator" />
+      <module name="TimeBudget" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -280,256 +155,15 @@
       <is-autoscroll-to-source value="true" />
     </todo-panel>
   </component>
-  <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
-    <layout>
-      <window_info id="Captures" order="0" weight="0.25" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.17948718" />
-      <window_info id="Structure" order="2" side_tool="true" />
-      <window_info id="Image Layers" order="3" />
-      <window_info id="Designer" order="4" />
-      <window_info id="Resources Explorer" order="5" weight="0.32960597" />
-      <window_info id="Capture Tool" order="6" />
-      <window_info id="Favorites" order="7" side_tool="true" />
-      <window_info anchor="bottom" id="Find" />
-      <window_info anchor="bottom" id="Version Control" order="0" weight="0.32920355" />
-      <window_info anchor="bottom" id="TODO" order="1" weight="0.32920355" />
-      <window_info anchor="bottom" id="Terminal" order="2" visible="true" weight="0.37959182" />
-      <window_info anchor="bottom" id="Event Log" order="3" side_tool="true" />
-      <window_info anchor="right" id="Assistant" weight="0.33333334" />
-      <window_info anchor="right" id="Capture Analysis" order="0" />
-      <window_info anchor="right" id="Theme Preview" order="1" />
-      <window_info anchor="right" id="Palette&#9;" order="2" />
-    </layout>
-  </component>
-  <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/timebudget/ServerCommunicator.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/timebudget/ServerFacade.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="22" column="4" selection-start-line="22" selection-start-column="4" selection-end-line="22" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.project">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="19" selection-start-line="1" selection-start-column="19" selection-end-line="1" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/timebudget/model/AuthToken.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
-          <folding>
-            <element signature="e#713#714#0" expanded="true" />
-            <element signature="e#747#748#0" expanded="true" />
-            <element signature="e#798#799#0" expanded="true" />
-            <element signature="e#844#845#0" expanded="true" />
-            <element signature="e#874#875#0" expanded="true" />
-            <element signature="e#903#904#0" expanded="true" />
-            <element signature="e#944#945#0" expanded="true" />
-            <element signature="e#980#981#0" expanded="true" />
-            <element signature="e#1013#1014#0" expanded="true" />
-            <element signature="e#1045#1046#0" expanded="true" />
-            <element signature="e#1092#1093#0" expanded="true" />
-            <element signature="e#1134#1135#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/timebudget/model/TimePeriod.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="407">
-          <caret line="39" column="43" selection-start-line="39" selection-start-column="43" selection-end-line="39" selection-end-column="43" />
-          <folding>
-            <element signature="e#1134#1135#0" expanded="true" />
-            <element signature="e#1182#1183#0" expanded="true" />
-            <element signature="e#1219#1220#0" expanded="true" />
-            <element signature="e#1254#1255#0" expanded="true" />
-            <element signature="e#1307#1308#0" expanded="true" />
-            <element signature="e#1355#1356#0" expanded="true" />
-            <element signature="e#1385#1386#0" expanded="true" />
-            <element signature="e#1414#1415#0" expanded="true" />
-            <element signature="e#1455#1456#0" expanded="true" />
-            <element signature="e#1491#1492#0" expanded="true" />
-            <element signature="e#1522#1523#0" expanded="true" />
-            <element signature="e#1552#1553#0" expanded="true" />
-            <element signature="e#1595#1596#0" expanded="true" />
-            <element signature="e#1633#1634#0" expanded="true" />
-            <element signature="e#1662#1663#0" expanded="true" />
-            <element signature="e#1690#1691#0" expanded="true" />
-            <element signature="e#1729#1730#0" expanded="true" />
-            <element signature="e#1763#1764#0" expanded="true" />
-            <element signature="e#1796#1797#0" expanded="true" />
-            <element signature="e#1828#1829#0" expanded="true" />
-            <element signature="e#1875#1876#0" expanded="true" />
-            <element signature="e#1917#1918#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/timebudget/model/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="25" column="11" lean-forward="true" selection-start-line="25" selection-start-column="11" selection-end-line="25" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/timebudget/model/Category.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="82">
-          <caret line="30" column="5" lean-forward="true" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
-          <folding>
-            <element signature="e#881#882#0" expanded="true" />
-            <element signature="e#921#922#0" expanded="true" />
-            <element signature="e#951#952#0" expanded="true" />
-            <element signature="e#975#976#0" expanded="true" />
-            <element signature="e#1021#1022#0" expanded="true" />
-            <element signature="e#1056#1057#0" expanded="true" />
-            <element signature="e#1083#1084#0" expanded="true" />
-            <element signature="e#1103#1104#0" expanded="true" />
-            <element signature="e#1266#1267#0" expanded="true" />
-            <element signature="e#1293#1294#0" expanded="true" />
-            <element signature="e#1203#1204#0" expanded="true" />
-            <element signature="e#1228#1229#0" expanded="true" />
-            <element signature="e#1279#1280#0" expanded="true" />
-            <element signature="e#1316#1317#0" expanded="true" />
-            <element signature="e#1346#1347#0" expanded="true" />
-            <element signature="e#1369#1370#0" expanded="true" />
-            <element signature="e#1413#1414#0" expanded="true" />
-            <element signature="e#1446#1447#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/timebudget/model/Event.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="29" column="5" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
-          <folding>
-            <element signature="e#817#818#0" expanded="true" />
-            <element signature="e#838#839#0" expanded="true" />
-            <element signature="e#878#879#0" expanded="true" />
-            <element signature="e#907#908#0" expanded="true" />
-            <element signature="e#938#939#0" expanded="true" />
-            <element signature="e#962#963#0" expanded="true" />
-            <element signature="e#1008#1009#0" expanded="true" />
-            <element signature="e#1043#1044#0" expanded="true" />
-            <element signature="e#1078#1079#0" expanded="true" />
-            <element signature="e#1103#1104#0" expanded="true" />
-            <element signature="e#1154#1155#0" expanded="true" />
-            <element signature="e#1191#1192#0" expanded="true" />
-            <element signature="e#1218#1219#0" expanded="true" />
-            <element signature="e#1238#1239#0" expanded="true" />
-            <element signature="e#1276#1277#0" expanded="true" />
-            <element signature="e#1303#1304#0" expanded="true" />
-            <element signature="e#1331#1332#0" expanded="true" />
-            <element signature="e#1352#1353#0" expanded="true" />
-            <element signature="e#1392#1393#0" expanded="true" />
-            <element signature="e#1421#1422#0" expanded="true" />
-            <element signature="e#1447#1448#0" expanded="true" />
-            <element signature="e#1466#1467#0" expanded="true" />
-            <element signature="e#1502#1503#0" expanded="true" />
-            <element signature="e#1527#1528#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/plugins/web/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="183">
-          <caret line="195" column="2" lean-forward="true" selection-start-line="195" selection-start-column="2" selection-end-line="195" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CS428.iml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/timebudget/IServer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-202">
-          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/timebudget/database/interfaces/IDAO.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/timebudget/database/interfaces/IDAOFactory.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/timebudget/database/interfaces/IUserDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="11" column="1" lean-forward="true" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/timebudget/database/DAOs/UserDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="29" column="19" lean-forward="true" selection-start-line="29" selection-start-column="19" selection-end-line="29" selection-end-column="19" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#226#227#0" expanded="true" />
-            <element signature="e#245#246#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/create_db.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tb.sqlite">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="28" column="12" selection-start-line="28" selection-start-column="12" selection-end-line="28" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/timebudget/database/DAOFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="186">
-          <caret line="96" column="4" lean-forward="true" selection-start-line="96" selection-start-column="4" selection-end-line="96" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/timebudget/handlers/HandlerBase.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/timebudget/handlers/FakeItHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="21" column="14" selection-start-line="21" selection-start-column="14" selection-end-line="21" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/timebudget/log/Corn.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="28" column="5" lean-forward="true" selection-start-line="28" selection-start-column="5" selection-end-line="28" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.vscode/launch.json">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

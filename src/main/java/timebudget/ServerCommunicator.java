@@ -17,6 +17,7 @@ import timebudget.handlers.events.EditEventHandler;
 import timebudget.handlers.events.GetEventByIdHandler;
 import timebudget.handlers.events.GetListEventHandler;
 import timebudget.log.Corn;
+import timebudget.model.User;
 
 
 import java.io.IOException;
@@ -52,6 +53,12 @@ public class ServerCommunicator {
 		
 		Corn.log("Creating contexts");
 		createContexts();
+		
+		
+		User user = new User(-1, "Bob", "bob@aol.com", "password", 1234);
+		TBSerializer tbs = new TBSerializer();
+		
+		System.out.println(tbs.ObjToJson(user));
 		
 		Corn.log("Starting timebudget.server on port: " + port);
 		server.start();
