@@ -23,7 +23,7 @@ public class RegisterHandler extends HandlerBase {
 				return;
 			}
 			
-			User userInfo = TBSerializer.jsonToUser(reqBody);
+			User userInfo = (User)TBSerializer.jsonToObj(reqBody, User.class);
 			
 			if(userInfo.getUsername() == null || userInfo.getPassword() == null || userInfo.getEmail() == null){
 				throw new BadUserException("Username, Password or Email was null!");

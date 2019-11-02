@@ -5,8 +5,13 @@ import java.net.HttpURLConnection;
 import java.util.logging.Level;
 
 import com.sun.net.httpserver.HttpExchange;
+
+import timebudget.ServerFacade;
+import timebudget.TBSerializer;
+import timebudget.exceptions.BadEventException;
 import timebudget.handlers.HandlerBase;
 import timebudget.log.Corn;
+import timebudget.model.Event;
 
 
 public class CreateEventHandler extends HandlerBase {
@@ -21,13 +26,18 @@ public class CreateEventHandler extends HandlerBase {
 				return;
 			}
 			
+			Event eventInfo = (Event)TBSerializer.jsonToObj(reqBody, Event.class);
 			
-			//DO STUFF HERE
+			if(eventInfo.getCategoryID() == -1 || eventInfo.getDescription() == null ||
+			eventInfo.getUserID() == -1 || eventInfo.getStartAt() == -1 ||
+			eventInfo.getEndAt() == -1){
+				throw new BadEventException("CategoryID, Description, userID, startAt or endAt was null!");
+			}
 			
-			
+			Event results = ServerFacade.getInstance().createEvent(eventInfo);
 			
 			httpExchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
-			//sendResponseBody(httpExchange, results);
+			sendResponseBody(httpExchange, results);
 		} catch(Exception e){
 			Corn.log(Level.SEVERE, e.getMessage());
 			e.printStackTrace();

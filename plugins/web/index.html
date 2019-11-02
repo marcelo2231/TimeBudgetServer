@@ -49,9 +49,9 @@
             var requestBody = document.getElementById("requestBox").value;
             var token = document.getElementById("authToken").value;
             var method = "post";
-            if (handle.includes("person") || handle.includes("event")) {
-                method = "get";
-            }
+            //if (handle.includes("get")) {
+            //    method = "get";
+            //}
             send(handle, requestBody, method, token);
             return false;
         }
@@ -113,7 +113,7 @@
             window.scrollTo(0, document.body.scrollHeight);
             document.getElementById("handleBox").value = "/user/register";
             document.getElementById("requestBox").value = formatJson(
-                "{\"username\":\"username\",\"password\":\"password\"}");
+                "{\"username\":\"username\",\"password\":\"password\",\"email\":\"email@mail.com\"}");
         }
         function logout() {
             window.scrollTo(0, document.body.scrollHeight);
@@ -123,7 +123,7 @@
         function createEvent() {
             window.scrollTo(0, document.body.scrollHeight);
             document.getElementById("handleBox").value = "/event/create";
-            document.getElementById("requestBox").value = formatJson("{\"eventName\":\"My Event\", \"eventDescription\":\"This is a great event!\"}");
+            document.getElementById("requestBox").value = formatJson("{\"userID\":\"123\", \"description\":\"This is a great event!\", \"startAt\":\"12\", \"endAt\":\"14\", \"categoryID\":\"143423\"}");
         }
         function editEvent() {
             window.scrollTo(0, document.body.scrollHeight);
