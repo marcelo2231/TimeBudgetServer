@@ -1,7 +1,9 @@
 package timebudget.model;
 
 import timebudget.ServerFacade;
+import timebudget.database.interfaces.ICategoryDAO;
 import timebudget.database.interfaces.IDAOFactory;
+import timebudget.database.interfaces.IEventDAO;
 import timebudget.database.interfaces.IUserDAO;
 import timebudget.exceptions.BadUserException;
 import timebudget.exceptions.UserCreationException;
@@ -15,12 +17,16 @@ public class ServerModel {
 	private Set<User> users; // Stores all users ever.
 	//private SecureRandom random;
 	private IUserDAO userDAO;
+	private IEventDAO eventDAO;
+	private ICategoryDAO categoryDAO;
 	
 	public ServerModel(IDAOFactory factory) {
 		users = new HashSet<User>();
 		//random = new SecureRandom();
 		if(factory != null) {
 			userDAO = factory.getUserDAOInstance();
+			eventDAO = factory.getEventDAOInstance();
+			categoryDAO = factory.getCategoryDAOInstance();
 			loadFromDatabase();
 		}
 	}
@@ -36,6 +42,9 @@ public class ServerModel {
 					users.add(user);
 				}
 			}
+			
+			//TODO do we need to pull anything in from the other daos here?
+			
 			ServerFacade.daoFactory.endTransaction(false);
 		}
 	}
@@ -99,5 +108,17 @@ public class ServerModel {
 		users.add(newUser);
 		return newUser;
 	}
+	
+	public List<Category> getCategoriesForUser(int userID){
+		
+		return null;
+	}
+	
+	public Category getCategoryByID(int categoryID){
+		
+		return null;
+	}
+	
+	
 	
 }

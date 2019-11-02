@@ -1,6 +1,9 @@
 package timebudget.handlers;
 
 import com.sun.net.httpserver.HttpExchange;
+import timebudget.ServerFacade;
+import timebudget.TBSerializer;
+import timebudget.exceptions.BadUserException;
 import timebudget.log.Corn;
 import timebudget.model.User;
 
@@ -19,12 +22,17 @@ public class RegisterHandler extends HandlerBase {
 				httpExchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, -1);
 				return;
 			}
-			//User userInfo = Serializer.getInstance().deserializeUser(reqBody);
 			
+			User userInfo = TBSerializer.jsonToUser(reqBody);
 			
+			if(userInfo.getUsername() == null || userInfo.getPassword() == null || userInfo.getEmail() == null){
+				throw new BadUserException("Username, Password or Email was null!");
+			}
+			
+			User results = ServerFacade.getInstance().register(userInfo);
 			
 			httpExchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
-			//sendResponseBody(httpExchange, results);
+			sendResponseBody(httpExchange, results);
 		} catch(Exception e) {
 			Corn.log(Level.SEVERE, e.getMessage());
 			e.printStackTrace();

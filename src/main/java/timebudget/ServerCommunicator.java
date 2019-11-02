@@ -48,17 +48,10 @@ public class ServerCommunicator {
 		
 		//Set the DAOFactory in the timebudget.server facade before contexts use the ServerFacade.
 		ServerFacade.daoFactory = new DAOFactory();
-		ServerFacade.max_commands = maxDeltas;
 		ServerFacade.getInstance(); //Loads the database stuff
 		
 		Corn.log("Creating contexts");
 		createContexts();
-		
-		
-		User user = new User(-1, "Bob", "bob@aol.com", "password", 1234);
-		TBSerializer tbs = new TBSerializer();
-		
-		System.out.println(tbs.ObjToJson(user));
 		
 		Corn.log("Starting timebudget.server on port: " + port);
 		server.start();

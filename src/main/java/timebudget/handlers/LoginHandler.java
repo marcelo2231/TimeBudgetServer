@@ -25,7 +25,7 @@ public class LoginHandler extends HandlerBase {
 				return;
 			}
 			
-			LoginRequest userToLogin = new TBSerializer().jsonToLoginRequest(reqBody);
+			LoginRequest userToLogin = TBSerializer.jsonToLoginRequest(reqBody);
 			
 			if(userToLogin.getUsername() == null || userToLogin.getPassword() == null){
 				throw new BadUserException("Username or Password was null");

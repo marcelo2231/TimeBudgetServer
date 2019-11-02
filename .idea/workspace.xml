@@ -2,10 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a34c3b2a-a4e4-4ab8-8bc7-f0e7235a27cc" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/timebudget/database/interfaces/ICategoryDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/timebudget/database/interfaces/IEventDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/timebudget/exceptions/NoCategoryException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/db/database.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/timebudget/IServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/timebudget/IServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/timebudget/ServerCommunicator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/timebudget/ServerCommunicator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/timebudget/ServerFacade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/timebudget/ServerFacade.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/timebudget/TBSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/timebudget/TBSerializer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/timebudget/database/DAOFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/timebudget/database/DAOFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/timebudget.server.log" beforeDir="false" afterPath="$PROJECT_DIR$/timebudget.server.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/timebudget/database/interfaces/IDAOFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/timebudget/database/interfaces/IDAOFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/timebudget/handlers/LoginHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/timebudget/handlers/LoginHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/timebudget/handlers/RegisterHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/timebudget/handlers/RegisterHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/timebudget/model/ServerModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/timebudget/model/ServerModel.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

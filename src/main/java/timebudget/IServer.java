@@ -2,9 +2,13 @@ package timebudget;
 
 
 import timebudget.exceptions.BadUserException;
+import timebudget.exceptions.NoCategoryException;
 import timebudget.exceptions.UserCreationException;
+import timebudget.model.Category;
 import timebudget.model.User;
 import timebudget.model.request.LoginRequest;
+
+import java.util.List;
 
 public interface IServer {
 	
@@ -74,6 +78,10 @@ public interface IServer {
 	 * @throws UserCreationException
 	 */
 	User register(User user) throws UserCreationException;
+	
+	List<Category> getAllActiveCategories(int userID) throws BadUserException, NoCategoryException;
+	
+	Category getCategoryByID(int categoryID) throws NoCategoryException;
 	
 }
 
