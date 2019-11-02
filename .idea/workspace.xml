@@ -2,69 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a34c3b2a-a4e4-4ab8-8bc7-f0e7235a27cc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/timebudget/TBSerializer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/timebudget/IServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/timebudget/IServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/timebudget/ServerCommunicator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/timebudget/ServerCommunicator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/timebudget/ServerFacade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/timebudget/ServerFacade.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/timebudget/database/DAOFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/timebudget/database/DAOFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/timebudget/database/DAOs/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/timebudget/database/DAOs/UserDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/timebudget/handlers/FakeItHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/timebudget/handlers/FakeItHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/timebudget/handlers/GetMetricsReportHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/timebudget/handlers/GetMetricsReportHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/timebudget/handlers/HandlerBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/timebudget/handlers/HandlerBase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/timebudget/handlers/LoginHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/timebudget/handlers/LoginHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/timebudget/handlers/RegisterHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/timebudget/handlers/RegisterHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/timebudget/handlers/categories/GetAllCategoriesHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/timebudget/handlers/categories/GetAllCategoriesHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/timebudget/handlers/categories/GetCategoryByIdHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/timebudget/handlers/categories/GetCategoryByIdHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/timebudget/handlers/events/CreateEventHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/timebudget/handlers/events/CreateEventHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/timebudget/handlers/events/DeleteEventHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/timebudget/handlers/events/DeleteEventHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/timebudget/handlers/events/EditEventHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/timebudget/handlers/events/EditEventHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/timebudget/handlers/events/GetEventByIdHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/timebudget/handlers/events/GetEventByIdHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/timebudget/handlers/events/GetListEventHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/timebudget/handlers/events/GetListEventHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/timebudget/model/ServerModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/timebudget/model/ServerModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/timebudget/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/timebudget/model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/timebudget/model/request/LoginRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/timebudget/model/request/LoginRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/IServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/IServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/ServerCommunicator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/ServerCommunicator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/ServerFacade.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/ServerFacade.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/database/DAOFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/database/DAOFactory.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/database/DAOs/UserDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/database/DAOs/UserDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/database/interfaces/IDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/database/interfaces/IDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/database/interfaces/IDAOFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/database/interfaces/IDAOFactory.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/database/interfaces/IUserDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/database/interfaces/IUserDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/exceptions/BadUserException.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/exceptions/BadUserException.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/exceptions/UserCreationException.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/exceptions/UserCreationException.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/handlers/DefaultHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/handlers/DefaultHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/handlers/FakeItHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/handlers/FakeItHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/handlers/GetMetricsReportHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/handlers/GetMetricsReportHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/handlers/HandlerBase.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/handlers/HandlerBase.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/handlers/LoginHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/handlers/LoginHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/handlers/RegisterHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/handlers/RegisterHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/handlers/categories/GetAllCategoriesHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/handlers/categories/GetAllCategoriesHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/handlers/categories/GetCategoryByIdHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/handlers/categories/GetCategoryByIdHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/handlers/events/CreateEventHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/handlers/events/CreateEventHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/handlers/events/DeleteEventHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/handlers/events/DeleteEventHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/handlers/events/EditEventHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/handlers/events/EditEventHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/handlers/events/GetEventByIdHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/handlers/events/GetEventByIdHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/handlers/events/GetListEventHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/handlers/events/GetListEventHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/log/Corn$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/log/Corn$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/log/Corn.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/log/Corn.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/model/AuthToken.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/model/AuthToken.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/model/Category.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/model/Category.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/model/Event.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/model/Event.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/model/IDManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/model/IDManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/model/ServerModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/model/ServerModel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/model/TimePeriod.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/model/TimePeriod.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/model/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/model/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/model/request/GetUsingCategoryIDRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/model/request/GetUsingCategoryIDRequest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/model/request/GetUsingEventIDRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/model/request/GetUsingEventIDRequest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/model/request/GetUsingUserIDRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/model/request/GetUsingUserIDRequest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/timebudget/model/request/LoginRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/timebudget/model/request/LoginRequest.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/timebudget.server.log" beforeDir="false" afterPath="$PROJECT_DIR$/timebudget.server.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/timebudget.server.log.lck" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

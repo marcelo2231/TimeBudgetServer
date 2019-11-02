@@ -14,13 +14,14 @@ public class DAOFactory implements IDAOFactory {
 	private final String DATABASE_URL = "jdbc:sqlite:." +
 			File.separator + "plugins" +
 			File.separator + "db" +
-			File.separator + "database.db";
+			File.separator + "tb.sqlite";
 	
 	private final String SQL_CREATE_USERS = "CREATE TABLE IF NOT EXISTS users (\n"
 			+ " ID integer PRIMARY KEY AUTOINCREMENT NOT NULL, \n"
 			+ " Username text, \n"
 			+ " Password text, \n"
-			+ " FullName text \n"
+			+ " Email text, \n"
+			+ " CreatedAt"
 			+ ");";
 	
 	public static Connection connection;
