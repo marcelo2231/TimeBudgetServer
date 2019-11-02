@@ -6,6 +6,7 @@ import timebudget.exceptions.BadUserException;
 import timebudget.exceptions.NoCategoryException;
 import timebudget.exceptions.UserCreationException;
 import timebudget.model.*;
+import timebudget.model.request.GetEventListRequest;
 import timebudget.model.request.LoginRequest;
 
 import java.util.List;
@@ -76,7 +77,7 @@ public class ServerFacade implements IServer {
 	}
 	
 	@Override
-	public List<Event> getEventList(int userID, TimePeriod timePeriod) throws BadUserException, BadEventException {
+	public List<Event> getEventList(GetEventListRequest request) throws BadUserException, BadEventException {
 		return null;
 	}
 	

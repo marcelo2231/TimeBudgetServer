@@ -1,6 +1,5 @@
 package timebudget;
 
-
 import timebudget.exceptions.BadEventException;
 import timebudget.exceptions.BadUserException;
 import timebudget.exceptions.NoCategoryException;
@@ -9,6 +8,7 @@ import timebudget.model.Category;
 import timebudget.model.Event;
 import timebudget.model.TimePeriod;
 import timebudget.model.User;
+import timebudget.model.request.GetEventListRequest;
 import timebudget.model.request.LoginRequest;
 
 import java.util.List;
@@ -94,7 +94,7 @@ public interface IServer {
 	
 	Event getEventByID(int eventID) throws BadEventException;
 	
-	List<Event> getEventList(int userID, TimePeriod timePeriod) throws BadUserException, BadEventException;
+	List<Event> getEventList(GetEventListRequest request) throws BadUserException, BadEventException;
 	
 }
 
