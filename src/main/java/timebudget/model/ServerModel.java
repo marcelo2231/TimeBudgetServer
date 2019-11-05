@@ -5,12 +5,15 @@ import timebudget.database.interfaces.ICategoryDAO;
 import timebudget.database.interfaces.IDAOFactory;
 import timebudget.database.interfaces.IEventDAO;
 import timebudget.database.interfaces.IUserDAO;
+import timebudget.exceptions.BadEventException;
 import timebudget.exceptions.BadUserException;
 import timebudget.exceptions.UserCreationException;
+import timebudget.model.request.GetEventListRequest;
 
 //import java.security.SecureRandom;
 import java.math.BigInteger;
 import java.security.SecureRandom;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -134,6 +137,61 @@ public class ServerModel {
 		return null;
 	}
 	
-	
+	/**
+	 * creates a new event
+	 * @param event contains all parts of the event to be created
+	 * @return newly created event
+	 * @throws BadEventException
+	 */
+	public Event createEvent(Event event) throws BadEventException {
+		if(event == null) throw new BadEventException("Event is null.");
+		return event;
+	}
+
+	/**
+	 * edits an event
+	 * @param event contains all parts of the event to be edited
+	 * @return newly edited event
+	 * @throws BadEventException
+	 */
+	public Event editEvent(Event event) throws BadEventException {
+		if(event == null) throw new BadEventException("Event is null.");
+		return event;
+	}
+
+	/**
+	 * deletes an event
+	 * @param eventID the event id
+	 * @return newly created event
+	 * @throws BadEventException
+	 */
+	public boolean deleteEvent(int eventID) throws BadEventException {
+		if(eventID == -1) throw new BadEventException("Event id is -1.");
+		return true;
+	}
+
+	/**
+	 * gets an event by id
+	 * @param eventID the event id
+	 * @return the event
+	 * @throws BadEventException
+	 */
+	public Event getEventByID(int eventID) throws BadEventException {
+		if(eventID == -1) throw new BadEventException("Event id is -1.");
+		return new Event();
+	}
+
+	/**
+	 * gets an event by id
+	 * @param eventID the event id
+	 * @return the event
+	 * @throws BadEventException
+	 */
+	public List<Event> getEventList(GetEventListRequest request) throws BadUserException, BadEventException {
+		if(request.getUserID() == -1) throw new BadUserException("User ID is -1.");
+		if(request.getTimePeriod() == null) throw new BadEventException("Time period is null.");
+		List<Event> returnList = new ArrayList<Event>();
+		return returnList;
+	}
 	
 }

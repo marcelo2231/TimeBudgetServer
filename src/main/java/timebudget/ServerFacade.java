@@ -44,36 +44,34 @@ public class ServerFacade implements IServer {
 	@Override
 	public List<Category> getAllActiveCategories(User user) throws BadUserException, NoCategoryException {
 		//This will get the full user and its userID based on the auth token provided by the client.
+
 		user = model.authenticate(user.getToken());
-		
-		
-		return null;
+		return model.getCategoriesForUser(user.getUserID());
 	}
 	
 	@Override
 	public Category getCategoryByID(User user, int categoryID) throws NoCategoryException {
-		
-		return null;
+		return model.getCategoryByID(categoryID);
 	}
 	
 	@Override
 	public Event createEvent(Event event) throws BadEventException {
-		return null;
+		return model.createEvent(event);
 	}
 	
 	@Override
 	public boolean deleteEvent(Event event) throws BadEventException {
-		return false;
+		return model.deleteEvent(event.getEventID());
 	}
 	
 	@Override
 	public Event editEvent(Event event) throws BadEventException {
-		return null;
+		return model.editEvent(event);
 	}
 	
 	@Override
 	public Event getEventByID(int eventID) throws BadEventException {
-		return null;
+		return model.getEventByID(eventID);
 	}
 	
 	@Override
