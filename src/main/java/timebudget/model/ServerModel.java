@@ -1,5 +1,6 @@
 package timebudget.model;
 
+import timebudget.ReportGen;
 import timebudget.ServerFacade;
 import timebudget.database.interfaces.ICategoryDAO;
 import timebudget.database.interfaces.IDAOFactory;
@@ -16,6 +17,7 @@ import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public class ServerModel {
@@ -140,10 +142,10 @@ public class ServerModel {
 	 */
 	public Event createEvent(User user, Event event) throws BadEventException {
 		if(event == null) throw new BadEventException("Event is null.");
-		Event resultEvent = eventDAO.create(user, event);
-		if(resultEvent == null)
+		boolean result = eventDAO.create(user, event);
+		if(result == false)
 			throw new BadEventException("Failed to create Event!");
-		return resultEvent;
+		return event;
 	}
 
 	/**
@@ -187,11 +189,26 @@ public class ServerModel {
 	 * @throws BadUserException
 	 * @throws BadEventException
 	 */
-	public List<Event> getEventList(User user, TimePeriod timePeriod) throws BadUserException, BadEventException {
+	public List<Event> getEventList(User user, DateTimeRange range) throws BadUserException, BadEventException {
 		if(user.getUserID() == -1) throw new BadUserException("User ID is -1.");
-		if(timePeriod == null) throw new BadEventException("Time period is null.");
-		List<Event> returnList = eventDAO.getByTimePeriod(user, timePeriod);
+		if(range == null) throw new BadEventException("range is null.");
+		List<Event> returnList = eventDAO.getWithinRange(user, range);
 		return returnList;
 	}
 
+	/**
+	 * get a report for a specified datetime range
+	 * @param user the user who's events we want
+	 * @param timePeriod specified range of time for grabbing the events
+	 * @return a list of events
+	 * @throws BadUserException
+	 * @throws BadEventException
+	 */
+	public Map<Integer, Float> getReport(User user, DateTimeRange range) throws BadUserException, BadEventException {
+		if(user.getUserID() == -1) throw new BadUserException("User ID is -1.");
+		if(range == null) throw new BadEventException("range is null.");
+
+		List<Event> eventsInRange = getEventList(user, range);
+		return ReportGen.getReport(user, eventsInRange);
+	}
 }

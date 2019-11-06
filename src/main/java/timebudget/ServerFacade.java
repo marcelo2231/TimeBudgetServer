@@ -6,6 +6,7 @@ import timebudget.model.*;
 import timebudget.model.request.LoginRequest;
 
 import java.util.List;
+import java.util.Map;
 
 public class ServerFacade implements IServer {
 
@@ -83,9 +84,14 @@ public class ServerFacade implements IServer {
 	}
 
 	@Override
-	public List<Event> getEventList(User user, TimePeriod timePeriod) throws BadUserException, BadEventException {
+	public List<Event> getEventList(User user, DateTimeRange range) throws BadUserException, BadEventException {
 		user = model.authenticate(user.getToken());
-		return model.getEventList(user, timePeriod);
+		return model.getEventList(user, range);
 	}
 
+	@Override
+	public Map<Integer, Float> getReport(User user, DateTimeRange range) throws BadUserException, BadEventException {
+		user = model.authenticate(user.getToken());
+		return model.getReport(user, range);
+	}
 }

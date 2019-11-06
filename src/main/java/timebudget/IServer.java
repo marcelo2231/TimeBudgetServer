@@ -5,12 +5,13 @@ import timebudget.exceptions.BadUserException;
 import timebudget.exceptions.NoCategoryException;
 import timebudget.exceptions.UserCreationException;
 import timebudget.model.Category;
+import timebudget.model.DateTimeRange;
 import timebudget.model.Event;
-import timebudget.model.TimePeriod;
 import timebudget.model.User;
 import timebudget.model.request.LoginRequest;
 
 import java.util.List;
+import java.util.Map;
 
 public interface IServer {
 
@@ -93,7 +94,8 @@ public interface IServer {
 	
 	Event getEventByID(User user, int eventID) throws BadEventException, BadUserException;
 	
-	List<Event> getEventList(User user, TimePeriod timePeriod) throws BadUserException, BadEventException;
+	List<Event> getEventList(User user, DateTimeRange range) throws BadUserException, BadEventException;
 	
+	Map<Integer, Float> getReport(User user, DateTimeRange range) throws BadUserException, BadEventException;
 }
 

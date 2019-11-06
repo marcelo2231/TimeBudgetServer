@@ -7,7 +7,6 @@ import timebudget.model.User;
 
 import java.util.List;
 
-package timebudget.database.DAOs;
 
 import timebudget.database.DAOFactory;
 import timebudget.database.interfaces.ICategoryDAO;
@@ -104,8 +103,6 @@ public class EventDAO implements IEventDAO {
 			System.err.println(e.getMessage());
 			return null;
 		}			
-
-		return null;
 	}
 
 	@Override
@@ -122,24 +119,27 @@ public class EventDAO implements IEventDAO {
 	@Override
 	public List<Event> getWithinRange(User user, DateTimeRange range) {
 		/* Is this enough filtering? */
-		String sql = "SELECT id, category_id, description, start_at, end_at, user_id FROM events" +
-						"WHERE user_id = ? and end_at > ? and start_at < ? ORDER BY start_at";
+		String sql = "SELECT id, category_id, description, start_at, end_at, user_id FROM events;";// +
+						//"WHERE end_at > ? and start_at < ?"; //user_id = ? ORDER BY start_at
 
 		try {
+			Statement statement = DAOFactory.connection.createStatement();
+			ResultSet resultSet = statement.executeQuery(sql);
+
+			// I'm getting a `not implemented by SQLite JDBC driver` error when using PreparedStatement for select queries
 			PreparedStatement preparedStatement = DAOFactory.connection.prepareStatement(sql);
-			preparedStatement.setInt(1, user.getUserID());
-			preparedStatement.setInt(2, range.getStartAt());
-			preparedStatement.setInt(3, range.getEndAt());
+			// preparedStatement.setInt(1, user.getUserID());
+			//preparedStatement.setInt(1, range.getStartAt());
+			//preparedStatement.setInt(2, range.getEndAt());
 
-
-			List<Event> ar = parseResultsSet(preparedStatement.executeQuery(sql));
+			// List<Event> ar = parseResultsSet(preparedStatement.executeQuery(sql));
+			List<Event> ar = parseResultsSet(resultSet);
 			return ar;
+
 		} catch (SQLException e){
 			System.err.println(e.getMessage());
 			return null;
 		}			
-
-		return null;
 	}
 
 	@Override

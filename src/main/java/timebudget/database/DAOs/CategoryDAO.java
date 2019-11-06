@@ -63,7 +63,7 @@ public class CategoryDAO implements ICategoryDAO {
 	@Override
 	public List<Category> getAllForUser(int userID) {
 		String sql = "SELECT id, user_id, description, deleted_at FROM categories" +
-					   "WHERE user_id = ? ORDER BY description";
+					   "WHERE user_id = ? and deleted_at is null ORDER BY description";
 
 		try {
 			PreparedStatement preparedStatement = DAOFactory.connection.prepareStatement(sql);
@@ -79,6 +79,8 @@ public class CategoryDAO implements ICategoryDAO {
 	@Override
 	public Category getByCategoryID(User user, int categoryID) {
 		// public List<Category> getAllForUser(int userID) {
+
+		// allow for deleted categories to be returned here, unlike getAllForUser
 		String sql = "SELECT id, user_id, description, deleted_at FROM categories" +
 					   "WHERE user_id = ? and id = ? ORDER BY description";
 

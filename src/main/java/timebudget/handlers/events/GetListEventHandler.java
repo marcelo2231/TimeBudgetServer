@@ -13,6 +13,7 @@ import timebudget.TBSerializer;
 import timebudget.exceptions.BadEventException;
 import timebudget.handlers.HandlerBase;
 import timebudget.log.Corn;
+import timebudget.model.DateTimeRange;
 import timebudget.model.Event;
 import timebudget.model.TimePeriod;
 import timebudget.model.User;
@@ -31,7 +32,7 @@ public class GetListEventHandler extends HandlerBase {
 				return;
 			}
 			
-			TimePeriod timePeriod = (TimePeriod)TBSerializer.jsonToObj(reqBody, TimePeriod.class);
+			DateTimeRange timePeriod = (DateTimeRange)TBSerializer.jsonToObj(reqBody, TimePeriod.class);
 			
 			if(timePeriod == null || timePeriod.getStartAt() == TimePeriod.NO_START_AT || timePeriod.getEndAt() == TimePeriod.NO_END_AT){
 				throw new BadEventException("EventID or time period was null!");
