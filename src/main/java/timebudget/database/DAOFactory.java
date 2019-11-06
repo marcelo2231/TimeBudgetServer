@@ -119,7 +119,7 @@ public class DAOFactory implements IDAOFactory {
 
 		startTransaction();
 		test();
-		endTransaction(false);
+		endTransaction(true);
 	}
 
 	private void test() {
@@ -151,7 +151,7 @@ public class DAOFactory implements IDAOFactory {
 
 		// netflix events
 		Event ev3 = new Event(Event.NO_EVENT_ID, c2.getCategoryID(), "Keeping up with the Kards", u.getUserID(), 3600 * 10, 3600 * 11);
-		Event ev4 = new Event(Event.NO_EVENT_ID, c2.getCategoryID(), "Stranger Things", u.getUserID(), 3600 * 12, 3600 * 15);
+		Event ev4 = new Event(Event.NO_EVENT_ID, c2.getCategoryID(), "Stranger Thangs", u.getUserID(), 3600 * 12, 3600 * 15);
 
 		ed.create(u, ev1);
 		ed.create(u, ev2);

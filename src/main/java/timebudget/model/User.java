@@ -14,6 +14,7 @@ public class User {
 	private String token = null;
 	private int createdAt = NO_CREATED_AT;
 
+	public User() {};
 
 	public User(int userID, String username, String email, String password, int createdAt) {
 		this.userID = userID;

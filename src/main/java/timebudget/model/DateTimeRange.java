@@ -4,11 +4,13 @@ public class DateTimeRange {
 
     public static final int NO_START_AT = -1;
     public static final int NO_END_AT = -1;
+    public static final int NO_USER_ID = -1;
 
     private int startAt = NO_START_AT; // Must be 4 characters long
     private int endAt = NO_END_AT;
+    private int userID = NO_USER_ID;
 
-    // useful for serialization
+    // needed for serialization
     public DateTimeRange() {};
 
     public DateTimeRange(int startAt, int endAt) {
@@ -16,7 +18,12 @@ public class DateTimeRange {
         this.endAt = endAt;
     }
 
-
+    public DateTimeRange(int startAt, int endAt, int userID) {
+        this.startAt = startAt;
+        this.endAt = endAt;
+        this.userID = userID;
+    }
+    
     public DateTimeRange(DateTimeRange tp) {
         this.startAt = tp.getStartAt();
         this.endAt = tp.getEndAt();
@@ -38,6 +45,14 @@ public class DateTimeRange {
 
     public void setEndAt(int endAt) {
         this.endAt = endAt;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
+
+    public int getUserID() {
+        return this.userID;
     }
 
 
