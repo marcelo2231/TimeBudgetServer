@@ -13,7 +13,7 @@ import timebudget.model.request.LoginRequest;
 import java.util.List;
 
 public interface IServer {
-	
+
 	// CONTEXTS
 	// Default
 	String DEFAULT = "/";
@@ -21,41 +21,41 @@ public interface IServer {
 	// User
 	String USER_LOGIN = "/user/login";
 	String USER_REGISTER = "/user/register";
-	
+
 	//Events
 	String EVENT_CREATE = "/event/create";
 	String EVENT_EDIT = "/event/edit";
 	String EVENT_DELETE = "/event/delete";
 	String EVENT_GET_LIST = "/event/get_list";
 	String EVENT_GET_BY_ID = "/event/get_by_id";
-	
+
 	//Reporting
 	String REPORT_GET_TIME_METRICS = "/report/get_time_metrics_all"; //Gets metrics for
-	
-	
+
+
 	//Mock calls
 	String FAKE_IT = "/fake_it";
-	
+
 	//Categories
 	String CATEGORIES_GET_ACTIVE = "/categories/get_all_active";
 	String CATEGORIES_GET_BY_ID = "/categories/get_by_id";
-	
-	
-	
+
+
+
 	//CONTEXTS DEMO 2
 	//Categories
-	
+
 	//Tags
-	
+
 	//Time Periods
-	
+
 	//Goals
-	
+
 	//Reporting pt. 2
-	
-	
-	
-	
+
+
+
+
 	/**
 	 * method to log a user in.
 	 * @pre user.username exists
@@ -66,7 +66,7 @@ public interface IServer {
 	 * @throws BadUserException contains a message about the failure (only if user is not formatted correctly)
 	 */
 	User login(LoginRequest loginRequest) throws BadUserException;
-	
+
 	/**
 	 * method to register a new user
 	 * @pre user.username is unique
@@ -80,7 +80,7 @@ public interface IServer {
 	 * @throws UserCreationException
 	 */
 	User register(User user) throws UserCreationException;
-	
+
 	List<Category> getAllActiveCategories(User user) throws BadUserException, NoCategoryException;
 	
 	Category getCategoryByID(User user, int categoryID) throws NoCategoryException, BadUserException;

@@ -16,7 +16,7 @@ import timebudget.model.User;
 
 
 public class EditEventHandler extends HandlerBase {
-	
+
 	@Override
 	public void handle(HttpExchange httpExchange) throws IOException {
 		Corn.log(Level.FINEST, "Edit Event Handler");
@@ -28,7 +28,7 @@ public class EditEventHandler extends HandlerBase {
 				return;
 			}
 			Event eventInfo = (Event)TBSerializer.jsonToObj(reqBody, Event.class);
-			
+
 			if(eventInfo.getCategoryID() == -1 || eventInfo.getDescription() == null ||
 			eventInfo.getUserID() == -1 || eventInfo.getStartAt() == -1 ||
 			eventInfo.getEndAt() == -1){

@@ -8,7 +8,7 @@ import java.io.*;
 import java.util.List;
 
 public abstract class HandlerBase implements HttpHandler {
-	
+
 	/**
 	 * Retrive the authentication token from the headers
 	 * @param exchange httpexchange object from the request
@@ -23,7 +23,7 @@ public abstract class HandlerBase implements HttpHandler {
 		}
 		return token;
 	}
-	
+
 	/**
 	 * turns bits from requestbody into a string
 	 * @param exchange http exchange from the request
@@ -40,7 +40,7 @@ public abstract class HandlerBase implements HttpHandler {
 		}
 		return sb.toString();
 	}
-	
+
 	/**
 	 * sends response body string by serializing and then writing the bits to the stream
 	 * @param exchange httpexchange object from the request

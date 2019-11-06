@@ -14,7 +14,7 @@ import timebudget.model.User;
 import timebudget.model.request.LoginRequest;
 
 public class LoginHandler extends HandlerBase {
-	
+
 	@Override
 	public void handle(HttpExchange httpExchange) throws IOException {
 		Corn.log(Level.FINEST, "Login Handler");
@@ -24,15 +24,15 @@ public class LoginHandler extends HandlerBase {
 				httpExchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, -1);
 				return;
 			}
-			
+
 			LoginRequest userToLogin = (LoginRequest)TBSerializer.jsonToObj(reqBody, LoginRequest.class);
-			
+
 			if(userToLogin.getUsername() == null || userToLogin.getPassword() == null){
 				throw new BadUserException("Username or Password was null");
 			}
-			
+
 			User results = ServerFacade.getInstance().login(userToLogin);
-			
+
 			httpExchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
 			sendResponseBody(httpExchange, results);
 		} catch(Exception e){

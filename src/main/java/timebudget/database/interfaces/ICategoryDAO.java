@@ -10,5 +10,6 @@ public interface ICategoryDAO extends IDAO {
 	boolean update(Category category);
 	List<Category> getAllForUser(int userID);
 	Category getByCategoryID(User user, int categoryID);
-	boolean delete(Category user);
+	boolean delete(Category category);
+	boolean clear(User user);
 }

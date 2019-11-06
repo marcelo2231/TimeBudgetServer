@@ -16,7 +16,7 @@ import timebudget.model.User;
 
 
 public class GetEventByIdHandler extends HandlerBase {
-	
+
 	@Override
 	public void handle(HttpExchange httpExchange) throws IOException {
 		Corn.log(Level.FINEST, "Get Event By ID Handler");
@@ -29,11 +29,11 @@ public class GetEventByIdHandler extends HandlerBase {
 			}
 
 			Event eventInfo = (Event)TBSerializer.jsonToObj(reqBody, Event.class);
-			
+
 			if(eventInfo.getEventID() == -1){
 				throw new BadEventException("EventID was null!");
 			}
-			
+	
 			Event results = ServerFacade.getInstance().getEventByID(new User(token), eventInfo.getEventID());
 			
 			httpExchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);

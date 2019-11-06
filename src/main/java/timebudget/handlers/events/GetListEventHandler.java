@@ -19,7 +19,7 @@ import timebudget.model.User;
 
 
 public class GetListEventHandler extends HandlerBase {
-	
+
 	@Override
 	public void handle(HttpExchange httpExchange) throws IOException {
 		Corn.log(Level.FINEST, "Get Event List Handler");

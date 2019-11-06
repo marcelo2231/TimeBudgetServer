@@ -3,7 +3,7 @@ package timebudget.model;
 import timebudget.model.request.LoginRequest;
 
 public class User {
-	
+
 	public static final int NO_USER_ID = -1;
 	public static final int NO_CREATED_AT = -1;
 
@@ -22,12 +22,12 @@ public class User {
 		this.password = password;
 		this.createdAt = createdAt;
 	}
-	
+
 	public User(LoginRequest loginRequest){
 		this.username = loginRequest.getUsername();
 		this.password = loginRequest.getPassword();
 	}
-	
+
 	public User(String token){
 		this.token = token;
 	}
@@ -47,11 +47,11 @@ public class User {
 	public void setUserID(int userID) {
 		this.userID = userID;
 	}
-	
+
 	public String getToken(){
 		return token;
 	}
-	
+
 	public void setToken(String token){
 		this.token = token;
 	}
@@ -87,7 +87,7 @@ public class User {
 	public void setCreatedAt(int createdAt) {
 		this.createdAt = createdAt;
 	}
-	
+
 
 	public boolean equals(Object object) {
 		if (this == object) return true;

@@ -24,7 +24,7 @@ public class ServerModel {
 	private IUserDAO userDAO;
 	private IEventDAO eventDAO;
 	private ICategoryDAO categoryDAO;
-	
+
 	public ServerModel(IDAOFactory factory) {
 		users = new HashSet<User>();
 		random = new SecureRandom();
@@ -35,7 +35,7 @@ public class ServerModel {
 			loadFromDatabase();
 		}
 	}
-	
+
 	private void loadFromDatabase() {
 		if(userDAO != null) {
 			ServerFacade.daoFactory.startTransaction();
@@ -50,11 +50,11 @@ public class ServerModel {
 			ServerFacade.daoFactory.endTransaction(false);
 		}
 	}
-	
+
 	private void generateToken(User u) {
 		u.setToken(new BigInteger(130, random).toString(32));
 	}
-	
+
 	/**
 	 * authenticate a user using username and password of a given user and generates authentication token
 	 *
@@ -74,7 +74,7 @@ public class ServerModel {
 		}
 		throw new BadUserException("Invalid username or password!");
 	}
-	
+
 	/**
 	 * authenticates a user using an authentication token.
 	 * @param token token of specified user to log on
@@ -88,7 +88,7 @@ public class ServerModel {
 		throw new BadUserException("Invalid user token!");
 	}
 
-	
+
 	/**
 	 * create a new user and generates an authentication token
 	 * @param user contains all parts of the user to be created
@@ -98,17 +98,17 @@ public class ServerModel {
 	public User addUser(User user) throws UserCreationException, DatabaseNotInitializedException {
 		if(user.getUsername().length() < 4) throw new UserCreationException("Username too short!");
 		if(user.getPassword().length() < 8) throw new UserCreationException("Password too short!");
-		
+
 		for(User u : users) {
 			if(u.getUsername().equals(user.getUsername()))
 				throw new UserCreationException("User already exisits!");
 		}
-		
+
 		User newUser = new User(user);
-		
+
 		if(userDAO != null) {
 			ServerFacade.daoFactory.startTransaction();
-			
+
 			if(userDAO.create(user)) {
 				ServerFacade.daoFactory.endTransaction(true);
 				newUser.setUserID(user.getUserID());
@@ -123,7 +123,7 @@ public class ServerModel {
 		users.add(newUser);
 		return newUser;
 	}
-	
+
 	public List<Category> getCategoriesForUser(int userID){
 		return categoryDAO.getAllForUser(userID);
 	}
@@ -131,7 +131,7 @@ public class ServerModel {
 	public Category getCategoryByID(User user, int categoryID){
 		return categoryDAO.getByCategoryID(user, categoryID);
 	}
-	
+
 	/**
 	 * creates a new event
 	 * @param event contains all parts of the event to be created
@@ -193,5 +193,5 @@ public class ServerModel {
 		List<Event> returnList = eventDAO.getByTimePeriod(user, timePeriod);
 		return returnList;
 	}
-	
+
 }
