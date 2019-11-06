@@ -18,7 +18,7 @@ import timebudget.model.request.GetEventListRequest;
 
 
 public class GetListEventHandler extends HandlerBase {
-	
+
 	@Override
 	public void handle(HttpExchange httpExchange) throws IOException {
 		Corn.log(Level.FINEST, "Get Event List Handler");
@@ -28,15 +28,15 @@ public class GetListEventHandler extends HandlerBase {
 				httpExchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, -1);
 				return;
 			}
-			
+
 			GetEventListRequest eventInfo = (GetEventListRequest)TBSerializer.jsonToObj(reqBody, GetEventListRequest.class);
-			
+
 			if(eventInfo.getUserID() == -1 || eventInfo.getTimePeriod() == null){
 				throw new BadEventException("EventID or time period was null!");
 			}
-			
+
 			List<Event> results = ServerFacade.getInstance().getEventList(eventInfo);
-			
+
 			httpExchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
 			sendResponseBody(httpExchange, results);
 		} catch(Exception e){

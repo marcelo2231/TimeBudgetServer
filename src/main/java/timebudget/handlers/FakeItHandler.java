@@ -10,7 +10,7 @@ import timebudget.log.Corn;
 
 
 public class FakeItHandler extends HandlerBase {
-	
+
 	@Override
 	public void handle(HttpExchange httpExchange) throws IOException {
 		Corn.log(Level.FINEST, "Fake It Handler");
@@ -20,12 +20,12 @@ public class FakeItHandler extends HandlerBase {
 				httpExchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, -1);
 				return;
 			}
-			
-			
+
+
 			//DO STUFF HERE
-			
-			
-			
+
+
+
 			httpExchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
 			//sendResponseBody(httpExchange, results);
 		} catch(Exception e){

@@ -15,7 +15,7 @@ import timebudget.model.Event;
 
 
 public class DeleteEventHandler extends HandlerBase {
-	
+
 	@Override
 	public void handle(HttpExchange httpExchange) throws IOException {
 		Corn.log(Level.FINEST, "Delete Event Handler");
@@ -27,13 +27,13 @@ public class DeleteEventHandler extends HandlerBase {
 			}
 
 			Event eventInfo = (Event)TBSerializer.jsonToObj(reqBody, Event.class);
-			
+
 			if(eventInfo.getEventID() == -1){
 				throw new BadEventException("EventID was null!");
 			}
-			
+
 			Boolean results = ServerFacade.getInstance().deleteEvent(eventInfo);
-			
+
 			httpExchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
 			sendResponseBody(httpExchange, results);
 		} catch(Exception e){

@@ -15,7 +15,7 @@ import timebudget.model.Event;
 
 
 public class CreateEventHandler extends HandlerBase {
-	
+
 	@Override
 	public void handle(HttpExchange httpExchange) throws IOException {
 		Corn.log(Level.FINEST, "Create Event Handler");
@@ -25,17 +25,17 @@ public class CreateEventHandler extends HandlerBase {
 				httpExchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, -1);
 				return;
 			}
-			
+
 			Event eventInfo = (Event)TBSerializer.jsonToObj(reqBody, Event.class);
-			
+
 			if(eventInfo.getCategoryID() == -1 || eventInfo.getDescription() == null ||
 			eventInfo.getUserID() == -1 || eventInfo.getStartAt() == -1 ||
 			eventInfo.getEndAt() == -1){
 				throw new BadEventException("CategoryID, Description, userID, startAt or endAt was null!");
 			}
-			
+
 			Event results = ServerFacade.getInstance().createEvent(eventInfo);
-			
+
 			httpExchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
 			sendResponseBody(httpExchange, results);
 		} catch(Exception e){

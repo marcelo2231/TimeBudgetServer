@@ -16,7 +16,7 @@ public class UserDAO implements IUserDAO {
 	@Override
 	public boolean create(User user) {
 		String sql = "INSERT INTO Users(username, password, email, created_at) VALUES(?,?,?,?)";
-''
+
 		try(PreparedStatement preparedStatement = DAOFactory.connection.prepareStatement(sql)){
 			preparedStatement.setString(1, user.getUsername());
 			preparedStatement.setString(2, user.getPassword());

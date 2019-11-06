@@ -24,11 +24,11 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 
 public class ServerCommunicator {
-	
+
 	private HttpServer server;
-	
+
 	private final int MAX_WAITING_CONNECTIONS = 12;
-	
+
 	/**
 	 * Creates an HttpServer on provided port
 	 *
@@ -43,20 +43,20 @@ public class ServerCommunicator {
 			e.printStackTrace();
 			return;
 		}
-		
+
 		server.setExecutor(null); // use the default executor
-		
+
 		//Set the DAOFactory in the timebudget.server facade before contexts use the ServerFacade.
 		ServerFacade.daoFactory = new DAOFactory();
 		ServerFacade.getInstance(); //Loads the database stuff
-		
+
 		Corn.log("Creating contexts");
 		createContexts();
-		
+
 		Corn.log("Starting timebudget.server on port: " + port);
 		server.start();
 	}
-	
+
 	private void createContexts() {
 		server.createContext(IServer.USER_LOGIN, new LoginHandler());
 		server.createContext(IServer.USER_REGISTER, new RegisterHandler());
@@ -71,46 +71,46 @@ public class ServerCommunicator {
 		server.createContext(IServer.CATEGORIES_GET_ACTIVE, new GetAllCategoriesHandler());
 		server.createContext(IServer.CATEGORIES_GET_BY_ID, new GetCategoryByIdHandler());
 	}
-	
-	
+
+
 	public static void main(String[] args) {
 		Options options = new Options();
-		
+
 		Option portOpt = new Option("p", "port", true, "timebudget.server host port");
 		portOpt.setRequired(false);
 		options.addOption(portOpt);
-		
+
 		Option deltaOpt = new Option("d", "delta", true, "number of commands to be saved");
 		deltaOpt.setRequired(false);
 		options.addOption(deltaOpt);
-		
+
 		Option logFileOpt = new Option("l", "log", true, "log file name with .log extension");
 		logFileOpt.setRequired(false);
 		options.addOption(logFileOpt);
-		
+
 		CommandLineParser parser = new DefaultParser();
 		HelpFormatter formatter = new HelpFormatter();
 		CommandLine cmd;
-		
+
 		try {
 			cmd = parser.parse(options, args);
 		} catch (ParseException e) {
 			System.out.println(e.getMessage());
 			formatter.printHelp("utility-name", options);
-			
+
 			System.exit(1);
 			return;
 		}
-		
+
 		//Defaults
 		int delta = -1;
 		String port = "8080";
 		String logFile = "timebudget.server.log";
-		
+
 		//Get arguments
 		if(cmd.getOptionValue("port") != null)
 			port = cmd.getOptionValue("port");
-		
+
 		String deltaStr = cmd.getOptionValue("delta");
 		if(deltaStr != null)
 			delta = Integer.parseInt(deltaStr);

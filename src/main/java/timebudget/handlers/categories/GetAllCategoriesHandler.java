@@ -16,7 +16,7 @@ import static timebudget.ServerFacade.getInstance;
 
 
 public class GetAllCategoriesHandler extends HandlerBase {
-	
+
 	@Override
 	public void handle(HttpExchange httpExchange) throws IOException {
 		Corn.log(Level.FINEST, "Get All Categories Handler");
@@ -27,11 +27,11 @@ public class GetAllCategoriesHandler extends HandlerBase {
 				httpExchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, -1);
 				return;
 			}
-			
+
 			List<Category> results = ServerFacade.getInstance().getAllActiveCategories(new User(token));
-			
-			
-			
+
+
+
 			httpExchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
 			sendResponseBody(httpExchange, results);
 		} catch(Exception e){
