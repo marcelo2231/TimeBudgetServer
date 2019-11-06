@@ -3,17 +3,18 @@ package timebudget.database.DAOs;
 import timebudget.database.interfaces.IEventDAO;
 import timebudget.model.Event;
 import timebudget.model.TimePeriod;
+import timebudget.model.User;
 
 import java.util.List;
 
 public class EventDAO implements IEventDAO {
 	@Override
-	public boolean create(Event event) {
-		return false;
+	public Event create(User user, Event event) {
+		return null;
 	}
 	
 	@Override
-	public boolean update(Event event) {
+	public boolean update(User user, Event event) {
 		return false;
 	}
 	
@@ -23,17 +24,17 @@ public class EventDAO implements IEventDAO {
 	}
 	
 	@Override
-	public List<Event> getByTimePeriod(TimePeriod timePeriod) {
+	public List<Event> getByTimePeriod(User user, TimePeriod timePeriod) {
 		return null;
 	}
 	
 	@Override
-	public Event getByID(int id) {
+	public Event getByID(User user, int id) {
 		return null;
 	}
 	
 	@Override
-	public boolean delete(Event user) {
+	public boolean delete(User user, int eventID) {
 		return false;
 	}
 	

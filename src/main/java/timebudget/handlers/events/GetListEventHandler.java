@@ -2,6 +2,7 @@ package timebudget.handlers.events;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
+import java.sql.Time;
 import java.util.List;
 import java.util.logging.Level;
 
@@ -14,7 +15,7 @@ import timebudget.handlers.HandlerBase;
 import timebudget.log.Corn;
 import timebudget.model.Event;
 import timebudget.model.TimePeriod;
-import timebudget.model.request.GetEventListRequest;
+import timebudget.model.User;
 
 
 public class GetListEventHandler extends HandlerBase {
@@ -23,19 +24,20 @@ public class GetListEventHandler extends HandlerBase {
 	public void handle(HttpExchange httpExchange) throws IOException {
 		Corn.log(Level.FINEST, "Get Event List Handler");
 		try {
+			String token = getAuthenticationToken(httpExchange);
 			String reqBody = getRequestBody(httpExchange);
 			if(reqBody == null || reqBody.isEmpty()) {
 				httpExchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, -1);
 				return;
 			}
 			
-			GetEventListRequest eventInfo = (GetEventListRequest)TBSerializer.jsonToObj(reqBody, GetEventListRequest.class);
+			TimePeriod timePeriod = (TimePeriod)TBSerializer.jsonToObj(reqBody, TimePeriod.class);
 			
-			if(eventInfo.getUserID() == -1 || eventInfo.getTimePeriod() == null){
+			if(timePeriod == null || timePeriod.getStartAt() == TimePeriod.NO_START_AT || timePeriod.getEndAt() == TimePeriod.NO_END_AT){
 				throw new BadEventException("EventID or time period was null!");
 			}
 			
-			List<Event> results = ServerFacade.getInstance().getEventList(eventInfo);
+			List<Event> results = ServerFacade.getInstance().getEventList(new User(token), timePeriod);
 			
 			httpExchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
 			sendResponseBody(httpExchange, results);

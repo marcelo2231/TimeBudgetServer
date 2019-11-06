@@ -11,7 +11,6 @@ public class Category {
 	private int userID = NO_USER_ID; // auto created by database, may be null
 	private String description = null;
 	private int deletedAt = NO_DELETED_AT;
-
 	public static final int AUTH_TOKEN_SIZE = 16;
 
 	public Category(int categoryID, int userID, String description, int deletedAt) {
@@ -30,7 +29,10 @@ public class Category {
 	public Category(Category category) {
 		this.categoryID = category.getCategoryID();
 		this.userID = category.getUserID();
+		this.description = category.getDescription();
+		this.deletedAt = category.getDeletedAt();
 	}
+
 	public boolean isDeleted() {
 		return deletedAt == NO_DELETED_AT;
 	}

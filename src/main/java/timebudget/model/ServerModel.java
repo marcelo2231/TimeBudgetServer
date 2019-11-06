@@ -7,8 +7,8 @@ import timebudget.database.interfaces.IEventDAO;
 import timebudget.database.interfaces.IUserDAO;
 import timebudget.exceptions.BadEventException;
 import timebudget.exceptions.BadUserException;
+import timebudget.exceptions.DatabaseNotInitializedException;
 import timebudget.exceptions.UserCreationException;
-import timebudget.model.request.GetEventListRequest;
 
 //import java.security.SecureRandom;
 import java.math.BigInteger;
@@ -47,9 +47,6 @@ public class ServerModel {
 					users.add(user);
 				}
 			}
-			
-			//TODO do we need to pull anything in from the other daos here?
-			
 			ServerFacade.daoFactory.endTransaction(false);
 		}
 	}
@@ -98,7 +95,7 @@ public class ServerModel {
 	 * @return newly created user
 	 * @throws UserCreationException
 	 */
-	public User addUser(User user) throws UserCreationException {
+	public User addUser(User user) throws UserCreationException, DatabaseNotInitializedException {
 		if(user.getUsername().length() < 4) throw new UserCreationException("Username too short!");
 		if(user.getPassword().length() < 8) throw new UserCreationException("Password too short!");
 		
@@ -120,7 +117,7 @@ public class ServerModel {
 				throw new UserCreationException("Could not create User in Database.");
 			}
 		} else {
-			newUser.setUserID(IDManager.getNextUserID());
+			throw new DatabaseNotInitializedException("The UserDAO was NULL!");
 		}
 		generateToken(newUser);
 		users.add(newUser);
@@ -128,13 +125,11 @@ public class ServerModel {
 	}
 	
 	public List<Category> getCategoriesForUser(int userID){
-		
-		return null;
+		return categoryDAO.getAllForUser(userID);
 	}
 	
-	public Category getCategoryByID(int categoryID){
-		
-		return null;
+	public Category getCategoryByID(User user, int categoryID){
+		return categoryDAO.getByCategoryID(user, categoryID);
 	}
 	
 	/**
@@ -143,31 +138,34 @@ public class ServerModel {
 	 * @return newly created event
 	 * @throws BadEventException
 	 */
-	public Event createEvent(Event event) throws BadEventException {
+	public Event createEvent(User user, Event event) throws BadEventException {
 		if(event == null) throw new BadEventException("Event is null.");
-		return event;
+		Event resultEvent = eventDAO.create(user, event);
+		if(resultEvent == null)
+			throw new BadEventException("Failed to create Event!");
+		return resultEvent;
 	}
 
 	/**
 	 * edits an event
 	 * @param event contains all parts of the event to be edited
-	 * @return newly edited event
+	 * @return was event edit successful
 	 * @throws BadEventException
 	 */
-	public Event editEvent(Event event) throws BadEventException {
+	public boolean editEvent(User user,Event event) throws BadEventException {
 		if(event == null) throw new BadEventException("Event is null.");
-		return event;
+		return eventDAO.update(user, event);
 	}
 
 	/**
 	 * deletes an event
 	 * @param eventID the event id
-	 * @return newly created event
+	 * @return deletion successful
 	 * @throws BadEventException
 	 */
-	public boolean deleteEvent(int eventID) throws BadEventException {
+	public boolean deleteEvent(User user, int eventID) throws BadEventException {
 		if(eventID == -1) throw new BadEventException("Event id is -1.");
-		return true;
+		return eventDAO.delete(user, eventID);
 	}
 
 	/**
@@ -176,21 +174,23 @@ public class ServerModel {
 	 * @return the event
 	 * @throws BadEventException
 	 */
-	public Event getEventByID(int eventID) throws BadEventException {
+	public Event getEventByID(User user, int eventID) throws BadEventException {
 		if(eventID == -1) throw new BadEventException("Event id is -1.");
-		return new Event();
+		return eventDAO.getByID(user, eventID);
 	}
 
 	/**
 	 * gets an event by id
-	 * @param eventID the event id
-	 * @return the event
+	 * @param user the user who's events we want
+	 * @param timePeriod specified range of time for grabbing the events
+	 * @return a list of events
+	 * @throws BadUserException
 	 * @throws BadEventException
 	 */
-	public List<Event> getEventList(GetEventListRequest request) throws BadUserException, BadEventException {
-		if(request.getUserID() == -1) throw new BadUserException("User ID is -1.");
-		if(request.getTimePeriod() == null) throw new BadEventException("Time period is null.");
-		List<Event> returnList = new ArrayList<Event>();
+	public List<Event> getEventList(User user, TimePeriod timePeriod) throws BadUserException, BadEventException {
+		if(user.getUserID() == -1) throw new BadUserException("User ID is -1.");
+		if(timePeriod == null) throw new BadEventException("Time period is null.");
+		List<Event> returnList = eventDAO.getByTimePeriod(user, timePeriod);
 		return returnList;
 	}
 	

@@ -12,6 +12,7 @@ import timebudget.exceptions.BadEventException;
 import timebudget.handlers.HandlerBase;
 import timebudget.log.Corn;
 import timebudget.model.Event;
+import timebudget.model.User;
 
 
 public class EditEventHandler extends HandlerBase {
@@ -20,6 +21,7 @@ public class EditEventHandler extends HandlerBase {
 	public void handle(HttpExchange httpExchange) throws IOException {
 		Corn.log(Level.FINEST, "Edit Event Handler");
 		try {
+			String token = getAuthenticationToken(httpExchange);
 			String reqBody = getRequestBody(httpExchange);
 			if(reqBody == null || reqBody.isEmpty()) {
 				httpExchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, -1);
@@ -33,9 +35,11 @@ public class EditEventHandler extends HandlerBase {
 				throw new BadEventException("CategoryID, Description, userID, startAt or endAt was null!");
 			}
 			
-			Event results = ServerFacade.getInstance().editEvent(eventInfo);
-			httpExchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
-			sendResponseBody(httpExchange, results);
+			if(ServerFacade.getInstance().editEvent(new User(token), eventInfo)) {
+				httpExchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, -1);
+			} else {
+				throw new BadEventException("Server could not update event!");
+			}
 		} catch(Exception e){
 			Corn.log(Level.SEVERE, e.getMessage());
 			e.printStackTrace();

@@ -26,9 +26,28 @@ public class DAOFactory implements IDAOFactory {
 			+ " Username text, \n"
 			+ " Password text, \n"
 			+ " Email text, \n"
-			+ " CreatedAt"
+			+ " CreatedAt integer"
 			+ ");";
-	
+
+
+	private final String SQL_CREATE_CATEGORIES = "CREATE TABLE IF NOT EXISTS categories (\n"
+			+ " ID integer PRIMARY KEY AUTOINCREMENT NOT NULL, \n"
+			+ " user_id integer, \n"
+			+ " deletedAt integer, \n"
+			+ " description text, \n"
+			+ " FOREIGN KEY(user_id) REFERENCES users(ID));";
+
+	private final String SQL_CREATE_EVENTS = "CREATE TABLE IF NOT EXISTS events (\n"
+			+ " ID integer PRIMARY KEY AUTOINCREMENT NOT NULL, \n"
+			+ " user_id integer, \n"
+			+ " category_id integer, \n"
+			+ " description text, \n"
+			+ " start_time integer, \n"
+			+ " end_time integer, \n"
+			+ " FOREIGN KEY(user_id) REFERENCES users(ID),\n"
+			+ " FOREIGN KEY(category_id) REFERENCES categories(ID));";
+
+
 	public static Connection connection;
 	
 	/******************************************************************************************/
@@ -97,6 +116,8 @@ public class DAOFactory implements IDAOFactory {
 		try(Connection connection = DriverManager.getConnection(DATABASE_URL);
 		    Statement statement = connection.createStatement()) {
 			statement.execute(SQL_CREATE_USERS);
+			statement.execute(SQL_CREATE_CATEGORIES);
+			statement.execute(SQL_CREATE_EVENTS);
 		} catch (SQLException e){
 			System.err.println(e.getMessage());
 		}

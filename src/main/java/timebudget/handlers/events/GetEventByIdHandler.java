@@ -12,6 +12,7 @@ import timebudget.exceptions.BadEventException;
 import timebudget.handlers.HandlerBase;
 import timebudget.log.Corn;
 import timebudget.model.Event;
+import timebudget.model.User;
 
 
 public class GetEventByIdHandler extends HandlerBase {
@@ -20,6 +21,7 @@ public class GetEventByIdHandler extends HandlerBase {
 	public void handle(HttpExchange httpExchange) throws IOException {
 		Corn.log(Level.FINEST, "Get Event By ID Handler");
 		try {
+			String token = getAuthenticationToken(httpExchange);
 			String reqBody = getRequestBody(httpExchange);
 			if(reqBody == null || reqBody.isEmpty()) {
 				httpExchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, -1);
@@ -32,7 +34,7 @@ public class GetEventByIdHandler extends HandlerBase {
 				throw new BadEventException("EventID was null!");
 			}
 			
-			Event results = ServerFacade.getInstance().getEventByID(eventInfo.getEventID());
+			Event results = ServerFacade.getInstance().getEventByID(new User(token), eventInfo.getEventID());
 			
 			httpExchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
 			sendResponseBody(httpExchange, results);

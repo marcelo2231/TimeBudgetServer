@@ -8,7 +8,6 @@ import timebudget.model.Category;
 import timebudget.model.Event;
 import timebudget.model.TimePeriod;
 import timebudget.model.User;
-import timebudget.model.request.GetEventListRequest;
 import timebudget.model.request.LoginRequest;
 
 import java.util.List;
@@ -84,17 +83,17 @@ public interface IServer {
 	
 	List<Category> getAllActiveCategories(User user) throws BadUserException, NoCategoryException;
 	
-	Category getCategoryByID(User user, int categoryID) throws NoCategoryException;
+	Category getCategoryByID(User user, int categoryID) throws NoCategoryException, BadUserException;
 	
-	Event createEvent(Event event) throws BadEventException;
+	Event createEvent(User user, Event event) throws BadEventException, BadUserException;
 	
-	boolean deleteEvent(Event event) throws BadEventException;
+	boolean deleteEvent(User user, Event event) throws BadEventException, BadUserException;
 	
-	Event editEvent(Event event) throws BadEventException;
+	boolean editEvent(User user, Event event) throws BadEventException, BadUserException;
 	
-	Event getEventByID(int eventID) throws BadEventException;
+	Event getEventByID(User user, int eventID) throws BadEventException, BadUserException;
 	
-	List<Event> getEventList(GetEventListRequest request) throws BadUserException, BadEventException;
+	List<Event> getEventList(User user, TimePeriod timePeriod) throws BadUserException, BadEventException;
 	
 }
 

@@ -2,6 +2,7 @@ package timebudget.database.DAOs;
 
 import timebudget.database.interfaces.ICategoryDAO;
 import timebudget.model.Category;
+import timebudget.model.User;
 
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class CategoryDAO implements ICategoryDAO {
 	}
 	
 	@Override
-	public Category getByCategoryID(int categoryID) {
+	public Category getByCategoryID(User user, int categoryID) {
 		return null;
 	}
 	

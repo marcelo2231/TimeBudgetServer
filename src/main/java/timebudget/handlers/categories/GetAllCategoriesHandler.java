@@ -22,11 +22,11 @@ public class GetAllCategoriesHandler extends HandlerBase {
 		Corn.log(Level.FINEST, "Get All Categories Handler");
 		try {
 			String token = getAuthenticationToken(httpExchange);
-			String reqBody = getRequestBody(httpExchange);
-			if(reqBody == null || reqBody.isEmpty()) {
-				httpExchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, -1);
-				return;
-			}
+//			String reqBody = getRequestBody(httpExchange);
+//			if(reqBody == null || reqBody.isEmpty()) {
+//				httpExchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, -1);
+//				return;
+//			}
 			
 			List<Category> results = ServerFacade.getInstance().getAllActiveCategories(new User(token));
 			

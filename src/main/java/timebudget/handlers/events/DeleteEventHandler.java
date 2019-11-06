@@ -12,6 +12,7 @@ import timebudget.exceptions.BadEventException;
 import timebudget.handlers.HandlerBase;
 import timebudget.log.Corn;
 import timebudget.model.Event;
+import timebudget.model.User;
 
 
 public class DeleteEventHandler extends HandlerBase {
@@ -20,6 +21,7 @@ public class DeleteEventHandler extends HandlerBase {
 	public void handle(HttpExchange httpExchange) throws IOException {
 		Corn.log(Level.FINEST, "Delete Event Handler");
 		try {
+			String token = getAuthenticationToken(httpExchange);
 			String reqBody = getRequestBody(httpExchange);
 			if(reqBody == null || reqBody.isEmpty()) {
 				httpExchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, -1);
@@ -32,7 +34,7 @@ public class DeleteEventHandler extends HandlerBase {
 				throw new BadEventException("EventID was null!");
 			}
 			
-			Boolean results = ServerFacade.getInstance().deleteEvent(eventInfo);
+			Boolean results = ServerFacade.getInstance().deleteEvent(new User(token),eventInfo);
 			
 			httpExchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
 			sendResponseBody(httpExchange, results);
