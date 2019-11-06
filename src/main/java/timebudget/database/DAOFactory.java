@@ -22,31 +22,31 @@ public class DAOFactory implements IDAOFactory {
 			File.separator + "db" +
 			File.separator + "tb.sqlite";
 	
-	private final String SQL_CREATE_USERS = "CREATE TABLE IF NOT EXISTS users (\n"
-			+ " ID integer PRIMARY KEY AUTOINCREMENT NOT NULL, \n"
-			+ " Username text, \n"
-			+ " Password text, \n"
-			+ " Email text, \n"
-			+ " CreatedAt integer"
-			+ ");";
-
-
-	private final String SQL_CREATE_CATEGORIES = "CREATE TABLE IF NOT EXISTS categories (\n"
-			+ " ID integer PRIMARY KEY AUTOINCREMENT NOT NULL, \n"
-			+ " user_id integer, \n"
-			+ " deletedAt integer, \n"
-			+ " description text, \n"
-			+ " FOREIGN KEY(user_id) REFERENCES users(ID));";
-
-	private final String SQL_CREATE_EVENTS = "CREATE TABLE IF NOT EXISTS events (\n"
-			+ " ID integer PRIMARY KEY AUTOINCREMENT NOT NULL, \n"
-			+ " user_id integer, \n"
-			+ " category_id integer, \n"
-			+ " description text, \n"
-			+ " start_time integer, \n"
-			+ " end_time integer, \n"
-			+ " FOREIGN KEY(user_id) REFERENCES users(ID),\n"
-			+ " FOREIGN KEY(category_id) REFERENCES categories(ID));";
+//	private final String SQL_CREATE_USERS = "CREATE TABLE IF NOT EXISTS users (\n"
+////			+ " ID integer PRIMARY KEY AUTOINCREMENT NOT NULL, \n"
+////			+ " Username text, \n"
+////			+ " Password text, \n"
+////			+ " Email text, \n"
+////			+ " CreatedAt integer"
+////			+ ");";
+////
+////
+////	private final String SQL_CREATE_CATEGORIES = "CREATE TABLE IF NOT EXISTS categories (\n"
+////			+ " ID integer PRIMARY KEY AUTOINCREMENT NOT NULL, \n"
+////			+ " user_id integer, \n"
+////			+ " deletedAt integer, \n"
+////			+ " description text, \n"
+////			+ " FOREIGN KEY(user_id) REFERENCES users(ID));";
+////
+////	private final String SQL_CREATE_EVENTS = "CREATE TABLE IF NOT EXISTS events (\n"
+////			+ " ID integer PRIMARY KEY AUTOINCREMENT NOT NULL, \n"
+////			+ " user_id integer, \n"
+////			+ " category_id integer, \n"
+////			+ " description text, \n"
+////			+ " start_time integer, \n"
+////			+ " end_time integer, \n"
+////			+ " FOREIGN KEY(user_id) REFERENCES users(ID),\n"
+////			+ " FOREIGN KEY(category_id) REFERENCES categories(ID));";
 
 	private final String SQL_CREATE_USERS = "CREATE TABLE users\n" +
 											"(id INTEGER NOT NULL,\n" +
@@ -55,24 +55,6 @@ public class DAOFactory implements IDAOFactory {
 											"password VARCHAR(100) NOT NULL,\n" +
 											"created_at INTEGER,\n" +
 											"PRIMARY KEY (id));";
-
-	// Unused for now, maybe we'll add it alter?
-	private final String SQL_CREATE_AUTH = "CREATE TABLE auth\n" +
-											"(id INTEGER NOT NULL,\n" +
-											"user_id INTEGER NOT NULL,\n" +
-											"expires_at INTEGER NOT NULL,\n" +
-											"PRIMARY KEY (id),\n" +
-											"FOREIGN KEY(user_id) REFERENCES users(id));";
-
-	private final String SQL_CREATE_TIME_PERIODS = "CREATE TABLE time_periods\n" +
-													"(id INTEGER NOT NULL,\n" +
-													"user_id INTEGER NOT NULL,\n" +
-													"start_at INTEGER NOT NULL,\n" +
-													"end_at INTEGER NOT NULL,\n" +
-													"deleted_at INTEGER,\n" +
-													"PRIMARY KEY (id),\n" +
-													"FOREIGN KEY(user_id) REFERENCES users(id));";
-
 
 	private final String SQL_CREATE_CATEGORIES = "CREATE TABLE categories\n" +
 												 "(id INTEGER NOT NULL,\n" +
@@ -103,7 +85,7 @@ public class DAOFactory implements IDAOFactory {
 			f.mkdirs();
 
 		// wipe db every time, avoid carryover state!
-		File db = new File("." + File.separator + "plugins" + File.separator + "db" + File.separator + "new.sqlite");
+		File db = new File("." + File.separator + "plugins" + File.separator + "db" + File.separator + "tb.sqlite");
 		if(db.exists())
 		    db.delete();
 
@@ -194,8 +176,6 @@ public class DAOFactory implements IDAOFactory {
 		try(Connection connection = DriverManager.getConnection(DATABASE_URL);
 		    Statement statement = connection.createStatement()) {
 			statement.execute(SQL_CREATE_USERS);
-			statement.execute(SQL_CREATE_AUTH);
-			statement.execute(SQL_CREATE_TIME_PERIODS);
 			statement.execute(SQL_CREATE_CATEGORIES);
 			statement.execute(SQL_CREATE_EVENTS);
 		} catch (SQLException e){
