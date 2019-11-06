@@ -36,7 +36,7 @@ public class CategoryDAO implements ICategoryDAO {
 			Statement statement = DAOFactory.connection.createStatement();
 			ResultSet resultSet = statement.executeQuery(idSql);
 			int id = resultSet.getInt("last_insert_rowid()");
-			category.setUserID(id);
+			category.setCategoryID(id);
 
 		} catch (SQLException e){
 			System.err.println(e.getMessage());
@@ -78,7 +78,25 @@ public class CategoryDAO implements ICategoryDAO {
 
 	@Override
 	public Category getByCategoryID(User user, int categoryID) {
-		return null;
+		// public List<Category> getAllForUser(int userID) {
+		String sql = "SELECT id, user_id, description, deleted_at FROM categories" +
+					   "WHERE user_id = ? and id = ? ORDER BY description";
+
+		try {
+			PreparedStatement preparedStatement = DAOFactory.connection.prepareStatement(sql);
+			preparedStatement.setInt(1, user.getUserID());
+			preparedStatement.setInt(2, categoryID);
+
+			List<Category> ar = parseResultsSet(preparedStatement.executeQuery(sql));
+			if (ar.size() > 0)
+				return ar.get(0);
+			else 
+				return null;
+
+		} catch (SQLException e){
+			System.err.println(e.getMessage());
+			return null;
+		}
 	}
 
 	@Override
