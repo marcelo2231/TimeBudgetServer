@@ -55,6 +55,24 @@ public class DAOFactory implements IDAOFactory {
 											"password VARCHAR(100) NOT NULL,\n" +
 											"created_at INTEGER,\n" +
 											"PRIMARY KEY (id));";
+//
+//	// Unused for now, maybe we'll add it alter?
+//	private final String SQL_CREATE_AUTH = "CREATE TABLE auth\n" +
+//											"(id INTEGER NOT NULL,\n" +
+//											"user_id INTEGER NOT NULL,\n" +
+//											"expires_at INTEGER NOT NULL,\n" +
+//											"PRIMARY KEY (id),\n" +
+//											"FOREIGN KEY(user_id) REFERENCES users(id));";
+//
+//	private final String SQL_CREATE_TIME_PERIODS = "CREATE TABLE time_periods\n" +
+//													"(id INTEGER NOT NULL,\n" +
+//													"user_id INTEGER NOT NULL,\n" +
+//													"start_at INTEGER NOT NULL,\n" +
+//													"end_at INTEGER NOT NULL,\n" +
+//													"deleted_at INTEGER,\n" +
+//													"PRIMARY KEY (id),\n" +
+//													"FOREIGN KEY(user_id) REFERENCES users(id));";
+
 
 	private final String SQL_CREATE_CATEGORIES = "CREATE TABLE categories\n" +
 												 "(id INTEGER NOT NULL,\n" +
@@ -176,6 +194,8 @@ public class DAOFactory implements IDAOFactory {
 		try(Connection connection = DriverManager.getConnection(DATABASE_URL);
 		    Statement statement = connection.createStatement()) {
 			statement.execute(SQL_CREATE_USERS);
+			//statement.execute(SQL_CREATE_AUTH);
+			//statement.execute(SQL_CREATE_TIME_PERIODS);
 			statement.execute(SQL_CREATE_CATEGORIES);
 			statement.execute(SQL_CREATE_EVENTS);
 		} catch (SQLException e){
