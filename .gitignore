@@ -3,5 +3,6 @@
 /.idea/
 *.log
 timebudget.server.log
-timebudget.server.log.1
+timebudget.server.log.*
+*lck
 /target/
