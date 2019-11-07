@@ -158,12 +158,12 @@
         function getAllCategoriesActive() {
             window.scrollTo(0, document.body.scrollHeight);
             document.getElementById("handleBox").value = "/categories/get_all_active";
-            document.getElementById("requestBox").value = formatJson("{\"userID\":\"username\"}");
+            document.getElementById("requestBox").value = formatJson("{}");
         }
         function getCategoryByID() {
             window.scrollTo(0, document.body.scrollHeight);
             document.getElementById("handleBox").value = "/categories/get_by_id";
-            document.getElementById("requestBox").value = formatJson("{\"userID\":\"username\"}");
+            document.getElementById("requestBox").value = formatJson("{\"categoryId\":\"1\"}");
         }
 
     </script>

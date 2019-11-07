@@ -13,7 +13,7 @@ import timebudget.handlers.HandlerBase;
 import timebudget.log.Corn;
 import timebudget.model.Category;
 import timebudget.model.User;
-import timebudget.model.request.GenericIDRequest;
+import timebudget.model.request.CategoryIDRequest;
 
 
 public class GetCategoryByIdHandler extends HandlerBase {
@@ -34,7 +34,7 @@ public class GetCategoryByIdHandler extends HandlerBase {
 				return;
 			}
 
-			int categoryId = ((GenericIDRequest)TBSerializer.jsonToObj(reqBody, GenericIDRequest.class)).getID();
+			int categoryId = ((CategoryIDRequest)TBSerializer.jsonToObj(reqBody, CategoryIDRequest.class)).getID();
 			
 			Category results = ServerFacade.getInstance().getCategoryByID(new User(token), categoryId);
 
