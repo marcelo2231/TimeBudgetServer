@@ -7,14 +7,8 @@ import timebudget.model.User;
 
 import java.util.List;
 
-
 import timebudget.database.DAOFactory;
-import timebudget.database.interfaces.ICategoryDAO;
-import timebudget.model.Category;
 import timebudget.model.DateTimeRange;
-import timebudget.model.User;
-
-import java.util.List;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
@@ -24,7 +18,6 @@ import java.sql.SQLException;
 
 //import java.time.Instant;
 import java.util.ArrayList;
-import java.util.Date;
 
 /*
 	Error Reporting: return null or throw exceptions?
@@ -89,16 +82,19 @@ public class EventDAO implements IEventDAO {
 
 	@Override
 	public List<Event> getAllForUser(User user) {
-		/* Is this enough filtering? */
-		String sql = "SELECT id, category_id, description, start_at, end_at, user_id FROM events" +
-						"WHERE user_id = ? ORDER BY start_at";
+		// Painful workaround for 'not implemented by SQLite JDBC driver'
+		String sql = "SELECT id, category_id, description, start_at, end_at, user_id FROM events " +
+						"WHERE user_id = " + String.valueOf(user.getUserID()) + 
+					    "ORDER BY start_at";
 
 		try {
-			PreparedStatement preparedStatement = DAOFactory.connection.prepareStatement(sql);
-			preparedStatement.setInt(1, user.getUserID());
+			Statement statement = DAOFactory.connection.createStatement();
+			ResultSet resultSet = statement.executeQuery(sql);
+			return parseResultsSet(resultSet);
 
-			List<Event> ar = parseResultsSet(preparedStatement.executeQuery(sql));
-			return ar;
+			// PreparedStatement preparedStatement = DAOFactory.connection.prepareStatement(sql);
+			// preparedStatement.setInt(1, user.getUserID());
+			// List<Event> ar = parseResultsSet(preparedStatement.executeQuery(sql));
 		} catch (SQLException e){
 			System.err.println(e.getMessage());
 			return null;
@@ -118,24 +114,25 @@ public class EventDAO implements IEventDAO {
 
 	@Override
 	public List<Event> getWithinRange(User user, DateTimeRange range) {
-		/* Is this enough filtering? */
-		String sql = "SELECT id, category_id, description, start_at, end_at, user_id FROM events;";// +
-						//"WHERE end_at > ? and start_at < ?"; //user_id = ? ORDER BY start_at
+		// Painful workaround for 'not implemented by SQLite JDBC driver'
+		String sql = "SELECT id, category_id, description, start_at, end_at, user_id FROM events " +
+						" WHERE " + 
+							   " user_id = " + String.valueOf(user.getUserID()) + 
+							" and end_at > " + String.valueOf(range.getStartAt()) + 
+						  " and start_at < " + String.valueOf(range.getEndAt()) + 
+						" ORDER BY start_at";
 
 		try {
 			Statement statement = DAOFactory.connection.createStatement();
 			ResultSet resultSet = statement.executeQuery(sql);
+			return parseResultsSet(resultSet);
 
 			// I'm getting a `not implemented by SQLite JDBC driver` error when using PreparedStatement for select queries
-			PreparedStatement preparedStatement = DAOFactory.connection.prepareStatement(sql);
+			// PreparedStatement preparedStatement = DAOFactory.connection.prepareStatement(sql);
 			// preparedStatement.setInt(1, user.getUserID());
-			//preparedStatement.setInt(1, range.getStartAt());
-			//preparedStatement.setInt(2, range.getEndAt());
-
+			// preparedStatement.setInt(1, range.getStartAt());
+			// preparedStatement.setInt(2, range.getEndAt());
 			// List<Event> ar = parseResultsSet(preparedStatement.executeQuery(sql));
-			List<Event> ar = parseResultsSet(resultSet);
-			return ar;
-
 		} catch (SQLException e){
 			System.err.println(e.getMessage());
 			return null;

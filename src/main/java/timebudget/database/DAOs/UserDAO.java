@@ -10,6 +10,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.util.ArrayList;
+import java.util.Date;
 
 public class UserDAO implements IUserDAO {
 
@@ -17,11 +19,14 @@ public class UserDAO implements IUserDAO {
 	public boolean create(User user) {
 		String sql = "INSERT INTO Users(username, password, email, created_at) VALUES(?,?,?,?)";
 
+		Date now = new Date();
+		long ut = now.getTime() / 1000L;
+
 		try(PreparedStatement preparedStatement = DAOFactory.connection.prepareStatement(sql)){
 			preparedStatement.setString(1, user.getUsername());
 			preparedStatement.setString(2, user.getPassword());
 			preparedStatement.setString(3, user.getEmail());
-			preparedStatement.setInt(4, user.getCreatedAt());
+			preparedStatement.setLong(4, ut);
 
 			preparedStatement.executeUpdate();
 			String idSql = "SELECT last_insert_rowid()";
@@ -47,15 +52,13 @@ public class UserDAO implements IUserDAO {
 	public boolean update(User user) {
 		String sql = "UPDATE users SET username = ? ,"
 				+ " password = ?,"
-				+ " email = ?,"
-				+ " created_at = ? "
+				+ " email = ?"
 				+ " WHERE id = ?";
 
 		try(PreparedStatement preparedStatement = DAOFactory.connection.prepareStatement(sql)){
 			preparedStatement.setString(1, user.getUsername());
 			preparedStatement.setString(2, user.getPassword());
 			preparedStatement.setString(3, user.getEmail());
-			preparedStatement.setInt(4, user.getCreatedAt());
 			preparedStatement.setInt(5, user.getUserID());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e){

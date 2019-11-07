@@ -170,7 +170,17 @@ public class DAOFactory implements IDAOFactory {
 			e.printStackTrace(); 
 			pass = false;
 		} 
-	
+		
+		try {
+			List<Event> res = ed.getAllForUser(u);
+			System.out.println(res);
+			pass = pass && res != null && res.size() > 0;
+		} catch (Throwable e) { 
+			// print stack trace 
+			e.printStackTrace(); 
+			pass = false;
+		} 
+
 		System.out.println("Tests passed: " + String.valueOf(pass));
 	}
 

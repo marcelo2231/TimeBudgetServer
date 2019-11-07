@@ -6,3 +6,4 @@ timebudget.server.log
 timebudget.server.log.*
 *lck
 /target/
+plugins/db/tb.sqlite
