@@ -9,6 +9,7 @@ import com.sun.net.httpserver.HttpExchange;
 import timebudget.ServerFacade;
 import timebudget.TBSerializer;
 import timebudget.exceptions.BadEventException;
+import timebudget.exceptions.BadUserException;
 import timebudget.handlers.HandlerBase;
 import timebudget.log.Corn;
 import timebudget.model.Event;
@@ -22,6 +23,11 @@ public class CreateEventHandler extends HandlerBase {
 		Corn.log(Level.FINEST, "Create Event Handler");
 		try {
 			String token = getAuthenticationToken(httpExchange);
+			if (token == null) {
+				Corn.log(Level.SEVERE, "Unable to retrieve user token!");
+				throw new BadUserException("Unable to retrieve user token!");
+			}
+
 			String reqBody = getRequestBody(httpExchange);
 			if(reqBody == null || reqBody.isEmpty()) {
 				httpExchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, -1);

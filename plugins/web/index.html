@@ -138,7 +138,7 @@
         function getEventList() {
             window.scrollTo(0, document.body.scrollHeight);
             document.getElementById("handleBox").value = "/event/get_list";
-            document.getElementById("requestBox").value = formatJson("{\"userID\":\"123\", \"timePeriod\":\"{\"timePeriodID\":\"123\", \"userID\":\"123\", \"startAt\":\"123\", \"endAt\":\"123\", \"deletedAt\":\"123\"}\"}");
+            document.getElementById("requestBox").value = formatJson("{\"userID\":\"123\", \"startAt\":\"0\", \"endAt\":\"3600\"}");
         }
         function getEventByID() {
             window.scrollTo(0, document.body.scrollHeight);

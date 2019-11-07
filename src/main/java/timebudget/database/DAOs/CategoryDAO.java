@@ -63,12 +63,12 @@ public class CategoryDAO implements ICategoryDAO {
 	@Override
 	public List<Category> getAllForUser(int userID) {
 		String sql = "SELECT id, user_id, description, deleted_at FROM categories" +
-					   "WHERE user_id = ? and deleted_at is null ORDER BY description";
+					   "WHERE user_id = " + String.valueOf(userID) + 
+					   " and deleted_at is null ORDER BY description";
 
 		try {
-			PreparedStatement preparedStatement = DAOFactory.connection.prepareStatement(sql);
-			preparedStatement.setInt(1, userID);
-			ResultSet resultSet = preparedStatement.executeQuery(sql);
+			Statement statement = DAOFactory.connection.createStatement();
+			ResultSet resultSet = statement.executeQuery(sql);
 			return parseResultsSet(resultSet);
 		} catch (SQLException e){
 			System.err.println(e.getMessage());
@@ -81,19 +81,25 @@ public class CategoryDAO implements ICategoryDAO {
 		// public List<Category> getAllForUser(int userID) {
 
 		// allow for deleted categories to be returned here, unlike getAllForUser
-		String sql = "SELECT id, user_id, description, deleted_at FROM categories" +
-					   "WHERE user_id = ? and id = ? ORDER BY description";
+		String sql = "SELECT id, user_id, description, deleted_at FROM categories " +
+					   " WHERE user_id = " + String.valueOf(user.getUserID()) +
+							  " and id = " + String.valueOf(categoryID) + 
+					   " ORDER BY description";
 
 		try {
-			PreparedStatement preparedStatement = DAOFactory.connection.prepareStatement(sql);
-			preparedStatement.setInt(1, user.getUserID());
-			preparedStatement.setInt(2, categoryID);
+			Statement statement = DAOFactory.connection.createStatement();
+			ResultSet resultSet = statement.executeQuery(sql);
+			List<Category> arr = parseResultsSet(resultSet);
 
-			List<Category> ar = parseResultsSet(preparedStatement.executeQuery(sql));
-			if (ar.size() > 0)
-				return ar.get(0);
+			if (arr.size() > 0)
+				return arr.get(0);
 			else 
 				return null;
+
+			// PreparedStatement preparedStatement = DAOFactory.connection.prepareStatement(sql);
+			// preparedStatement.setInt(1, user.getUserID());
+			// preparedStatement.setInt(2, categoryID);
+	
 
 		} catch (SQLException e){
 			System.err.println(e.getMessage());
