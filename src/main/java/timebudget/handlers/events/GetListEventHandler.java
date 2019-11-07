@@ -18,6 +18,7 @@ import timebudget.model.DateTimeRange;
 import timebudget.model.Event;
 import timebudget.model.TimePeriod;
 import timebudget.model.User;
+import timebudget.model.request.EventListRequest;
 
 
 public class GetListEventHandler extends HandlerBase {
@@ -38,13 +39,17 @@ public class GetListEventHandler extends HandlerBase {
 				return;
 			}
 
-			DateTimeRange dtr = (DateTimeRange)TBSerializer.jsonToObj(reqBody, DateTimeRange.class);
+			EventListRequest elr = (EventListRequest)TBSerializer.jsonToObj(reqBody, EventListRequest.class);
 
-			if(dtr == null || dtr.getStartAt() == TimePeriod.NO_START_AT || dtr.getEndAt() == TimePeriod.NO_END_AT){
+			if(elr == null)
+				throw new BadEventException("Invalid request!");
+			
+			DateTimeRange dtr = new DateTimeRange(elr.getStartAt(), elr.getEndAt());
+
+			if (dtr.getStartAt() == DateTimeRange.NO_START_AT || dtr.getEndAt() == DateTimeRange.NO_END_AT)
 				throw new BadEventException("EventID or time period was null!");
-			}
 
-			List<Event> results = ServerFacade.getInstance().getEventList(new User(token), dtr);
+			List<Event> results = ServerFacade.getInstance().getEventListOneCategory(new User(token), dtr, elr.getCategoryID());
 
 			httpExchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
 			sendResponseBody(httpExchange, results);

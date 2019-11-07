@@ -95,7 +95,7 @@ public interface IServer {
 	
 	Event getEventByID(User user, int eventID) throws BadEventException, BadUserException;
 	
-	List<Event> getEventList(User user, DateTimeRange range) throws BadUserException, BadEventException;
+	List<Event> getEventListOneCategory(User user, DateTimeRange range, int categoryID) throws BadUserException, BadEventException;
 	
 	Map<Integer, Float> getReport(User user, DateTimeRange range) throws BadUserException, BadEventException, DatabaseError;
 }

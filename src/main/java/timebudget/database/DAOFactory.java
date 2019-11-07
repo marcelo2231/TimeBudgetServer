@@ -15,6 +15,9 @@ import timebudget.model.Event;
 
 import java.io.File;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -123,6 +126,7 @@ public class DAOFactory implements IDAOFactory {
 		// would love if this worked: ServerFacade.getInstance().model.loadFromDatabase();
 	}
 
+	/* Please someone replace this with something better */
 	private void test() {
 		ICategoryDAO cd = getCategoryDAOInstance();
 		IUserDAO ud = getUserDAOInstance();
@@ -133,16 +137,14 @@ public class DAOFactory implements IDAOFactory {
 		User u = new User(User.NO_USER_ID, "test_user", "test@gmail.com","password", User.NO_CREATED_AT);
 		ud.create(u);
 
-		System.out.println("Testing: user_id = " + String.valueOf(u.getUserID()));
-
 		pass = pass && u.getUserID() != User.NO_USER_ID;
 
 		Category c1 = new Category(Category.NO_CATEGORY_ID, u.getUserID(), "Books yo");
 		Category c2 = new Category(Category.NO_CATEGORY_ID, u.getUserID(), "Netflixing");
+		Category[] categories = {c1, c2};
 
-		/* TODO: Why doesn't create set c's categoryID? */
-		cd.create(c1);
-		cd.create(c2);
+		for (Category c : categories)
+			cd.create(c);
 
 		pass = pass && c1.getCategoryID() != Category.NO_CATEGORY_ID;
 
@@ -154,14 +156,14 @@ public class DAOFactory implements IDAOFactory {
 		Event ev3 = new Event(Event.NO_EVENT_ID, c2.getCategoryID(), "Keeping up with the Kards", u.getUserID(), 3600 * 10, 3600 * 11);
 		Event ev4 = new Event(Event.NO_EVENT_ID, c2.getCategoryID(), "Stranger Thangs", u.getUserID(), 3600 * 12, 3600 * 15);
 
-		ed.create(u, ev1);
-		ed.create(u, ev2);
-		ed.create(u, ev3);
-		ed.create(u, ev4);
+		Event[] events = {ev1, ev2, ev3, ev4};
+		for (Event e: events)
+			ed.create(u, e);
 
-		List<Event> eventsInRange = ed.getWithinRange(u, new DateTimeRange(0, 3600 * 24));
+		List<Event> eventsArrayList = Arrays.asList(events);
+
 		try {
-			Map<Integer, Float> res = ReportGen.getReport(u, eventsInRange);
+			Map<Integer, Float> res = ReportGen.getReport(u, eventsArrayList);
 			System.out.println(res);
 			pass = pass && res.get(c1.getCategoryID()) == 8f;
 			pass = pass && res.get(c2.getCategoryID()) == 4f;	
@@ -173,7 +175,6 @@ public class DAOFactory implements IDAOFactory {
 		
 		try {
 			List<Event> res = ed.getAllForUser(u);
-			System.out.println(res);
 			pass = pass && res != null && res.size() > 0;
 		} catch (Throwable e) { 
 			// print stack trace 

@@ -15,6 +15,7 @@ import timebudget.exceptions.UserCreationException;
 //import java.security.SecureRandom;
 import java.math.BigInteger;
 import java.security.SecureRandom;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -240,6 +241,24 @@ public class ServerModel {
 	 * @throws BadUserException
 	 * @throws BadEventException
 	 */
+	public List<Event> getEventListOneCategory(User user, DateTimeRange range, int categoryID) throws BadUserException, BadEventException {
+		if(user.getUserID() == -1) throw new BadUserException("User ID is -1.");
+		if(range == null) throw new BadEventException("range is null.");
+		ServerFacade.daoFactory.startTransaction();
+		List<Event> returnList = eventDAO.getWithinRangeOneCategory(user, range, categoryID);
+		ServerFacade.daoFactory.endTransaction(false);
+		return returnList;
+	}
+
+
+	/**
+	 * gets an event by id
+	 * @param user the user who's events we want
+	 * @param timePeriod specified range of time for grabbing the events
+	 * @return a list of events
+	 * @throws BadUserException
+	 * @throws BadEventException
+	 */
 	public List<Event> getEventList(User user, DateTimeRange range) throws BadUserException, BadEventException {
 		if(user.getUserID() == -1) throw new BadUserException("User ID is -1.");
 		if(range == null) throw new BadEventException("range is null.");
@@ -261,8 +280,9 @@ public class ServerModel {
 		if(user.getUserID() == -1) throw new BadUserException("User ID is -1.");
 		if(range == null) throw new BadEventException("range is null.");
 
+		// These include events that belong to categories that could be deleted.
 		List<Event> eventsInRange = getEventList(user, range);
-
+	
 		ServerFacade.daoFactory.startTransaction();
 		Map<Integer, Float> report = ReportGen.getReport(user, eventsInRange);
 		ServerFacade.daoFactory.endTransaction(false);

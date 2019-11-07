@@ -111,13 +111,13 @@ public class EventDAO implements IEventDAO {
 	}
 
 	@Override
-	public List<Event> getWithinRange(User user, DateTimeRange range) {
+	public List<Event> getWithinRangeOneCategory(User user, DateTimeRange range, int categoryID) {
 		// Painful workaround for 'not implemented by SQLite JDBC driver'
 		String sql = "SELECT id, category_id, description, start_at, end_at, user_id FROM events " +
-						" WHERE " + 
-							   " user_id = " + String.valueOf(user.getUserID()) + 
-							" and end_at > " + String.valueOf(range.getStartAt()) + 
-						  " and start_at < " + String.valueOf(range.getEndAt()) + 
+						" WHERE  user_id = " + String.valueOf(user.getUserID()) + 
+						   " and category_id = " + String.valueOf(categoryID) + 
+						   " and end_at > " + String.valueOf(range.getStartAt()) + 
+						   " and start_at < " + String.valueOf(range.getEndAt()) + 
 						" ORDER BY start_at";
 
 		try {
@@ -131,6 +131,26 @@ public class EventDAO implements IEventDAO {
 			// preparedStatement.setInt(1, range.getStartAt());
 			// preparedStatement.setInt(2, range.getEndAt());
 			// List<Event> ar = parseResultsSet(preparedStatement.executeQuery(sql));
+		} catch (SQLException e){
+			System.err.println(e.getMessage());
+			return null;
+		}			
+	}
+
+
+	@Override
+	public List<Event> getWithinRange(User user, DateTimeRange range) {
+		// Painful workaround for 'not implemented by SQLite JDBC driver'
+		String sql = "SELECT id, category_id, description, start_at, end_at, user_id FROM events " +
+						" WHERE  user_id = " + String.valueOf(user.getUserID()) + 
+						   " and end_at > " + String.valueOf(range.getStartAt()) + 
+						   " and start_at < " + String.valueOf(range.getEndAt()) + 
+						" ORDER BY start_at";
+
+		try {
+			Statement statement = DAOFactory.connection.createStatement();
+			ResultSet resultSet = statement.executeQuery(sql);
+			return parseResultsSet(resultSet);
 		} catch (SQLException e){
 			System.err.println(e.getMessage());
 			return null;

@@ -138,7 +138,7 @@
         function getEventList() {
             window.scrollTo(0, document.body.scrollHeight);
             document.getElementById("handleBox").value = "/event/get_list";
-            document.getElementById("requestBox").value = formatJson("{\"startAt\":\"0\", \"endAt\":\"360000\"}");
+            document.getElementById("requestBox").value = formatJson("{\"startAt\":\"0\", \"endAt\":\"360000\", \"categoryID\":\"1\"}");
         }
         function getEventByID() {
             window.scrollTo(0, document.body.scrollHeight);
@@ -148,7 +148,7 @@
         function getTimeMetricsReport() {
             window.scrollTo(0, document.body.scrollHeight);
             document.getElementById("handleBox").value = "/report/get_time_metrics_all";
-            document.getElementById("requestBox").value = formatJson("{\"startAt\":\"0\",\"endAt\":\"7200\"}");
+            document.getElementById("requestBox").value = formatJson("{\"startAt\":\"0\",\"endAt\":\"3600000\"}");
         }
         function fakeIt() {
             window.scrollTo(0, document.body.scrollHeight);

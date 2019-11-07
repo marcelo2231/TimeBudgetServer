@@ -12,6 +12,7 @@ public interface IEventDAO extends IDAO{
 	boolean create(User user, Event event);
 	boolean update(User user, Event event);
 	List<Event> getAllForUser(User user);
+	List<Event> getWithinRangeOneCategory(User user, DateTimeRange range, int categoryID);
 	List<Event> getWithinRange(User user, DateTimeRange range);
 	List<Event> getByTimePeriod(User user, TimePeriod timePeriod);
 	Event getByID(User user, int id);
