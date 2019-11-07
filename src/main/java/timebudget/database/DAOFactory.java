@@ -139,7 +139,7 @@ public class DAOFactory implements IDAOFactory {
 
 		pass = pass && u.getUserID() != User.NO_USER_ID;
 
-		Category c1 = new Category(Category.NO_CATEGORY_ID, u.getUserID(), "Books yo");
+		Category c1 = new Category(Category.NO_CATEGORY_ID, u.getUserID(), "Books");
 		Category c2 = new Category(Category.NO_CATEGORY_ID, u.getUserID(), "Netflixing");
 		Category[] categories = {c1, c2};
 
@@ -162,11 +162,12 @@ public class DAOFactory implements IDAOFactory {
 
 		List<Event> eventsArrayList = Arrays.asList(events);
 
+		DateTimeRange report_dtr = new DateTimeRange(0, 3600*14);
 		try {
-			Map<Integer, Float> res = ReportGen.getReport(u, eventsArrayList);
+			Map<Integer, Float> res = ReportGen.getReport(u, report_dtr, eventsArrayList);
 			System.out.println(res);
 			pass = pass && res.get(c1.getCategoryID()) == 8f;
-			pass = pass && res.get(c2.getCategoryID()) == 4f;	
+			pass = pass && res.get(c2.getCategoryID()) == 3f;	
 		} catch (Throwable e) { 
 			// print stack trace 
 			e.printStackTrace(); 

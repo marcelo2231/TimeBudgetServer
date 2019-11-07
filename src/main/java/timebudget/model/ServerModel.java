@@ -284,7 +284,7 @@ public class ServerModel {
 		List<Event> eventsInRange = getEventList(user, range);
 	
 		ServerFacade.daoFactory.startTransaction();
-		Map<Integer, Float> report = ReportGen.getReport(user, eventsInRange);
+		Map<Integer, Float> report = ReportGen.getReport(user, range, eventsInRange);
 		ServerFacade.daoFactory.endTransaction(false);
 
 		List<Category> activeCategories = getCategoriesForUser(user.getUserID());
