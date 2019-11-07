@@ -6,6 +6,7 @@ import timebudget.TBSerializer;
 import timebudget.exceptions.BadUserException;
 import timebudget.log.Corn;
 import timebudget.model.User;
+import timebudget.model.response.UserDetails;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -30,9 +31,10 @@ public class RegisterHandler extends HandlerBase {
 			}
 
 			User results = ServerFacade.getInstance().register(userInfo);
+			UserDetails response = new UserDetails(results);
 
 			httpExchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
-			sendResponseBody(httpExchange, results);
+			sendResponseBody(httpExchange, response);
 		} catch(Exception e) {
 			Corn.log(Level.SEVERE, e.getMessage());
 			e.printStackTrace();

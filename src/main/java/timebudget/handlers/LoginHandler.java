@@ -12,6 +12,7 @@ import timebudget.exceptions.BadUserException;
 import timebudget.log.Corn;
 import timebudget.model.User;
 import timebudget.model.request.LoginRequest;
+import timebudget.model.response.UserDetails;
 
 public class LoginHandler extends HandlerBase {
 
@@ -32,9 +33,10 @@ public class LoginHandler extends HandlerBase {
 			}
 
 			User results = ServerFacade.getInstance().login(userToLogin);
+			UserDetails response = new UserDetails(results);
 
 			httpExchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
-			sendResponseBody(httpExchange, results);
+			sendResponseBody(httpExchange, response);
 		} catch(Exception e){
 			Corn.log(Level.SEVERE, e.getMessage());
 			e.printStackTrace();
