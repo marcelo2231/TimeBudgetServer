@@ -90,7 +90,7 @@ public class ServerFacade implements IServer {
 	}
 
 	@Override
-	public Map<Integer, Float> getReport(User user, DateTimeRange range) throws BadUserException, BadEventException {
+	public Map<Integer, Float> getReport(User user, DateTimeRange range) throws BadUserException, BadEventException, DatabaseError {
 		user = model.authenticate(user.getToken());
 		return model.getReport(user, range);
 	}

@@ -97,6 +97,6 @@ public interface IServer {
 	
 	List<Event> getEventList(User user, DateTimeRange range) throws BadUserException, BadEventException;
 	
-	Map<Integer, Float> getReport(User user, DateTimeRange range) throws BadUserException, BadEventException;
+	Map<Integer, Float> getReport(User user, DateTimeRange range) throws BadUserException, BadEventException, DatabaseError;
 }
 

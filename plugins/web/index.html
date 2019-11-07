@@ -128,7 +128,7 @@
         function editEvent() {
             window.scrollTo(0, document.body.scrollHeight);
             document.getElementById("handleBox").value = "/event/edit";
-            document.getElementById("requestBox").value = formatJson("{\"userID\":\"123\", \"description\":\"This is a great event!\", \"startAt\":\"12\", \"endAt\":\"14\", \"categoryID\":\"143423\"}");
+            document.getElementById("requestBox").value = formatJson("{\"eventID\":\"1\", \"userID\":\"123\", \"description\":\"This is a great event!\", \"startAt\":\"12\", \"endAt\":\"14\", \"categoryID\":\"143423\"}");
         }
         function deleteEvent() {
             window.scrollTo(0, document.body.scrollHeight);
@@ -138,7 +138,7 @@
         function getEventList() {
             window.scrollTo(0, document.body.scrollHeight);
             document.getElementById("handleBox").value = "/event/get_list";
-            document.getElementById("requestBox").value = formatJson("{\"userID\":\"123\", \"startAt\":\"0\", \"endAt\":\"3600\"}");
+            document.getElementById("requestBox").value = formatJson("{\"startAt\":\"0\", \"endAt\":\"360000\"}");
         }
         function getEventByID() {
             window.scrollTo(0, document.body.scrollHeight);
@@ -153,7 +153,7 @@
         function fakeIt() {
             window.scrollTo(0, document.body.scrollHeight);
             document.getElementById("handleBox").value = "/fake_it";
-            document.getElementById("requestBox").value = formatJson("{\"userID\":\"username\"}");
+            document.getElementById("requestBox").value = formatJson("{ }");
         }
         function getAllCategoriesActive() {
             window.scrollTo(0, document.body.scrollHeight);
@@ -230,7 +230,7 @@
         <h1 style="padding-left:1cm; text-decoration: underline;">Mock Commands</h1>
         <ul>
             <li>
-                <a href="javascript:fakeIt()">/fake_it</a> This API call will fake data.
+                <a href="javascript:fakeIt()">/fake_it</a> Make sure no other uses have been created (sorry).
             </li>
         </ul>
     </div>

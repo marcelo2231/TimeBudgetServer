@@ -62,17 +62,15 @@ public class EventDAO implements IEventDAO {
 
 	@Override
 	public boolean update(User user, Event event) {
-		String sql = "UPDATE events SET category_id = ?, description = ?, start_at = ?, end_at = ? WHERE id = ? and user_id = ?";
+		String sql = "UPDATE events SET category_id = " + String.valueOf(event.getCategoryID()) +
+									  ", description = \"" + event.getDescription() + "\", " + 
+									  " start_at = " + String.valueOf(event.getStartAt()) +
+									  ", end_at = " + String.valueOf(event.getEndAt()) + 
+									  " WHERE id = " + String.valueOf(event.getEventID()) +
+									  " and user_id = " + String.valueOf(user.getUserID());
 
-		try(PreparedStatement preparedStatement = DAOFactory.connection.prepareStatement(sql)){
-			preparedStatement.setInt(1, event.getCategoryID());
-			preparedStatement.setString(2, event.getDescription());
-			preparedStatement.setInt(3, event.getStartAt());
-			preparedStatement.setInt(4, event.getEndAt());
-			preparedStatement.setInt(5, event.getEventID());
-			preparedStatement.setInt(6, event.getUserID());
-
-			preparedStatement.executeUpdate();
+		try(Statement statement = DAOFactory.connection.createStatement()){
+			statement.executeUpdate(sql);
 		} catch (SQLException e){
 			System.err.println(e.getMessage());
 			return false;
@@ -143,14 +141,14 @@ public class EventDAO implements IEventDAO {
 	public Event getByID(User user, int id) {
 		// public List<Category> getAllForUser(int userID) {
 		String sql = "SELECT id, category_id, description, start_at, end_at, user_id FROM events" +
-						" WHERE user_id = ? and id = ?";
+						" WHERE user_id = " + String.valueOf(user.getUserID()) + 
+						  " and id = " + String.valueOf(id);
 
 		try {
-			PreparedStatement preparedStatement = DAOFactory.connection.prepareStatement(sql);
-			preparedStatement.setInt(1, user.getUserID());
-			preparedStatement.setInt(2, id);
-
-			List<Event> ar = parseResultsSet(preparedStatement.executeQuery(sql));
+			Statement statement = DAOFactory.connection.createStatement();
+		
+			ResultSet results = statement.executeQuery(sql);
+			List<Event> ar = parseResultsSet(results);
 			if (ar.size() > 0)
 				return ar.get(0);
 			else 

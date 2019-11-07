@@ -15,7 +15,6 @@ import timebudget.exceptions.UserCreationException;
 //import java.security.SecureRandom;
 import java.math.BigInteger;
 import java.security.SecureRandom;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -189,9 +188,16 @@ public class ServerModel {
 	 * @return was event edit successful
 	 * @throws BadEventException
 	 */
-	public boolean editEvent(User user,Event event) throws BadEventException {
+	public boolean editEvent(User user, Event event) throws BadEventException {
 		if(event == null) throw new BadEventException("Event is null.");
-		return eventDAO.update(user, event);
+		ServerFacade.daoFactory.startTransaction();
+		boolean success = eventDAO.update(user, event);
+
+		if (success)
+			ServerFacade.daoFactory.endTransaction(true);
+		else
+			ServerFacade.daoFactory.endTransaction(false);
+		return success;
 	}
 
 	/**
@@ -202,7 +208,14 @@ public class ServerModel {
 	 */
 	public boolean deleteEvent(User user, int eventID) throws BadEventException {
 		if(eventID == -1) throw new BadEventException("Event id is -1.");
-		return eventDAO.delete(user, eventID);
+		ServerFacade.daoFactory.startTransaction();
+		boolean success = eventDAO.delete(user, eventID);
+		if (success) 
+			ServerFacade.daoFactory.endTransaction(true);
+		else
+			ServerFacade.daoFactory.endTransaction(false);
+
+		return success;
 	}
 
 	/**
@@ -213,7 +226,10 @@ public class ServerModel {
 	 */
 	public Event getEventByID(User user, int eventID) throws BadEventException {
 		if(eventID == -1) throw new BadEventException("Event id is -1.");
-		return eventDAO.getByID(user, eventID);
+		ServerFacade.daoFactory.startTransaction();
+		Event e = eventDAO.getByID(user, eventID);
+		ServerFacade.daoFactory.endTransaction(false);
+		return e;
 	}
 
 	/**
@@ -241,7 +257,7 @@ public class ServerModel {
 	 * @throws BadUserException
 	 * @throws BadEventException
 	 */
-	public Map<Integer, Float> getReport(User user, DateTimeRange range) throws BadUserException, BadEventException {
+	public Map<Integer, Float> getReport(User user, DateTimeRange range) throws BadUserException, BadEventException, DatabaseError {
 		if(user.getUserID() == -1) throw new BadUserException("User ID is -1.");
 		if(range == null) throw new BadEventException("range is null.");
 
@@ -250,6 +266,13 @@ public class ServerModel {
 		ServerFacade.daoFactory.startTransaction();
 		Map<Integer, Float> report = ReportGen.getReport(user, eventsInRange);
 		ServerFacade.daoFactory.endTransaction(false);
+
+		List<Category> activeCategories = getCategoriesForUser(user.getUserID());
+		for (Category c: activeCategories) {
+			if (!report.containsKey(c.getCategoryID()))
+				report.put(c.getCategoryID(), 0f);
+		}
+
 		return report;
 	}
 }
