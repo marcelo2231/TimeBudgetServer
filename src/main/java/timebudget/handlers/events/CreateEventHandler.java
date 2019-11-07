@@ -37,8 +37,8 @@ public class CreateEventHandler extends HandlerBase {
 			Event eventInfo = (Event)TBSerializer.jsonToObj(reqBody, Event.class);
 
 			if(eventInfo.getCategoryID() == -1 || eventInfo.getDescription() == null ||
-			eventInfo.getUserID() == -1 || eventInfo.getStartAt() == -1 ||
-			eventInfo.getEndAt() == -1){
+				eventInfo.getStartAt() == -1 ||
+				eventInfo.getEndAt() == -1){
 				throw new BadEventException("CategoryID, Description, userID, startAt or endAt was null!");
 			}
 			
