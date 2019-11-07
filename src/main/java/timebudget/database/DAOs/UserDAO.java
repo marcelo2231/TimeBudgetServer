@@ -74,7 +74,7 @@ public class UserDAO implements IUserDAO {
 	 */
 	@Override
 	public List<User> getAll() {
-		String sql = "SELECT id, username, password, email, created_at FROM users ORDER BY ID";
+		String sql = "SELECT id, username, password, email, created_at FROM users ORDER BY id";
 		try {
 			Statement statement = DAOFactory.connection.createStatement();
 			ResultSet resultSet = statement.executeQuery(sql);

@@ -21,6 +21,8 @@ public class GetMetricsReportHandler extends HandlerBase {
 	public void handle(HttpExchange httpExchange) throws IOException {
 		Corn.log(Level.FINEST, "Get Metrics Report Handler");
 		try {
+			String token = getAuthenticationToken(httpExchange);
+
 			String reqBody = getRequestBody(httpExchange);
 			if(reqBody == null || reqBody.isEmpty()) {
 				httpExchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, -1);
@@ -28,18 +30,16 @@ public class GetMetricsReportHandler extends HandlerBase {
 			}
 			
 			DateTimeRange dtr = (DateTimeRange)TBSerializer.jsonToObj(reqBody, DateTimeRange.class);
-			User u = new User();
-			u.setUserID(dtr.getUserID());
 
-			Map<Integer, Float> result = ServerFacade.getInstance().getReport(u, dtr);
+			Map<Integer, Float> result = ServerFacade.getInstance().getReport(new User(token), dtr);
 
 			Map<Integer, Float> temp = new HashMap<>();
 			temp.put(0, 1.5f);
 			temp.put(1, 9f);
 			httpExchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
 
-			sendResponseBody(httpExchange, temp);
-			// sendResponseBody(httpExchange, result);
+			// sendResponseBody(httpExchange, temp);
+			sendResponseBody(httpExchange, result);
 		} catch(Exception e){
 			Corn.log(Level.SEVERE, e.getMessage());
 			e.printStackTrace();
