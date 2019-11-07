@@ -67,7 +67,7 @@
             };
             obj.open(method, path, false);
             obj.setRequestHeader("Content-Type", "application/json");
-            obj.setRequestHeader("Authorization", token);
+            obj.setRequestHeader("Authentication", token);
             obj.send(params);
         }
         function formatJson(inputText) {
