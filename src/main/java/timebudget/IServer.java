@@ -42,7 +42,7 @@ public interface IServer {
 	String CATEGORIES_GET_ACTIVE = "/categories/get_all_active";
 	String CATEGORIES_GET_BY_ID = "/categories/get_by_id";
 
-
+	String RUN_TESTS = "/integration_test";
 
 	//CONTEXTS DEMO 2
 	//Categories

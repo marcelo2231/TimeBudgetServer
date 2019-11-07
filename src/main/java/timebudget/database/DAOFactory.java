@@ -173,7 +173,7 @@ public class DAOFactory implements IDAOFactory {
 			e.printStackTrace(); 
 			pass = false;
 		} 
-		
+
 		try {
 			List<Event> res = ed.getAllForUser(u);
 			pass = pass && res != null && res.size() > 0;

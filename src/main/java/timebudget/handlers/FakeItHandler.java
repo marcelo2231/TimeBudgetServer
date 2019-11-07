@@ -23,11 +23,11 @@ public class FakeItHandler extends HandlerBase {
 	public void handle(HttpExchange httpExchange) throws IOException {
 		Corn.log(Level.FINEST, "Fake It Handler");
 		try {
-			String reqBody = getRequestBody(httpExchange);
-			if(reqBody == null || reqBody.isEmpty()) {
-				httpExchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, -1);
-				return;
-			}
+			// String reqBody = getRequestBody(httpExchange);
+			// if(reqBody == null || reqBody.isEmpty()) {
+			// 	httpExchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, -1);
+			// 	return;
+			// }
 
 			User u = new User(User.NO_USER_ID, "test_user", "test@gmail.com","password", User.NO_CREATED_AT);
 			try {
@@ -71,12 +71,12 @@ public class FakeItHandler extends HandlerBase {
 				ServerFacade.getInstance().createEvent(u, e);
 
 
-
-			httpExchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
-
-			// send the full user
-			// UserDetails response = new UserDetails(u);
-			sendResponseBody(httpExchange, u);
+			if (httpExchange != null) {
+				httpExchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
+				// send the full user
+				// UserDetails response = new UserDetails(u);
+				sendResponseBody(httpExchange, u);
+			}
 		} catch(Exception e){
 			Corn.log(Level.SEVERE, e.getMessage());
 			e.printStackTrace();

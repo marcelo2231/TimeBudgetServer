@@ -165,6 +165,11 @@
             document.getElementById("handleBox").value = "/categories/get_by_id";
             document.getElementById("requestBox").value = formatJson("{\"categoryID\":\"1\"}");
         }
+        function runIntegrationTests() {
+            window.scrollTo(0, document.body.scrollHeight);
+            document.getElementById("handleBox").value = "/integration_tests";
+            document.getElementById("requestBox").value = formatJson("{ }");
+        }
     </script>
 </head>
 
