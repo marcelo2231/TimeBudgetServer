@@ -252,16 +252,16 @@
         A few notes:
         <ul>
             <li>
-                The authorization token is returned from the server in the "Authorization"
+                The authorization token is returned from the server in the "token"
                 attribute of the JSON object returned by the "/user/register" and "/user/login" APIs.
-                The authorization token must be placed in the "Authorization" header
+                The authentication token must be placed in the "Authentication" header
                 on all subsequent HTTP requests.
             </li>
             <li>
-                If something fails, the returned JSON object contains a "message" attribute
+                If something fails, <i>the returned JSON object contains a "message" attribute
                 which contains a message describing what happened.
                 Watch for these as they will give helpful insight into why the server did not
-                work as expected.
+                work as expected.</i>
             </li>
         </ul>
     </h5>
