@@ -15,7 +15,6 @@ import timebudget.model.Event;
 
 import java.io.File;
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -119,7 +118,9 @@ public class DAOFactory implements IDAOFactory {
 
 		startTransaction();
 		test();
-		endTransaction(true);
+		endTransaction(false);
+
+		// would love if this worked: ServerFacade.getInstance().model.loadFromDatabase();
 	}
 
 	private void test() {
@@ -129,7 +130,7 @@ public class DAOFactory implements IDAOFactory {
 
 		Boolean pass = true;
 
-		User u = new User(User.NO_USER_ID, "billy", "billy@gmail.com","password", User.NO_CREATED_AT);
+		User u = new User(User.NO_USER_ID, "test_user", "test@gmail.com","password", User.NO_CREATED_AT);
 		ud.create(u);
 
 		System.out.println("Testing: user_id = " + String.valueOf(u.getUserID()));
@@ -172,6 +173,7 @@ public class DAOFactory implements IDAOFactory {
 	
 		System.out.println("Tests passed: " + String.valueOf(pass));
 	}
+
 
 	@Override
 	public IUserDAO getUserDAOInstance() {
