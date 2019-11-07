@@ -8,6 +8,7 @@ import timebudget.database.interfaces.IEventDAO;
 import timebudget.database.interfaces.IUserDAO;
 import timebudget.exceptions.BadEventException;
 import timebudget.exceptions.BadUserException;
+import timebudget.exceptions.DatabaseError;
 import timebudget.exceptions.DatabaseNotInitializedException;
 import timebudget.exceptions.UserCreationException;
 
@@ -112,8 +113,21 @@ public class ServerModel {
 			ServerFacade.daoFactory.startTransaction();
 
 			if(userDAO.create(user)) {
-				ServerFacade.daoFactory.endTransaction(true);
 				newUser.setUserID(user.getUserID());
+
+				String[] initialCategories = {"Sleep","Work", "School", "Eat", "Health/Wellness", "Amusement"};
+				for (String s : initialCategories) {
+					Category defaultCategory = new Category(Category.NO_CATEGORY_ID, 
+															newUser.getUserID(),
+															s);
+
+					if (!categoryDAO.create(defaultCategory)) {
+						ServerFacade.daoFactory.endTransaction(false);
+						throw new UserCreationException("Could not create the default categories");
+					}
+				}
+
+				ServerFacade.daoFactory.endTransaction(true);
 			} else {
 				ServerFacade.daoFactory.endTransaction(false);
 				throw new UserCreationException("Could not create User in Database.");
@@ -125,13 +139,26 @@ public class ServerModel {
 		users.add(newUser);
 		return newUser;
 	}
+	
+	public List<Category> getCategoriesForUser(int userID) throws DatabaseError {
+		ServerFacade.daoFactory.startTransaction();
 
-	public List<Category> getCategoriesForUser(int userID){
-		return categoryDAO.getAllForUser(userID);
+		List<Category> categories = categoryDAO.getAllForUser(userID);
+
+		if(categories != null) {
+			ServerFacade.daoFactory.endTransaction(false);
+			return categories;
+		} else {
+			ServerFacade.daoFactory.endTransaction(false);
+			throw new DatabaseError("An error has occured in CategoryDAO");
+		}
 	}
 	
 	public Category getCategoryByID(User user, int categoryID){
-		return categoryDAO.getByCategoryID(user, categoryID);
+		ServerFacade.daoFactory.startTransaction();
+		Category category = categoryDAO.getByCategoryID(user, categoryID);
+		ServerFacade.daoFactory.endTransaction(false);
+		return category;
 	}
 
 	/**
@@ -142,9 +169,17 @@ public class ServerModel {
 	 */
 	public Event createEvent(User user, Event event) throws BadEventException {
 		if(event == null) throw new BadEventException("Event is null.");
-		boolean result = eventDAO.create(user, event);
-		if(result == false)
+
+		ServerFacade.daoFactory.startTransaction();
+
+		if (eventDAO.create(user, event)) {
+			ServerFacade.daoFactory.endTransaction(true);
+			user.setUserID(user.getUserID());
+		} else {
+			ServerFacade.daoFactory.endTransaction(false);
 			throw new BadEventException("Failed to create Event!");
+		}
+
 		return event;
 	}
 
@@ -192,7 +227,9 @@ public class ServerModel {
 	public List<Event> getEventList(User user, DateTimeRange range) throws BadUserException, BadEventException {
 		if(user.getUserID() == -1) throw new BadUserException("User ID is -1.");
 		if(range == null) throw new BadEventException("range is null.");
+		ServerFacade.daoFactory.startTransaction();
 		List<Event> returnList = eventDAO.getWithinRange(user, range);
+		ServerFacade.daoFactory.endTransaction(false);
 		return returnList;
 	}
 
@@ -209,6 +246,10 @@ public class ServerModel {
 		if(range == null) throw new BadEventException("range is null.");
 
 		List<Event> eventsInRange = getEventList(user, range);
-		return ReportGen.getReport(user, eventsInRange);
+
+		ServerFacade.daoFactory.startTransaction();
+		Map<Integer, Float> report = ReportGen.getReport(user, eventsInRange);
+		ServerFacade.daoFactory.endTransaction(false);
+		return report;
 	}
 }

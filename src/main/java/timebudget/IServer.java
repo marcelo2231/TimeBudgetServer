@@ -2,6 +2,7 @@ package timebudget;
 
 import timebudget.exceptions.BadEventException;
 import timebudget.exceptions.BadUserException;
+import timebudget.exceptions.DatabaseError;
 import timebudget.exceptions.NoCategoryException;
 import timebudget.exceptions.UserCreationException;
 import timebudget.model.Category;
@@ -82,7 +83,7 @@ public interface IServer {
 	 */
 	User register(User user) throws UserCreationException;
 
-	List<Category> getAllActiveCategories(User user) throws BadUserException, NoCategoryException;
+	List<Category> getAllActiveCategories(User user) throws DatabaseError, BadUserException;
 	
 	Category getCategoryByID(User user, int categoryID) throws NoCategoryException, BadUserException;
 	

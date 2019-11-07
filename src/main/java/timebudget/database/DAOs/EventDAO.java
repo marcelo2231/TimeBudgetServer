@@ -84,8 +84,8 @@ public class EventDAO implements IEventDAO {
 	public List<Event> getAllForUser(User user) {
 		// Painful workaround for 'not implemented by SQLite JDBC driver'
 		String sql = "SELECT id, category_id, description, start_at, end_at, user_id FROM events " +
-						"WHERE user_id = " + String.valueOf(user.getUserID()) + 
-					    "ORDER BY start_at";
+						" WHERE user_id = " + String.valueOf(user.getUserID()) + 
+					    " ORDER BY start_at";
 
 		try {
 			Statement statement = DAOFactory.connection.createStatement();
@@ -143,7 +143,7 @@ public class EventDAO implements IEventDAO {
 	public Event getByID(User user, int id) {
 		// public List<Category> getAllForUser(int userID) {
 		String sql = "SELECT id, category_id, description, start_at, end_at, user_id FROM events" +
-						"WHERE user_id = ? and id = ?";
+						" WHERE user_id = ? and id = ?";
 
 		try {
 			PreparedStatement preparedStatement = DAOFactory.connection.prepareStatement(sql);

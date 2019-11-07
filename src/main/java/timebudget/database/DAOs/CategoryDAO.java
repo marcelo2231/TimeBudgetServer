@@ -63,7 +63,7 @@ public class CategoryDAO implements ICategoryDAO {
 	@Override
 	public List<Category> getAllForUser(int userID) {
 		String sql = "SELECT id, user_id, description, deleted_at FROM categories" +
-					   "WHERE user_id = " + String.valueOf(userID) + 
+					   " WHERE user_id = " + String.valueOf(userID) + 
 					   " and deleted_at is null ORDER BY description";
 
 		try {
@@ -85,6 +85,7 @@ public class CategoryDAO implements ICategoryDAO {
 					   " WHERE user_id = " + String.valueOf(user.getUserID()) +
 							  " and id = " + String.valueOf(categoryID) + 
 					   " ORDER BY description";
+		System.out.println(sql);
 
 		try {
 			Statement statement = DAOFactory.connection.createStatement();

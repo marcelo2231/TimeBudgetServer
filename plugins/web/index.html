@@ -148,7 +148,7 @@
         function getTimeMetricsReport() {
             window.scrollTo(0, document.body.scrollHeight);
             document.getElementById("handleBox").value = "/report/get_time_metrics_all";
-            document.getElementById("requestBox").value = formatJson("{\"userID\":\"username\"}");
+            document.getElementById("requestBox").value = formatJson("{\"startAt\":\"0\",\"endAt\":\"7200\"}");
         }
         function fakeIt() {
             window.scrollTo(0, document.body.scrollHeight);
@@ -163,9 +163,8 @@
         function getCategoryByID() {
             window.scrollTo(0, document.body.scrollHeight);
             document.getElementById("handleBox").value = "/categories/get_by_id";
-            document.getElementById("requestBox").value = formatJson("{\"categoryId\":\"1\"}");
+            document.getElementById("requestBox").value = formatJson("{\"categoryID\":\"1\"}");
         }
-
     </script>
 </head>
 
