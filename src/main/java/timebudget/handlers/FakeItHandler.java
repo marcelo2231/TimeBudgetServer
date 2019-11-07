@@ -71,8 +71,12 @@ public class FakeItHandler extends HandlerBase {
 				ServerFacade.getInstance().createEvent(u, e);
 
 
+
 			httpExchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
-			sendResponseBody(httpExchange, u);	
+
+			// send the full user
+			// UserDetails response = new UserDetails(u);
+			sendResponseBody(httpExchange, u);
 		} catch(Exception e){
 			Corn.log(Level.SEVERE, e.getMessage());
 			e.printStackTrace();
