@@ -37,7 +37,7 @@ public class GetEventByIdHandler extends HandlerBase {
 			Event results = ServerFacade.getInstance().getEventByID(new User(token), eventInfo.getEventID());
 			
 			httpExchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
-			sendResponseBody(httpExchange, results);
+			sendResponseBody(httpExchange, results, false);
 		} catch(Exception e){
 			Corn.log(Level.SEVERE, e.getMessage());
 			e.printStackTrace();

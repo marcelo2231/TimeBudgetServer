@@ -1,5 +1,6 @@
 package timebudget.model;
 
+import com.google.gson.annotations.Expose;
 
 public class Event {
 	/**
@@ -11,11 +12,23 @@ public class Event {
 	public static final int NO_START_AT = -1;
 	public static final int NO_END_AT = -1;
 
-	private int eventID = NO_EVENT_ID;
+
+	// never serialize
+	private transient int userID = NO_USER_ID;
+
+	// don't serialize in the event/get_list handler
 	private int categoryID = NO_CATEGORY_ID;
+
+	@Expose
+	private int eventID = NO_EVENT_ID;
+
+	@Expose
 	private String description = null;
-	private int userID = NO_USER_ID;
+
+	@Expose
 	private int startAt = NO_START_AT;
+
+	@Expose
 	private int endAt = NO_END_AT;
 
 	public Event() {}

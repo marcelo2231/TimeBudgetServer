@@ -37,7 +37,7 @@ public class DeleteEventHandler extends HandlerBase {
 			Boolean results = ServerFacade.getInstance().deleteEvent(new User(token),eventInfo);
 			
 			httpExchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
-			sendResponseBody(httpExchange, results);
+			sendResponseBody(httpExchange, results, false);
 		} catch(Exception e){
 			Corn.log(Level.SEVERE, e.getMessage());
 			e.printStackTrace();

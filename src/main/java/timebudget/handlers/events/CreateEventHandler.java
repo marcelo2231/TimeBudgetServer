@@ -45,7 +45,7 @@ public class CreateEventHandler extends HandlerBase {
 			Event results = ServerFacade.getInstance().createEvent(new User(token), eventInfo);
 			
 			httpExchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
-			sendResponseBody(httpExchange, results);
+			sendResponseBody(httpExchange, results, false);
 		} catch(Exception e){
 			Corn.log(Level.SEVERE, e.getMessage());
 			e.printStackTrace();

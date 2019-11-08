@@ -1,5 +1,7 @@
 package timebudget.handlers;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import timebudget.TBSerializer;
@@ -47,11 +49,22 @@ public abstract class HandlerBase implements HttpHandler {
 	 * @param result results object to respond with
 	 * @throws IOException
 	 */
-	protected void sendResponseBody(HttpExchange exchange, Object result) throws IOException {
+	protected void sendResponseBody(HttpExchange exchange, Object result, boolean serializeOnlyExpose) throws IOException {
 		OutputStream os = exchange.getResponseBody();
 		OutputStreamWriter writer = new OutputStreamWriter(os);
-		writer.write(new TBSerializer().ObjToJson(result));
+		String json = "";
+		if (serializeOnlyExpose) {
+			Gson gson = new GsonBuilder()
+								.excludeFieldsWithoutExposeAnnotation()
+								  .create();
+			json = gson.toJson(result);
+		} else {
+			json = TBSerializer.ObjToJson(result);
+		}
+
+		writer.write(json);
 		writer.close();
+		
 		os.close();
 	}
 }

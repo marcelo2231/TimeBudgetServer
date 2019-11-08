@@ -34,7 +34,7 @@ public class RegisterHandler extends HandlerBase {
 			UserDetails response = new UserDetails(results);
 
 			httpExchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
-			sendResponseBody(httpExchange, response);
+			sendResponseBody(httpExchange, response, false);
 		} catch(Exception e) {
 			Corn.log(Level.SEVERE, e.getMessage());
 			e.printStackTrace();

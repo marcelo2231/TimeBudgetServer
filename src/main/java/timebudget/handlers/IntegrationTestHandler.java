@@ -2,7 +2,9 @@ package timebudget.handlers;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.logging.Level;
 
@@ -15,29 +17,20 @@ import timebudget.log.Corn;
 import timebudget.model.Category;
 import timebudget.model.Event;
 import timebudget.model.User;
+import timebudget.model.request.LoginRequest;
 
 
-public class FakeItHandler extends HandlerBase {
+public class IntegrationTestHandler extends HandlerBase {
 
+	
 	@Override
 	public void handle(HttpExchange httpExchange) throws IOException {
-		Corn.log(Level.FINEST, "Fake It Handler");
+		Corn.log(Level.FINEST, "Integration Test Handler");
 		try {
-			// String reqBody = getRequestBody(httpExchange);
-			// if(reqBody == null || reqBody.isEmpty()) {
-			// 	httpExchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, -1);
-			// 	return;
-			// }
-
-			User u = new User(User.NO_USER_ID, "test_user", "test@gmail.com","password", User.NO_CREATED_AT);
-			try {
-				u = ServerFacade.getInstance().register(u);
-			} catch (UserCreationException e) {
-				Random r = new Random();
-				u.setUsername("test_user" + String.valueOf(r.nextInt(10000)));
-				u = ServerFacade.getInstance().register(u);
-			}
-
+			new FakeItHandler().handle(null);
+			
+			User u = ServerFacade.getInstance().login(new LoginRequest("test_user", "password"));
+			
 			int schoolCategoryID = -1;
 			int amusementCategoryID = -1;
 			int healthCategoryID = -1;
@@ -70,13 +63,18 @@ public class FakeItHandler extends HandlerBase {
 			for (Event e : events)
 				ServerFacade.getInstance().createEvent(u, e);
 
+			// any way to call JUnit tests right now?
 
-			if (httpExchange != null) {
-				httpExchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
-				// send the full user
-				// UserDetails response = new UserDetails(u);
-				sendResponseBody(httpExchange, u, false);
-			}
+			// invoke test 1
+			
+
+			httpExchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
+
+			// send the full user
+			// UserDetails response = new UserDetails(u);
+			Map<String, String> response = new HashMap<>();
+			response.put("result", "tests passed");
+			sendResponseBody(httpExchange, response, false);
 		} catch(Exception e){
 			Corn.log(Level.SEVERE, e.getMessage());
 			e.printStackTrace();

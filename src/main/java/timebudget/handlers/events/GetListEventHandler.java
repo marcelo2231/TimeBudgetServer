@@ -6,6 +6,8 @@ import java.sql.Time;
 import java.util.List;
 import java.util.logging.Level;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.sun.net.httpserver.HttpExchange;
 
 import timebudget.ServerFacade;
@@ -52,7 +54,8 @@ public class GetListEventHandler extends HandlerBase {
 			List<Event> results = ServerFacade.getInstance().getEventListOneCategory(new User(token), dtr, elr.getCategoryID());
 
 			httpExchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
-			sendResponseBody(httpExchange, results);
+			
+			sendResponseBody(httpExchange, results, true);
 		} catch(Exception e){
 			Corn.log(Level.SEVERE, e.getMessage());
 			e.printStackTrace();

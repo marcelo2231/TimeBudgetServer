@@ -39,7 +39,7 @@ public class GetCategoryByIdHandler extends HandlerBase {
 			Category results = ServerFacade.getInstance().getCategoryByID(new User(token), categoryId);
 
 			httpExchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
-			sendResponseBody(httpExchange, results);
+			sendResponseBody(httpExchange, results, false);
 		} catch(Exception e){
 			Corn.log(Level.SEVERE, e.getMessage());
 			e.printStackTrace();

@@ -9,6 +9,7 @@ import timebudget.TBSerializer;
 import timebudget.log.Corn;
 import timebudget.model.DateTimeRange;
 import timebudget.model.User;
+import timebudget.model.response.ReportResponse;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -37,9 +38,9 @@ public class GetMetricsReportHandler extends HandlerBase {
 			temp.put(0, 1.5f);
 			temp.put(1, 9f);
 			httpExchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
-
+			
 			// sendResponseBody(httpExchange, temp);
-			sendResponseBody(httpExchange, result);
+			sendResponseBody(httpExchange, new ReportResponse(result), false);
 		} catch(Exception e){
 			Corn.log(Level.SEVERE, e.getMessage());
 			e.printStackTrace();
