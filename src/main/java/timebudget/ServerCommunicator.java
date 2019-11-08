@@ -8,7 +8,7 @@ import timebudget.handlers.DefaultHandler;
 import timebudget.handlers.FakeItHandler;
 import timebudget.handlers.GetMetricsReportHandler;
 import timebudget.handlers.LoginHandler;
-import timebudget.handlers.IntegrationTestHandler;
+// import timebudget.handlers.IntegrationTestHandler;
 import timebudget.handlers.RegisterHandler;
 import timebudget.handlers.categories.GetAllCategoriesHandler;
 import timebudget.handlers.categories.GetCategoryByIdHandler;
@@ -71,7 +71,7 @@ public class ServerCommunicator {
 		server.createContext(IServer.FAKE_IT, new FakeItHandler());
 		server.createContext(IServer.CATEGORIES_GET_ACTIVE, new GetAllCategoriesHandler());
 		server.createContext(IServer.CATEGORIES_GET_BY_ID, new GetCategoryByIdHandler());
-		server.createContext(IServer.RUN_TESTS, new IntegrationTestHandler());
+		//server.createContext(IServer.RUN_TESTS, new IntegrationTestHandler());
 	}
 
 
