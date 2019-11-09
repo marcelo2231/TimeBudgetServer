@@ -62,15 +62,21 @@ public class EventDAO implements IEventDAO {
 
 	@Override
 	public boolean update(User user, Event event) {
-		String sql = "UPDATE events SET category_id = " + String.valueOf(event.getCategoryID()) +
-									  ", description = \"" + event.getDescription() + "\", " + 
-									  " start_at = " + String.valueOf(event.getStartAt()) +
-									  ", end_at = " + String.valueOf(event.getEndAt()) + 
-									  " WHERE id = " + String.valueOf(event.getEventID()) +
-									  " and user_id = " + String.valueOf(user.getUserID());
+		String sql = "UPDATE events SET category_id = ?," +
+									  " description = ?," +
+									  " start_at = ?," +
+									  " end_at = ?" +
+									  " WHERE id = ?" +
+									  " and user_id = ?";
 
-		try(Statement statement = DAOFactory.connection.createStatement()){
-			statement.executeUpdate(sql);
+		try{
+			PreparedStatement preparedStatement = DAOFactory.connection.prepareStatement(sql);
+			preparedStatement.setInt(1, event.getCategoryID());
+			preparedStatement.setInt(2, event.getStartAt());
+			preparedStatement.setInt(3, event.getEndAt());
+			preparedStatement.setInt(4, event.getEventID());
+			preparedStatement.setInt(5, event.getUserID());
+			preparedStatement.executeUpdate();
 		} catch (SQLException e){
 			System.err.println(e.getMessage());
 			return false;
@@ -80,19 +86,14 @@ public class EventDAO implements IEventDAO {
 
 	@Override
 	public List<Event> getAllForUser(User user) {
-		// Painful workaround for 'not implemented by SQLite JDBC driver'
 		String sql = "SELECT id, category_id, description, start_at, end_at, user_id FROM events " +
-						" WHERE user_id = " + String.valueOf(user.getUserID()) + 
+						" WHERE user_id = ?" +
 					    " ORDER BY start_at";
 
 		try {
-			Statement statement = DAOFactory.connection.createStatement();
-			ResultSet resultSet = statement.executeQuery(sql);
-			return parseResultsSet(resultSet);
-
-			// PreparedStatement preparedStatement = DAOFactory.connection.prepareStatement(sql);
-			// preparedStatement.setInt(1, user.getUserID());
-			// List<Event> ar = parseResultsSet(preparedStatement.executeQuery(sql));
+			PreparedStatement preparedStatement = DAOFactory.connection.prepareStatement(sql);
+			preparedStatement.setInt(1, user.getUserID());
+			return parseResultsSet(preparedStatement.executeQuery());
 		} catch (SQLException e){
 			System.err.println(e.getMessage());
 			return null;
@@ -112,25 +113,21 @@ public class EventDAO implements IEventDAO {
 
 	@Override
 	public List<Event> getWithinRangeOneCategory(User user, DateTimeRange range, int categoryID) {
-		// Painful workaround for 'not implemented by SQLite JDBC driver'
 		String sql = "SELECT id, category_id, description, start_at, end_at, user_id FROM events " +
-						" WHERE  user_id = " + String.valueOf(user.getUserID()) + 
-						   " and category_id = " + String.valueOf(categoryID) + 
-						   " and end_at > " + String.valueOf(range.getStartAt()) + 
-						   " and start_at < " + String.valueOf(range.getEndAt()) + 
+						" WHERE  user_id = ?" +
+						   " and category_id = ?" +
+						   " and end_at > ?" +
+						   " and start_at < ?" +
 						" ORDER BY start_at";
-
 		try {
-			Statement statement = DAOFactory.connection.createStatement();
-			ResultSet resultSet = statement.executeQuery(sql);
-			return parseResultsSet(resultSet);
+			
 
-			// I'm getting a `not implemented by SQLite JDBC driver` error when using PreparedStatement for select queries
-			// PreparedStatement preparedStatement = DAOFactory.connection.prepareStatement(sql);
-			// preparedStatement.setInt(1, user.getUserID());
-			// preparedStatement.setInt(1, range.getStartAt());
-			// preparedStatement.setInt(2, range.getEndAt());
-			// List<Event> ar = parseResultsSet(preparedStatement.executeQuery(sql));
+			 PreparedStatement preparedStatement = DAOFactory.connection.prepareStatement(sql);
+			 preparedStatement.setInt(1, user.getUserID());
+			 preparedStatement.setInt(2, categoryID);
+			 preparedStatement.setInt(3, range.getStartAt());
+			 preparedStatement.setInt(4, range.getEndAt());
+			 return parseResultsSet(preparedStatement.executeQuery());
 		} catch (SQLException e){
 			System.err.println(e.getMessage());
 			return null;
@@ -140,17 +137,18 @@ public class EventDAO implements IEventDAO {
 
 	@Override
 	public List<Event> getWithinRange(User user, DateTimeRange range) {
-		// Painful workaround for 'not implemented by SQLite JDBC driver'
 		String sql = "SELECT id, category_id, description, start_at, end_at, user_id FROM events " +
-						" WHERE  user_id = " + String.valueOf(user.getUserID()) + 
-						   " and end_at > " + String.valueOf(range.getStartAt()) + 
-						   " and start_at < " + String.valueOf(range.getEndAt()) + 
+						" WHERE  user_id = ?" +
+						   " and end_at > ?" +
+						   " and start_at < ?" +
 						" ORDER BY start_at";
 
 		try {
-			Statement statement = DAOFactory.connection.createStatement();
-			ResultSet resultSet = statement.executeQuery(sql);
-			return parseResultsSet(resultSet);
+			PreparedStatement preparedStatement = DAOFactory.connection.prepareStatement(sql);
+			preparedStatement.setInt(1, user.getUserID());
+			preparedStatement.setInt(2, range.getStartAt());
+			preparedStatement.setInt(3, range.getEndAt());
+			return parseResultsSet(preparedStatement.executeQuery());
 		} catch (SQLException e){
 			System.err.println(e.getMessage());
 			return null;
@@ -161,14 +159,16 @@ public class EventDAO implements IEventDAO {
 	public Event getByID(User user, int id) {
 		// public List<Category> getAllForUser(int userID) {
 		String sql = "SELECT id, category_id, description, start_at, end_at, user_id FROM events" +
-						" WHERE user_id = " + String.valueOf(user.getUserID()) + 
-						  " and id = " + String.valueOf(id);
+						" WHERE user_id = ?" +
+						  " and id = ?";
 
 		try {
-			Statement statement = DAOFactory.connection.createStatement();
-		
-			ResultSet results = statement.executeQuery(sql);
+			PreparedStatement preparedStatement = DAOFactory.connection.prepareStatement(sql);
+			preparedStatement.setInt(1, user.getUserID());
+			preparedStatement.setInt(2, id);
+			ResultSet results = preparedStatement.executeQuery();
 			List<Event> ar = parseResultsSet(results);
+			
 			if (ar.size() > 0)
 				return ar.get(0);
 			else 

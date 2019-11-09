@@ -63,13 +63,13 @@ public class CategoryDAO implements ICategoryDAO {
 	@Override
 	public List<Category> getAllForUser(int userID) {
 		String sql = "SELECT id, user_id, description, deleted_at FROM categories" +
-					   " WHERE user_id = " + String.valueOf(userID) + 
+					   " WHERE user_id = ?" +
 					   " and deleted_at is null ORDER BY description";
 
 		try {
-			Statement statement = DAOFactory.connection.createStatement();
-			ResultSet resultSet = statement.executeQuery(sql);
-			return parseResultsSet(resultSet);
+			PreparedStatement preparedStatement = DAOFactory.connection.prepareStatement(sql);
+			preparedStatement.setInt(1, userID);
+			return parseResultsSet(preparedStatement.executeQuery());
 		} catch (SQLException e){
 			System.err.println(e.getMessage());
 			return new ArrayList<>();
@@ -82,24 +82,23 @@ public class CategoryDAO implements ICategoryDAO {
 
 		// allow for deleted categories to be returned here, unlike getAllForUser
 		String sql = "SELECT id, user_id, description, deleted_at FROM categories " +
-					   " WHERE user_id = " + String.valueOf(user.getUserID()) +
-							  " and id = " + String.valueOf(categoryID) + 
+					   " WHERE user_id = ?" +
+							  " and id = ?" +
 					   " ORDER BY description";
 		System.out.println(sql);
 
 		try {
-			Statement statement = DAOFactory.connection.createStatement();
-			ResultSet resultSet = statement.executeQuery(sql);
-			List<Category> arr = parseResultsSet(resultSet);
+			PreparedStatement preparedStatement = DAOFactory.connection.prepareStatement(sql);
+			preparedStatement.setInt(1, user.getUserID());
+			preparedStatement.setInt(2, categoryID);
+			List<Category> arr = parseResultsSet(preparedStatement.executeQuery());
 
 			if (arr.size() > 0)
 				return arr.get(0);
 			else 
 				return null;
 
-			// PreparedStatement preparedStatement = DAOFactory.connection.prepareStatement(sql);
-			// preparedStatement.setInt(1, user.getUserID());
-			// preparedStatement.setInt(2, categoryID);
+			 
 	
 
 		} catch (SQLException e){
