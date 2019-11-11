@@ -11,6 +11,7 @@ import timebudget.handlers.HandlerBase;
 import timebudget.log.Corn;
 import timebudget.model.Category;
 import timebudget.model.User;
+import timebudget.model.response.CategoryList;
 
 import static timebudget.ServerFacade.getInstance;
 
@@ -28,7 +29,8 @@ public class GetAllCategoriesHandler extends HandlerBase {
 //				return;
 //			}
 
-			List<Category> results = ServerFacade.getInstance().getAllActiveCategories(new User(token));
+			List<Category> categoryList = ServerFacade.getInstance().getAllActiveCategories(new User(token));
+			CategoryList results = new CategoryList(categoryList);
 
 			httpExchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
 			sendResponseBody(httpExchange, results, false);
