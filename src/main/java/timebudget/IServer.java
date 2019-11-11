@@ -8,6 +8,7 @@ import timebudget.exceptions.UserCreationException;
 import timebudget.model.Category;
 import timebudget.model.DateTimeRange;
 import timebudget.model.Event;
+import timebudget.model.EventList;
 import timebudget.model.User;
 import timebudget.model.request.LoginRequest;
 
@@ -95,7 +96,7 @@ public interface IServer {
 	
 	Event getEventByID(User user, int eventID) throws BadEventException, BadUserException;
 	
-	List<Event> getEventListOneCategory(User user, DateTimeRange range, int categoryID) throws BadUserException, BadEventException;
+	EventList getEventListOneCategory(User user, DateTimeRange range, int categoryID) throws BadUserException, BadEventException;
 	
 	Map<Integer, Float> getReport(User user, DateTimeRange range) throws BadUserException, BadEventException, DatabaseError;
 }

@@ -84,9 +84,9 @@ public class ServerFacade implements IServer {
 	}
 
 	@Override
-	public List<Event> getEventListOneCategory(User user, DateTimeRange range, int categoryID) throws BadUserException, BadEventException {
+	public EventList getEventListOneCategory(User user, DateTimeRange range, int categoryID) throws BadUserException, BadEventException {
 		user = model.authenticate(user.getToken());
-		return model.getEventListOneCategory(user, range, categoryID);
+		return new EventList(model.getEventListOneCategory(user, range, categoryID));
 	}
 
 	@Override

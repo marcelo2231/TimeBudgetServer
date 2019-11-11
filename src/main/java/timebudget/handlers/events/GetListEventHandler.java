@@ -18,6 +18,7 @@ import timebudget.handlers.HandlerBase;
 import timebudget.log.Corn;
 import timebudget.model.DateTimeRange;
 import timebudget.model.Event;
+import timebudget.model.EventList;
 import timebudget.model.TimePeriod;
 import timebudget.model.User;
 import timebudget.model.request.EventListRequest;
@@ -51,7 +52,7 @@ public class GetListEventHandler extends HandlerBase {
 			if (dtr.getStartAt() == DateTimeRange.NO_START_AT || dtr.getEndAt() == DateTimeRange.NO_END_AT)
 				throw new BadEventException("EventID or time period was null!");
 
-			List<Event> results = ServerFacade.getInstance().getEventListOneCategory(new User(token), dtr, elr.getCategoryID());
+			EventList results = ServerFacade.getInstance().getEventListOneCategory(new User(token), dtr, elr.getCategoryID());
 
 			httpExchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
 			
