@@ -72,10 +72,11 @@ public class EventDAO implements IEventDAO {
 		try{
 			PreparedStatement preparedStatement = DAOFactory.connection.prepareStatement(sql);
 			preparedStatement.setInt(1, event.getCategoryID());
-			preparedStatement.setInt(2, event.getStartAt());
-			preparedStatement.setInt(3, event.getEndAt());
-			preparedStatement.setInt(4, event.getEventID());
-			preparedStatement.setInt(5, event.getUserID());
+			preparedStatement.setString(2, event.getDescription());
+			preparedStatement.setInt(3, event.getStartAt());
+			preparedStatement.setInt(4, event.getEndAt());
+			preparedStatement.setInt(5, event.getEventID());
+			preparedStatement.setInt(6, event.getUserID());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e){
 			System.err.println(e.getMessage());
@@ -103,10 +104,15 @@ public class EventDAO implements IEventDAO {
 	@Override
 	public List<Event> getByTimePeriod(User user, TimePeriod timePeriod) {
 		/* DEMO 2
-		   check to see if timePeriod has start_at and end_at 
-			 - if not, fetch it from the database
+
+		   Should this be for only one category?
+
+		   wraps getWithinRange by allowing you to query for a specific time period already in the database.
+
+		   1. check to see if that timePeriod has start_at and end_at 
+			 - if not, fetch its range from the database
 			
-		   return the result of getWithinRange
+		   2. return the result of getWithinRange
 		*/
 		return null;
 	}
