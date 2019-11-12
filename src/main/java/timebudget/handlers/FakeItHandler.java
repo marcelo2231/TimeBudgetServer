@@ -44,7 +44,6 @@ public class FakeItHandler extends HandlerBase {
 			List<Category> categories = ServerFacade.getInstance().getAllActiveCategories(u);
 
 			for (Category c: categories) {
-				System.out.println(c.getCategoryID());
 				if (c.getDescription().equals("Amusement"))
 					amusementCategoryID = c.getCategoryID();
 				

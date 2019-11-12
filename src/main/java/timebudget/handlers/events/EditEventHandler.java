@@ -30,13 +30,14 @@ public class EditEventHandler extends HandlerBase {
 			Event eventInfo = (Event)TBSerializer.jsonToObj(reqBody, Event.class);
 
 			if(eventInfo.getCategoryID() == -1 || eventInfo.getDescription() == null ||
-			eventInfo.getUserID() == -1 || eventInfo.getStartAt() == -1 ||
+			eventInfo.getEventID() == -1 || eventInfo.getStartAt() == -1 ||
 			eventInfo.getEndAt() == -1){
 				throw new BadEventException("CategoryID, Description, userID, startAt or endAt was null!");
 			}
 			
 			if(ServerFacade.getInstance().editEvent(new User(token), eventInfo)) {
 				httpExchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, -1);
+				sendResponseBody(httpExchange, "true", false);
 			} else {
 				throw new BadEventException("Server could not update event!");
 			}

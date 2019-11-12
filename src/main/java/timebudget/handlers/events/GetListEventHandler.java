@@ -41,7 +41,7 @@ public class GetListEventHandler extends HandlerBase {
 				httpExchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, -1);
 				return;
 			}
-
+			System.out.println(reqBody);
 			EventListRequest elr = (EventListRequest)TBSerializer.jsonToObj(reqBody, EventListRequest.class);
 
 			if(elr == null)

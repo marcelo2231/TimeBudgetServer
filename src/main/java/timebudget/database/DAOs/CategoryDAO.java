@@ -85,7 +85,6 @@ public class CategoryDAO implements ICategoryDAO {
 					   " WHERE user_id = ?" +
 							  " and id = ?" +
 					   " ORDER BY description";
-		System.out.println(sql);
 
 		try {
 			PreparedStatement preparedStatement = DAOFactory.connection.prepareStatement(sql);
