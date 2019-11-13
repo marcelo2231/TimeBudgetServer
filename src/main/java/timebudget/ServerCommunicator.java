@@ -18,7 +18,6 @@ import timebudget.handlers.events.EditEventHandler;
 import timebudget.handlers.events.GetEventByIdHandler;
 import timebudget.handlers.events.GetListEventHandler;
 import timebudget.log.Corn;
-import timebudget.model.User;
 
 
 import java.io.IOException;

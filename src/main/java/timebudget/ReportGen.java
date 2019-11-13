@@ -2,7 +2,6 @@ package timebudget;
 
 import timebudget.exceptions.BadEventException;
 import timebudget.exceptions.BadUserException;
-import timebudget.model.Category;
 import timebudget.model.DateTimeRange;
 import timebudget.model.Event;
 import timebudget.model.User;

@@ -13,9 +13,6 @@ import timebudget.model.Category;
 import timebudget.model.User;
 import timebudget.model.response.CategoryList;
 
-import static timebudget.ServerFacade.getInstance;
-
-
 public class GetAllCategoriesHandler extends HandlerBase {
 
 	@Override
