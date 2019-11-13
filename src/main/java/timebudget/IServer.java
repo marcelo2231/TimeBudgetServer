@@ -43,6 +43,7 @@ public interface IServer {
 
 	//CONTEXTS DEMO 2
 	//Categories
+	String CATEGORIES_CREATE = "/categories/create";
 
 	//Tags
 
