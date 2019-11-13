@@ -6,24 +6,28 @@ public class Category {
 	public static final int NO_CATEGORY_ID = -1;
 	public static final int NO_USER_ID = -1;
 	public static final int NO_DELETED_AT = -1;
+	public static final int NO_COLOR = -1;
 
 	private int categoryID = NO_CATEGORY_ID;
 	private int userID = NO_USER_ID; // auto created by database, may be null
 	private String description = null;
+	private int color = NO_COLOR;
 	private int deletedAt = NO_DELETED_AT;
 	public static final int AUTH_TOKEN_SIZE = 16;
 
-	public Category(int categoryID, int userID, String description, int deletedAt) {
+	public Category(int categoryID, int userID, String description, int color, int deletedAt) {
 		this.categoryID = categoryID;
 		this.userID = userID;
 		this.description = description;
+		this.color = color;
 		this.deletedAt = deletedAt;
 	}
 
-	public Category(int categoryID, int userID, String description) {
+	public Category(int categoryID, int userID, int color, String description) {
 		this.categoryID = categoryID;
 		this.userID = userID;
 		this.description = description;
+		this.color = color;
 	}
 
 	public Category(Category category) {
@@ -31,6 +35,7 @@ public class Category {
 		this.userID = category.getUserID();
 		this.description = category.getDescription();
 		this.deletedAt = category.getDeletedAt();
+		this.color = category.getColor();
 	}
 
 	public boolean isDeleted() {
@@ -61,6 +66,14 @@ public class Category {
 		this.description = description;
 	}
 
+	public int getColor(){
+		return color;
+	}
+
+	public void setColor(int color){
+		this.color = color;
+	}
+
 	public int getDeletedAt() {
 		return deletedAt;
 	}
@@ -76,12 +89,13 @@ public class Category {
 		Category category = (Category) object;
 		return getCategoryID() == category.getCategoryID() &&
 				getUserID() == category.getUserID() &&
+				getColor() == category.getColor() &&
 				getDeletedAt() == category.getDeletedAt() &&
 				java.util.Objects.equals(getDescription(), category.getDescription());
 	}
 
 	public int hashCode() {
-		return java.util.Objects.hash(super.hashCode(), getCategoryID(), getUserID(), getDescription(), getDeletedAt());
+		return java.util.Objects.hash(super.hashCode(), getCategoryID(), getUserID(), getDescription(), getColor(), getDeletedAt());
 	}
 
 	@java.lang.Override
@@ -90,6 +104,7 @@ public class Category {
 				"categoryID=" + categoryID +
 				", userID=" + userID +
 				", description='" + description + '\'' +
+				", color='" + color + '\'' +
 				", deletedAt=" + deletedAt +
 				'}';
 	}

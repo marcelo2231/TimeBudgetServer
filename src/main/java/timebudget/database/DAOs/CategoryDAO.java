@@ -25,11 +25,12 @@ import java.util.Date;
 public class CategoryDAO implements ICategoryDAO {
 	@Override
 	public boolean create(Category category) {
-		String sql = "INSERT INTO categories (description, user_id) VALUES(?,?)";
+		String sql = "INSERT INTO categories (description, color, user_id) VALUES(?,?,?)";
 
 		try(PreparedStatement preparedStatement = DAOFactory.connection.prepareStatement(sql)){
 			preparedStatement.setString(1, category.getDescription());
-			preparedStatement.setInt(2, category.getUserID());
+			preparedStatement.setInt(2, category.getColor());
+			preparedStatement.setInt(3, category.getUserID());
 
 			preparedStatement.executeUpdate();
 			String idSql = "SELECT last_insert_rowid()";
@@ -47,11 +48,13 @@ public class CategoryDAO implements ICategoryDAO {
 
 	@Override
 	public boolean update(Category category) {
-		String sql = "UPDATE categories SET description = ? WHERE id = ?";
+		String sql = "UPDATE categories SET description = ? AND color = ? WHERE id = ?";
 
 		try(PreparedStatement preparedStatement = DAOFactory.connection.prepareStatement(sql)){
 			preparedStatement.setString(1, category.getDescription());
-			preparedStatement.setInt(2, category.getCategoryID());
+			preparedStatement.setInt(2, category.getColor());
+			preparedStatement.setInt(3, category.getCategoryID());
+
 			preparedStatement.executeUpdate();
 		} catch (SQLException e){
 			System.err.println(e.getMessage());
@@ -62,13 +65,14 @@ public class CategoryDAO implements ICategoryDAO {
 
 	@Override
 	public List<Category> getAllForUser(int userID) {
-		String sql = "SELECT id, user_id, description, deleted_at FROM categories" +
+		String sql = "SELECT id, user_id, description, color, deleted_at FROM categories" +
 					   " WHERE user_id = ?" +
 					   " and deleted_at is null ORDER BY description";
 
 		try {
 			PreparedStatement preparedStatement = DAOFactory.connection.prepareStatement(sql);
 			preparedStatement.setInt(1, userID);
+
 			return parseResultsSet(preparedStatement.executeQuery());
 		} catch (SQLException e){
 			System.err.println(e.getMessage());
@@ -81,7 +85,7 @@ public class CategoryDAO implements ICategoryDAO {
 		// public List<Category> getAllForUser(int userID) {
 
 		// allow for deleted categories to be returned here, unlike getAllForUser
-		String sql = "SELECT id, user_id, description, deleted_at FROM categories " +
+		String sql = "SELECT id, user_id, description, color, deleted_at FROM categories " +
 					   " WHERE user_id = ?" +
 							  " and id = ?" +
 					   " ORDER BY description";
@@ -90,16 +94,13 @@ public class CategoryDAO implements ICategoryDAO {
 			PreparedStatement preparedStatement = DAOFactory.connection.prepareStatement(sql);
 			preparedStatement.setInt(1, user.getUserID());
 			preparedStatement.setInt(2, categoryID);
+
 			List<Category> arr = parseResultsSet(preparedStatement.executeQuery());
 
 			if (arr.size() > 0)
 				return arr.get(0);
 			else 
 				return null;
-
-			 
-	
-
 		} catch (SQLException e){
 			System.err.println(e.getMessage());
 			return null;
@@ -131,6 +132,7 @@ public class CategoryDAO implements ICategoryDAO {
 					resultSet.getInt("id"),
 					resultSet.getInt("user_id"),
 					resultSet.getString("description"),
+					resultSet.getInt("color"),
 					resultSet.getInt("deleted_at")
 			);
 			categoryList.add(category);

@@ -6,19 +6,12 @@ import timebudget.database.interfaces.ICategoryDAO;
 import timebudget.database.interfaces.IDAOFactory;
 import timebudget.database.interfaces.IEventDAO;
 import timebudget.database.interfaces.IUserDAO;
-import timebudget.exceptions.BadEventException;
-import timebudget.exceptions.BadUserException;
-import timebudget.exceptions.DatabaseError;
-import timebudget.exceptions.DatabaseNotInitializedException;
-import timebudget.exceptions.UserCreationException;
+import timebudget.exceptions.*;
 
 //import java.security.SecureRandom;
 import java.math.BigInteger;
 import java.security.SecureRandom;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class ServerModel {
 	private Set<User> users; // Stores all users ever.
@@ -112,21 +105,26 @@ public class ServerModel {
 			ServerFacade.daoFactory.startTransaction();
 
 			if(userDAO.create(user)) {
+				ServerFacade.daoFactory.endTransaction(true);
+
 				newUser.setUserID(user.getUserID());
 
-				String[] initialCategories = {"Sleep","Work", "School", "Eat", "Health/Wellness", "Amusement"};
-				for (String s : initialCategories) {
-					Category defaultCategory = new Category(Category.NO_CATEGORY_ID, 
-															newUser.getUserID(),
-															s);
+				HashMap<String, Integer> initCatMap = new HashMap<>();
+				initCatMap.put("Sleep", 0xFF4CAF50);
+				initCatMap.put("Work", 0xFFF44336);
+				initCatMap.put("School", 0xFF2196F3);
+				initCatMap.put("Eat", 0xFFFF9800);
+				initCatMap.put("Health/Wellness", 0xFF9C27B0);
+				initCatMap.put("Amusement", 0xFF00BCD4);
 
-					if (!categoryDAO.create(defaultCategory)) {
-						ServerFacade.daoFactory.endTransaction(false);
-						throw new UserCreationException("Could not create the default categories");
+				for (String s : initCatMap.keySet()) {
+					Category defaultCategory = new Category(Category.NO_CATEGORY_ID, newUser.getUserID(), initCatMap.get(s), s);
+					try {
+						createCategory(newUser, defaultCategory);
+					} catch (BadCategoryException e) {
+						e.printStackTrace();
 					}
 				}
-
-				ServerFacade.daoFactory.endTransaction(true);
 			} else {
 				ServerFacade.daoFactory.endTransaction(false);
 				throw new UserCreationException("Could not create User in Database.");
@@ -137,6 +135,20 @@ public class ServerModel {
 		generateToken(newUser);
 		users.add(newUser);
 		return newUser;
+	}
+
+	public Category createCategory(User user, Category category) throws BadCategoryException {
+		ServerFacade.daoFactory.startTransaction();
+
+		if(categoryDAO.create(category)) {
+			ServerFacade.daoFactory.endTransaction(true);
+			if(category.getCategoryID() == Category.NO_CATEGORY_ID)
+				System.err.println("FAILED TO UPDATE NEW CATEGORY ID");
+			return category;
+		} else {
+			ServerFacade.daoFactory.endTransaction(false);
+			throw new BadCategoryException("Could not create Category!");
+		}
 	}
 	
 	public List<Category> getCategoriesForUser(int userID) throws DatabaseError {
@@ -235,7 +247,7 @@ public class ServerModel {
 	/**
 	 * gets an event by id
 	 * @param user the user who's events we want
-	 * @param timePeriod specified range of time for grabbing the events
+	 * @param range specified range of time for grabbing the events
 	 * @return a list of events
 	 * @throws BadUserException
 	 * @throws BadEventException
@@ -253,7 +265,7 @@ public class ServerModel {
 	/**
 	 * gets an event by id
 	 * @param user the user who's events we want
-	 * @param timePeriod specified range of time for grabbing the events
+	 * @param range specified range of time for grabbing the events
 	 * @return a list of events
 	 * @throws BadUserException
 	 * @throws BadEventException
@@ -270,7 +282,7 @@ public class ServerModel {
 	/**
 	 * get a report for a specified datetime range
 	 * @param user the user who's events we want
-	 * @param timePeriod specified range of time for grabbing the events
+	 * @param range specified range of time for grabbing the events
 	 * @return a list of events
 	 * @throws BadUserException
 	 * @throws BadEventException

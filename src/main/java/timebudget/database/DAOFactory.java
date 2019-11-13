@@ -84,6 +84,7 @@ public class DAOFactory implements IDAOFactory {
 												 "(id INTEGER NOT NULL,\n" +
 												 "description VARCHAR(100),\n" +
 												 "user_id INTEGER NOT NULL,\n" +
+												 "color INTEGER,\n" +
 												 "deleted_at INTEGER,\n" +
 												 "PRIMARY KEY (id),\n" +
 												 "FOREIGN KEY(user_id) REFERENCES users(id));";
@@ -137,8 +138,8 @@ public class DAOFactory implements IDAOFactory {
 
 		pass = pass && u.getUserID() != User.NO_USER_ID;
 
-		Category c1 = new Category(Category.NO_CATEGORY_ID, u.getUserID(), "Books");
-		Category c2 = new Category(Category.NO_CATEGORY_ID, u.getUserID(), "Netflixing");
+		Category c1 = new Category(Category.NO_CATEGORY_ID, u.getUserID(), 0, "Books");
+		Category c2 = new Category(Category.NO_CATEGORY_ID, u.getUserID(), 123,"Netflixing");
 		Category[] categories = {c1, c2};
 
 		for (Category c : categories)
