@@ -19,7 +19,6 @@ import timebudget.handlers.events.GetEventByIdHandler;
 import timebudget.handlers.events.GetListEventHandler;
 import timebudget.log.Corn;
 
-
 import java.io.IOException;
 import java.net.InetSocketAddress;
 
