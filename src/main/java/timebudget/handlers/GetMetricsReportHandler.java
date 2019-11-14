@@ -33,10 +33,10 @@ public class GetMetricsReportHandler extends HandlerBase {
 			DateTimeRange dtr = (DateTimeRange)TBSerializer.jsonToObj(reqBody, DateTimeRange.class);
 
 			Map<Integer, Float> result = ServerFacade.getInstance().getReport(new User(token), dtr);
-
-			Map<Integer, Float> temp = new HashMap<>();
-			temp.put(0, 1.5f);
-			temp.put(1, 9f);
+//
+//			Map<Integer, Float> temp = new HashMap<>();
+//			temp.put(0, 1.5f);
+//			temp.put(1, 9f);
 			httpExchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
 			
 			// sendResponseBody(httpExchange, temp);

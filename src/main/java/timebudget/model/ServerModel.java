@@ -182,10 +182,9 @@ public class ServerModel {
 		if(event == null) throw new BadEventException("Event is null.");
 
 		ServerFacade.daoFactory.startTransaction();
-
+		event.setUserID(user.getUserID());
 		if (eventDAO.create(user, event)) {
 			ServerFacade.daoFactory.endTransaction(true);
-			user.setUserID(user.getUserID());
 		} else {
 			ServerFacade.daoFactory.endTransaction(false);
 			throw new BadEventException("Failed to create Event!");

@@ -4,8 +4,8 @@
     <list default="true" id="a34c3b2a-a4e4-4ab8-8bc7-f0e7235a27cc" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/timebudget/database/DAOs/CategoryDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/timebudget/database/DAOs/CategoryDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/timebudget/database/DAOs/EventDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/timebudget/database/DAOs/EventDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/timebudget/handlers/GetMetricsReportHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/timebudget/handlers/GetMetricsReportHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/timebudget/model/ServerModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/timebudget/model/ServerModel.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
