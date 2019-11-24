@@ -52,9 +52,8 @@ public class CategoryDAO implements ICategoryDAO {
 		if (category.getDeletedAt() == Category.NO_DELETED_AT || category.getDeletedAt() == 0)
 			sql = "UPDATE categories SET description = ? AND color = ? AND deleted_at = NULL WHERE id = ?";
 		else
-			sql = "UPDATE categories SET description = ? AND color = ? AND deleted_at = strftime('%s','now') WHERE id = ?";
-		sql = "UPDATE categories SET description = ? AND color = ? AND deleted_at = 'now' WHERE id = ?";
-		System.out.println(sql);
+			sql = "UPDATE categories SET description = ? AND color = ? AND deleted_at = 1000000 WHERE id = ?";
+
 		try(PreparedStatement preparedStatement = DAOFactory.connection.prepareStatement(sql)){
 			preparedStatement.setString(1, category.getDescription());
 			preparedStatement.setInt(2, category.getColor());

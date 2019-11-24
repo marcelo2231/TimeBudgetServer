@@ -192,7 +192,9 @@ response = requests.get("http://localhost:8080/categories/update",
                         headers={'Authentication': token},
                         json=category_to_update)
 
-assert json.loads(response.text)['status'] == 'success'
+
+
+assert response.text != "" and json.loads(response.text)['status'] == 'success', f'response.text == "{response.text}"'
 
 matching_categories = [cat for cat in json.loads(requests.get("http://localhost:8080/categories/get_all_active",
                         headers={'Authentication': token}).text)['categories'] if cat['categoryID'] == category_to_update['categoryID']]

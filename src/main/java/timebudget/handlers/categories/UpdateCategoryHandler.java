@@ -50,6 +50,7 @@ public class UpdateCategoryHandler extends HandlerBase {
             response.put("status", "success");
             sendResponseBody(httpExchange, response, false);
         } catch(Exception e){
+            System.out.println(e.getMessage());
             Corn.log(Level.SEVERE, e.getMessage());
             e.printStackTrace();
             httpExchange.sendResponseHeaders(HttpURLConnection.HTTP_INTERNAL_ERROR, -1);
