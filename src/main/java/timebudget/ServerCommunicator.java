@@ -14,6 +14,7 @@ import timebudget.handlers.RegisterHandler;
 import timebudget.handlers.categories.CreateCategoryHandler;
 import timebudget.handlers.categories.GetAllCategoriesHandler;
 import timebudget.handlers.categories.GetCategoryByIdHandler;
+import timebudget.handlers.categories.UpdateCategoryHandler;
 import timebudget.handlers.events.CreateEventHandler;
 import timebudget.handlers.events.DeleteEventHandler;
 import timebudget.handlers.events.EditEventHandler;
@@ -73,6 +74,7 @@ public class ServerCommunicator {
 		server.createContext(IServer.CATEGORIES_GET_ACTIVE, new GetAllCategoriesHandler());
 		server.createContext(IServer.CATEGORIES_GET_BY_ID, new GetCategoryByIdHandler());
 		server.createContext(IServer.CATEGORIES_CREATE, new CreateCategoryHandler());
+		server.createContext(IServer.CATEGORIES_UPDATE, new UpdateCategoryHandler());
 		//server.createContext(IServer.RUN_TESTS, new IntegrationTestHandler());
 	}
 

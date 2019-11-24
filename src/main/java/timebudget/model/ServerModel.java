@@ -150,6 +150,18 @@ public class ServerModel {
 			throw new BadCategoryException("Could not create Category!");
 		}
 	}
+
+	public Category updateCategory(User user, Category category) throws BadCategoryException {
+		ServerFacade.daoFactory.startTransaction();
+
+		if(categoryDAO.update(category)) {
+			ServerFacade.daoFactory.endTransaction(true);
+			return category;
+		} else {
+			ServerFacade.daoFactory.endTransaction(false);
+			throw new BadCategoryException("Could not update Category!");
+		}
+	}
 	
 	public List<Category> getCategoriesForUser(int userID) throws DatabaseError {
 		ServerFacade.daoFactory.startTransaction();

@@ -44,6 +44,7 @@ public interface IServer {
 	//CONTEXTS DEMO 2
 	//Categories
 	String CATEGORIES_CREATE = "/categories/create";
+	String CATEGORIES_UPDATE = "/categories/update";
 
 	//Tags
 
@@ -82,6 +83,8 @@ public interface IServer {
 	User register(User user) throws UserCreationException;
 
 	Category createCategory(User user, Category category) throws BadUserException, BadCategoryException;
+
+	public Category updateCategory(User user, Category category) throws BadUserException, BadCategoryException;
 
 	List<Category> getAllActiveCategories(User user) throws DatabaseError, BadUserException;
 	

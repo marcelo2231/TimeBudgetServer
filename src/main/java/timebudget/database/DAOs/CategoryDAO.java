@@ -48,8 +48,13 @@ public class CategoryDAO implements ICategoryDAO {
 
 	@Override
 	public boolean update(Category category) {
-		String sql = "UPDATE categories SET description = ? AND color = ? WHERE id = ?";
-
+		String sql = "";
+		if (category.getDeletedAt() == Category.NO_DELETED_AT || category.getDeletedAt() == 0)
+			sql = "UPDATE categories SET description = ? AND color = ? AND deleted_at = NULL WHERE id = ?";
+		else
+			sql = "UPDATE categories SET description = ? AND color = ? AND deleted_at = strftime('%s','now') WHERE id = ?";
+		sql = "UPDATE categories SET description = ? AND color = ? AND deleted_at = 'now' WHERE id = ?";
+		System.out.println(sql);
 		try(PreparedStatement preparedStatement = DAOFactory.connection.prepareStatement(sql)){
 			preparedStatement.setString(1, category.getDescription());
 			preparedStatement.setInt(2, category.getColor());
@@ -68,7 +73,6 @@ public class CategoryDAO implements ICategoryDAO {
 		String sql = "SELECT id, user_id, description, color, deleted_at FROM categories" +
 					   " WHERE user_id = ?" +
 					   " and deleted_at is null ORDER BY description";
-
 		try {
 			PreparedStatement preparedStatement = DAOFactory.connection.prepareStatement(sql);
 			preparedStatement.setInt(1, userID);

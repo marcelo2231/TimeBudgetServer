@@ -61,7 +61,6 @@ public abstract class HandlerBase implements HttpHandler {
 		} else {
 			json = TBSerializer.ObjToJson(result);
 		}
-
 		writer.write(json);
 		writer.close();
 		

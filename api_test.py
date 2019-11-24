@@ -9,12 +9,12 @@ For a larger API we should have written swagger documentation and had API tests
 """
 
 def verify_category(category):
-    correct_keys = ['categoryID', 'deletedAt', 'description', 'userID']
+    correct_keys = ['categoryID', 'color', 'deletedAt', 'description', 'userID']
     for truth in correct_keys:
         if truth not in category:
             print(truth, "not in", category.keys())
-            assert truth in category
-    assert len(category.keys()) == len(correct_keys)
+            assert truth in category, truth + " not in " + str(category)
+    assert len(category.keys()) == len(correct_keys), str(category.keys()) + " != " + str(correct_keys)
 
 def verify_event(event, include_category=True):
     keys = ['categoryID', 'description', 'endAt', 'eventID', 'startAt']
@@ -165,9 +165,8 @@ assert len(user) == len(correct_keys)
 
 print("user/register passed")
 
-"""
 # categories/create
-new_category = dict(description='new category')
+new_category = dict(description='new category', color=10000)
 
 response = requests.get("http://localhost:8080/categories/create",
                         headers={'Authentication': token},
@@ -175,6 +174,39 @@ response = requests.get("http://localhost:8080/categories/create",
 category = json.loads(response.text)
 verify_category(category)
 assert category['description'] == new_category['description']
+assert category['color'] == new_category['color']
 
 print("categories/create passed")
-"""
+
+# categories/update test change description and color
+response = requests.get("http://localhost:8080/categories/get_all_active",
+                        headers={'Authentication': token})
+active_categories = json.loads(response.text)['categories']
+
+category_to_update = active_categories[0]
+category_to_update['color'] = 7987
+category_to_update['description'] = 'new description'
+category_to_update['deletedAt'] = 0
+
+response = requests.get("http://localhost:8080/categories/update",
+                        headers={'Authentication': token},
+                        json=category_to_update)
+
+assert json.loads(response.text)['status'] == 'success'
+
+matching_categories = [cat for cat in json.loads(requests.get("http://localhost:8080/categories/get_all_active",
+                        headers={'Authentication': token}).text)['categories'] if cat['categoryID'] == category_to_update['categoryID']]
+assert len(matching_categories) == 1, "Category was wrongfully deactivate"
+response_category = matching_categories[0]
+
+verify_category(response_category)
+assert category_to_update['description'] == response_category['description'], str(category_to_update) + " " + str(response_category)
+assert category_to_update['color'] == response_category['color'], str(category_to_update) + " " + str(response_category)
+assert response_category['deletedAt'] <= 0, "Error in get_all_active, an inactive category was returned."
+
+print("categories/update passed")
+
+# categories/update test reactivating a category
+
+
+# categories/update test deactivating a category

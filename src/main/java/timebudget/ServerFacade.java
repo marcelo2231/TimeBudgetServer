@@ -50,6 +50,12 @@ public class ServerFacade implements IServer {
 	}
 
 	@Override
+	public Category updateCategory(User user, Category category) throws BadUserException, BadCategoryException {
+		user = model.authenticate(user.getToken());
+		return model.updateCategory(user, category);
+	}
+	
+	@Override
 	public List<Category> getAllActiveCategories(User user) throws DatabaseError, BadUserException {
 		//This will get the full user and its userID based on the auth token provided by the client.
 		user = model.authenticate(user.getToken());
