@@ -2,6 +2,7 @@ from __future__ import print_function
 import random
 import requests
 import json
+import traceback
 
 """
 For a larger API we should have written swagger documentation and had API tests
@@ -211,7 +212,8 @@ try:
     test_update()
     print("categories/update passed")
 except:
-    print("\ncategories/update failed\n")    
+    print("\ncategories/update failed:")    
+    traceback.print_exc()
 
 # categories/deactivate test
 def test_deactivate_reactivate():
