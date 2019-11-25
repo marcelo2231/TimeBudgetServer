@@ -12,14 +12,16 @@ import timebudget.handlers.LoginHandler;
 // import timebudget.handlers.IntegrationTestHandler;
 import timebudget.handlers.RegisterHandler;
 import timebudget.handlers.categories.CreateCategoryHandler;
+import timebudget.handlers.categories.DeactivateCategoryHandler;
 import timebudget.handlers.categories.GetAllCategoriesHandler;
 import timebudget.handlers.categories.GetCategoryByIdHandler;
-import timebudget.handlers.categories.UpdateCategoryHandler;
+import timebudget.handlers.categories.ReactivateCategoryHandler;
 import timebudget.handlers.events.CreateEventHandler;
 import timebudget.handlers.events.DeleteEventHandler;
 import timebudget.handlers.events.EditEventHandler;
 import timebudget.handlers.events.GetEventByIdHandler;
 import timebudget.handlers.events.GetListEventHandler;
+import timebudget.handlers.categories.UpdateCategoryHandler;
 import timebudget.log.Corn;
 import timebudget.model.User;
 
@@ -75,6 +77,8 @@ public class ServerCommunicator {
 		server.createContext(IServer.CATEGORIES_GET_BY_ID, new GetCategoryByIdHandler());
 		server.createContext(IServer.CATEGORIES_CREATE, new CreateCategoryHandler());
 		server.createContext(IServer.CATEGORIES_UPDATE, new UpdateCategoryHandler());
+		server.createContext(IServer.CATEGORIES_REACTIVATE, new ReactivateCategoryHandler());
+		server.createContext(IServer.CATEGORIES_DEACTIVATE, new DeactivateCategoryHandler());
 		//server.createContext(IServer.RUN_TESTS, new IntegrationTestHandler());
 	}
 

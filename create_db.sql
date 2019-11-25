@@ -27,6 +27,7 @@ CREATE TABLE categories
 (id INTEGER NOT NULL,
 description VARCHAR(100),
 user_id INTEGER NOT NULL,
+color INTEGER NOT NULL,
 deleted_at INTEGER,
 PRIMARY KEY (id),
 FOREIGN KEY(user_id) REFERENCES users(id));

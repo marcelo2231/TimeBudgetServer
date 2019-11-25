@@ -6,6 +6,7 @@ import timebudget.model.DateTimeRange;
 import timebudget.model.Event;
 import timebudget.model.EventList;
 import timebudget.model.User;
+import timebudget.model.request.CategoryIDRequest;
 import timebudget.model.request.LoginRequest;
 
 import java.util.List;
@@ -45,6 +46,9 @@ public interface IServer {
 	//Categories
 	String CATEGORIES_CREATE = "/categories/create";
 	String CATEGORIES_UPDATE = "/categories/update";
+	String CATEGORIES_DEACTIVATE = "/categories/deactivate";
+	String CATEGORIES_REACTIVATE = "/categories/reactivate";
+
 
 	//Tags
 
@@ -85,6 +89,10 @@ public interface IServer {
 	Category createCategory(User user, Category category) throws BadUserException, BadCategoryException;
 
 	public Category updateCategory(User user, Category category) throws BadUserException, BadCategoryException;
+
+	public boolean deactivateCategory(User user, CategoryIDRequest categoryID) throws BadUserException, BadCategoryException;
+
+	public boolean reactivateCategory(User user, CategoryIDRequest categoryID) throws BadUserException, BadCategoryException;
 
 	List<Category> getAllActiveCategories(User user) throws DatabaseError, BadUserException;
 	

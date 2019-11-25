@@ -47,17 +47,15 @@ public class CategoryDAO implements ICategoryDAO {
 	}
 
 	@Override
-	public boolean update(Category category) {
+	public boolean update(User u, Category category) {
 		String sql = "";
-		if (category.getDeletedAt() == Category.NO_DELETED_AT || category.getDeletedAt() == 0)
-			sql = "UPDATE categories SET description = ? AND color = ? AND deleted_at = NULL WHERE id = ?";
-		else
-			sql = "UPDATE categories SET description = ? AND color = ? AND deleted_at = 1000000 WHERE id = ?";
+		sql = "UPDATE categories SET description = ? AND color = ? WHERE user_id = ? AND id = ?";
 
 		try(PreparedStatement preparedStatement = DAOFactory.connection.prepareStatement(sql)){
 			preparedStatement.setString(1, category.getDescription());
 			preparedStatement.setInt(2, category.getColor());
-			preparedStatement.setInt(3, category.getCategoryID());
+			preparedStatement.setInt(3, u.getUserID());
+			preparedStatement.setInt(4, category.getCategoryID());
 
 			preparedStatement.executeUpdate();
 		} catch (SQLException e){
@@ -111,15 +109,31 @@ public class CategoryDAO implements ICategoryDAO {
 	}
 
 	@Override
-	public boolean delete(Category category) {
-		String sql = "UPDATE categories SET deleted_at = ? WHERE id = ?";
+	public boolean delete(User u, int categoryID) {
+		String sql = "UPDATE categories SET deleted_at = ? WHERE user_id = ? AND id = ?";
 
 		Date now = new Date();
 		long ut = now.getTime() / 1000L;
 
 		try(PreparedStatement preparedStatement = DAOFactory.connection.prepareStatement(sql)){
 			preparedStatement.setLong(1, ut);
-			preparedStatement.setInt(2, category.getCategoryID());
+			preparedStatement.setInt(2, u.getUserID());
+			preparedStatement.setInt(3, categoryID);
+			preparedStatement.executeUpdate();
+		} catch (SQLException e){
+			System.err.println(e.getMessage());
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public boolean reactivate(User u, int categoryID) {
+		String sql = "UPDATE categories SET deleted_at = NULL WHERE user_id = ? AND id = ?";
+
+		try(PreparedStatement preparedStatement = DAOFactory.connection.prepareStatement(sql)){
+			preparedStatement.setInt(1, u.getUserID());
+			preparedStatement.setInt(2, categoryID);
 			preparedStatement.executeUpdate();
 		} catch (SQLException e){
 			System.err.println(e.getMessage());
@@ -168,4 +182,5 @@ public class CategoryDAO implements ICategoryDAO {
 			return false;
 		}
 	}
+
 }

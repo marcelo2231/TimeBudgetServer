@@ -66,5 +66,9 @@ public abstract class HandlerBase implements HttpHandler {
 		
 		os.close();
 	}
+
+	protected boolean isValidSQLiteID(int id) {
+		return id > 0;
+	}
 }
 

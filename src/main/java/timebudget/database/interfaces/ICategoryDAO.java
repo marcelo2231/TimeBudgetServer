@@ -7,9 +7,10 @@ import java.util.List;
 
 public interface ICategoryDAO extends IDAO {
 	boolean create(Category category);
-	boolean update(Category category);
+	boolean update(User u, Category category);
 	List<Category> getAllForUser(int userID);
 	Category getByCategoryID(User user, int categoryID);
-	boolean delete(Category category);
+	boolean delete(User u, int categoryID);
+	boolean reactivate(User u, int categoryID);
 	boolean clear(User user);
 }

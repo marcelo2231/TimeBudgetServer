@@ -7,6 +7,7 @@ import timebudget.database.interfaces.IDAOFactory;
 import timebudget.database.interfaces.IEventDAO;
 import timebudget.database.interfaces.IUserDAO;
 import timebudget.exceptions.*;
+import timebudget.model.request.CategoryIDRequest;
 
 //import java.security.SecureRandom;
 import java.math.BigInteger;
@@ -154,7 +155,7 @@ public class ServerModel {
 	public Category updateCategory(User user, Category category) throws BadCategoryException {
 		ServerFacade.daoFactory.startTransaction();
 
-		if(categoryDAO.update(category)) {
+		if(categoryDAO.update(user, category)) {
 			ServerFacade.daoFactory.endTransaction(true);
 			return category;
 		} else {
@@ -162,7 +163,31 @@ public class ServerModel {
 			throw new BadCategoryException("Could not update Category!");
 		}
 	}
-	
+
+	public boolean deactivateCategory(User user, CategoryIDRequest categoryID) throws BadCategoryException {
+		ServerFacade.daoFactory.startTransaction();
+
+		if(categoryDAO.delete(user, categoryID.getID())) {
+			ServerFacade.daoFactory.endTransaction(true);
+			return true;
+		} else {
+			ServerFacade.daoFactory.endTransaction(false);
+			throw new BadCategoryException("Could not inactivate Category!");
+		}
+	}
+
+	public boolean reactivateCategory(User user, CategoryIDRequest categoryID) throws BadCategoryException {
+		ServerFacade.daoFactory.startTransaction();
+
+		if(categoryDAO.reactivate(user, categoryID.getID())) {
+			ServerFacade.daoFactory.endTransaction(true);
+			return true;
+		} else {
+			ServerFacade.daoFactory.endTransaction(false);
+			throw new BadCategoryException("Could not reactivate Category!");
+		}
+	}
+
 	public List<Category> getCategoriesForUser(int userID) throws DatabaseError {
 		ServerFacade.daoFactory.startTransaction();
 

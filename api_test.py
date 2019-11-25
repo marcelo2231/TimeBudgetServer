@@ -178,37 +178,88 @@ assert category['color'] == new_category['color']
 
 print("categories/create passed")
 
-# categories/update test change description and color
-response = requests.get("http://localhost:8080/categories/get_all_active",
-                        headers={'Authentication': token})
-active_categories = json.loads(response.text)['categories']
 
-category_to_update = active_categories[0]
-category_to_update['color'] = 7987
-category_to_update['description'] = 'new description'
-category_to_update['deletedAt'] = 0
+def test_update():
+    # categories/update test change description and color
+    response = requests.get("http://localhost:8080/categories/get_all_active",
+                            headers={'Authentication': token})
+    active_categories = json.loads(response.text)['categories']
 
-response = requests.get("http://localhost:8080/categories/update",
-                        headers={'Authentication': token},
-                        json=category_to_update)
+    category_to_update = active_categories[0]
+    category_to_update['color'] = 7987
+    category_to_update['description'] = 'new description'
+    category_to_update['deletedAt'] = 0
 
+    response = requests.get("http://localhost:8080/categories/update",
+                            headers={'Authentication': token},
+                            json=category_to_update)
 
+    assert response.text != "" and json.loads(response.text)['status'] == 'success', f'response.text == "{response.text}"'
 
-assert response.text != "" and json.loads(response.text)['status'] == 'success', f'response.text == "{response.text}"'
+    matching_categories = [cat for cat in json.loads(requests.get("http://localhost:8080/categories/get_all_active",
+                            headers={'Authentication': token}).text)['categories'] if cat['categoryID'] == category_to_update['categoryID']]
+    assert len(matching_categories) == 1, "Category was wrongfully deactivate"
+    response_category = matching_categories[0]
 
-matching_categories = [cat for cat in json.loads(requests.get("http://localhost:8080/categories/get_all_active",
-                        headers={'Authentication': token}).text)['categories'] if cat['categoryID'] == category_to_update['categoryID']]
-assert len(matching_categories) == 1, "Category was wrongfully deactivate"
-response_category = matching_categories[0]
+    verify_category(response_category)
+    
+    assert category_to_update['description'] == response_category['description'], str(category_to_update) + " " + str(response_category)
+    assert category_to_update['color'] == response_category['color'], str(category_to_update) + " " + str(response_category)
+    assert response_category['deletedAt'] <= 0, "Error in get_all_active, an inactive category was returned."
 
-verify_category(response_category)
-assert category_to_update['description'] == response_category['description'], str(category_to_update) + " " + str(response_category)
-assert category_to_update['color'] == response_category['color'], str(category_to_update) + " " + str(response_category)
-assert response_category['deletedAt'] <= 0, "Error in get_all_active, an inactive category was returned."
+try:
+    test_update()
+    print("categories/update passed")
+except:
+    print("\ncategories/update failed\n")    
 
-print("categories/update passed")
+# categories/deactivate test
+def test_deactivate_reactivate():
+    response = requests.get("http://localhost:8080/categories/get_all_active",
+                            headers={'Authentication': token})
+    
+    active_categories = json.loads(response.text)['categories']
 
-# categories/update test reactivating a category
+    category_to_deactivate = active_categories[0]
+    obj = {"categoryID": category_to_deactivate["categoryID"]}
+    
+    response = requests.get("http://localhost:8080/categories/deactivate",
+                            headers={'Authentication': token},
+                            json=obj)
 
+    assert response.text != "" and json.loads(response.text)['status'] == 'success', f'response.text == "{response.text}"'
 
-# categories/update test deactivating a category
+    matching_categories = [cat for cat in json.loads(requests.get("http://localhost:8080/categories/get_all_active",
+                            headers={'Authentication': token}).text)['categories'] if cat['categoryID'] == category_to_deactivate['categoryID']]
+    assert len(matching_categories) == 0, "Category was not deactivated"
+
+    response = requests.get("http://localhost:8080/categories/get_by_id",
+                            headers={'Authentication': token},
+                            json=obj)
+    
+    assert response.text != "" 
+    category = json.loads(response.text)
+    assert category["deletedAt"] > 0, "Category was not deactivated"
+    print("categories/deactivate passed")
+
+    
+    response = requests.get("http://localhost:8080/categories/reactivate",
+                            headers={'Authentication': token},
+                            json=obj)
+
+    assert response.text != "" and json.loads(response.text)['status'] == 'success', f'response.text == "{response.text}"'
+
+    matching_categories = [cat for cat in json.loads(requests.get("http://localhost:8080/categories/get_all_active",
+                            headers={'Authentication': token}).text)['categories'] if cat['categoryID'] == category_to_deactivate['categoryID']]
+    assert len(matching_categories) == 1, "Category was not reactivated"
+
+    response = requests.get("http://localhost:8080/categories/get_by_id",
+                            headers={'Authentication': token},
+                            json=obj)
+
+    assert response.text != "" 
+    category = json.loads(response.text)
+    assert category["deletedAt"] <= 0, "Category was not reactivated"
+    print("categories/reactivate passed")
+
+test_deactivate_reactivate()

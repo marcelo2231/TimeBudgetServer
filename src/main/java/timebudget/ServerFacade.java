@@ -3,6 +3,7 @@ package timebudget;
 import timebudget.database.interfaces.IDAOFactory;
 import timebudget.exceptions.*;
 import timebudget.model.*;
+import timebudget.model.request.CategoryIDRequest;
 import timebudget.model.request.LoginRequest;
 
 import java.util.List;
@@ -56,6 +57,18 @@ public class ServerFacade implements IServer {
 	}
 	
 	@Override
+	public boolean deactivateCategory(User user, CategoryIDRequest categoryID) throws BadUserException, BadCategoryException {
+		user = model.authenticate(user.getToken());
+		return model.deactivateCategory(user, categoryID);
+	}
+
+	@Override
+	public boolean reactivateCategory(User user, CategoryIDRequest categoryID) throws BadUserException, BadCategoryException {
+		user = model.authenticate(user.getToken());
+		return model.reactivateCategory(user, categoryID);
+	}
+	
+	@Override
 	public List<Category> getAllActiveCategories(User user) throws DatabaseError, BadUserException {
 		//This will get the full user and its userID based on the auth token provided by the client.
 		user = model.authenticate(user.getToken());
@@ -71,7 +84,6 @@ public class ServerFacade implements IServer {
 	@Override
 	public Event createEvent(User user, Event event) throws BadEventException, BadUserException {
 		user = model.authenticate(user.getToken());
-
 		return model.createEvent(user, event);
 	}
 
