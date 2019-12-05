@@ -165,6 +165,11 @@
             document.getElementById("handleBox").value = "/categories/get_by_id";
             document.getElementById("requestBox").value = formatJson("{\"categoryID\":\"1\"}");
         }
+        function createCategory() {
+            window.scrollTo(0, document.body.scrollHeight);
+            document.getElementById("handleBox").value = "/categories/create";
+            document.getElementById("requestBox").value = formatJson("{\"userID\":1,\"description\":\"Media\",\"color\":-16728876}");
+        }
         function runIntegrationTests() {
             window.scrollTo(0, document.body.scrollHeight);
             document.getElementById("handleBox").value = "/integration_tests";
@@ -243,6 +248,9 @@
     <div style="border: 2px solid black; margin:5px;">
         <h1 style="padding-left:1cm; text-decoration: underline;">Categories Commands</h1>
         <ul>
+            <li>
+                <a href="javascript:createCategory()">/categories/create</a> This API call creates a new category.
+            </li>
             <li>
                 <a href="javascript:getAllCategoriesActive()">/categories/get_all_active</a> This API call returns all active categories.
             </li>
